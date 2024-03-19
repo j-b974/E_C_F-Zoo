@@ -1,0 +1,17 @@
+{
+    "name": "berti/zoo_jose",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "jb974",
+            "email": "bertil974@hotmail.fr"
+        }
+    ],
+    "require": {
+        "altorouter/altorouter": "^2.0"
+    }
+}
