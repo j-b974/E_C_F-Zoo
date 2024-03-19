@@ -8,10 +8,11 @@
 
 <body>
     <div class="container-fluid">
+        <?php require 'template\navBar.php' ?>
         <?= $contenu ?>
     </div>
 
 
-    <script src="../../public/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
