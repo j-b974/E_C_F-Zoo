@@ -1,0 +1,50 @@
+version: '3.8'
+services:
+  web:
+    image: image_zoo:latest
+    container_name: ZooJose
+    environment:
+      APACHE_DOCUMENT_ROOT: /var/www/ZooJose
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www/ZooJose
+    depends_on:
+      - db
+    networks:
+      - dev
+  db:
+    image: mysql:latest
+    container_name: db_zoo
+    restart: always
+    volumes:
+      # espace memoire pour mysql
+      - db-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: jose
+      MYSQL_DATABASE: db_zoo
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 1234
+    ports:
+      - "3306:3306"
+    networks:
+      - dev
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: myadminZoo
+    environment:
+      PMA_HOST: db
+      PMA_USER: admin
+      PMA_PASSWORD: 1234
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "8080:80"
+    networks:
+      - dev
+volumes:
+  db-data:
+
+networks:
+  dev:

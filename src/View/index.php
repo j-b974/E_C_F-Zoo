@@ -8,7 +8,7 @@
 
 <body>
     <div class="container-fluid">
-        <?php require 'template\navBar.php' ?>
+        <?php require 'template'.DIRECTORY_SEPARATOR.'navBar.php' ?>
         <?= $contenu ?>
     </div>
 
