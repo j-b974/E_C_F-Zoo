@@ -1,30 +1,30 @@
 CREATE TABLE IF NOT EXISTS service(
-    id int(50) UNSIGNED NOT NULL AUTO_INCREMENT,
-    nom varchar(50) NOT NULL ,
-    description varchar(50) NOT NULL ,
+    id int(255) UNSIGNED NOT NULL AUTO_INCREMENT,
+    nom varchar(255) NOT NULL ,
+    description varchar(255) NOT NULL ,
     primary key (id)
 )ENGINE=InnoDB ;
 
 CREATE TABLE IF NOT EXISTS avis(
-    id int(50) UNSIGNED NOT NULL AUTO_INCREMENT,
-    pseudo varchar(50) NOT NULL,
-    commentaire varchar(50) NOT NULL,
+    id int(255) UNSIGNED NOT NULL AUTO_INCREMENT,
+    pseudo varchar(255) NOT NULL,
+    commentaire varchar(255) NOT NULL,
     isVisible boolean default(false),
     primary key (id)
 )ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS role(
-    id int(50) UNSIGNED NOT NULL AUTO_INCREMENT,
-    label varchar(50) NOT NULL ,
+    id int(255) UNSIGNED NOT NULL AUTO_INCREMENT,
+    label varchar(255) NOT NULL ,
     primary key (id)
 )ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS utilisateur(
-    username varchar(50) NOT NULL ,
-    password varchar(50) NOT NULL ,
-    nom varchar(50) NOT NULL ,
-    prenom varchar(50) NOT NULL ,
-    role_id int(50) UNSIGNED NOT NULL ,
+    username varchar(255) NOT NULL ,
+    password varchar(255) NOT NULL ,
+    nom varchar(255) NOT NULL ,
+    prenom varchar(255) NOT NULL ,
+    role_id int(255) UNSIGNED NOT NULL ,
     primary key (username),
     CONSTRAINT  fk_role
       FOREIGN KEY (role_id)
@@ -34,26 +34,26 @@ CREATE TABLE IF NOT EXISTS utilisateur(
 )ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS race(
-    id int(50) UNSIGNED NOT NULL AUTO_INCREMENT,
-    label varchar(50) NOT NULL ,
+    id int(255) UNSIGNED NOT NULL AUTO_INCREMENT,
+    label varchar(255) NOT NULL ,
     PRIMARY KEY (id)
 )ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS habitat(
-    id int(50) UNSIGNED NOT NULL AUTO_INCREMENT,
-    nom varchar(50) NOT NULL,
-    description varchar(50) NOT NULL,
-    commentaire_habitat varchar(50) NOT NULL,
+    id int(255) UNSIGNED NOT NULL AUTO_INCREMENT,
+    nom varchar(255) NOT NULL,
+    description varchar(255) NOT NULL,
+    commentaire_habitat varchar(255) NOT NULL,
     PRIMARY KEY (id)
 )ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS animal(
-     id int(50) UNSIGNED NOT NULL AUTO_INCREMENT,
-     prenom varchar(50) NOT NULL,
-     etat varchar(50) NOT NULL,
-     race_id int(50) UNSIGNED NOT NULL,
-     habit_id int(50) UNSIGNED NOT NULL,
-     rapport_id int(50) UNSIGNED NULL ,
+     id int(255) UNSIGNED NOT NULL AUTO_INCREMENT,
+     prenom varchar(255) NOT NULL,
+     etat varchar(255) NOT NULL,
+     race_id int(255) UNSIGNED NOT NULL,
+     habit_id int(255) UNSIGNED NOT NULL,
+     rapport_id int(255) UNSIGNED NULL ,
      PRIMARY KEY (id),
      CONSTRAINT fk_race
          FOREIGN KEY (race_id)
@@ -68,11 +68,11 @@ CREATE TABLE IF NOT EXISTS animal(
 )ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS rapport_veterinaire(
-    id int(50) UNSIGNED NOT NULL AUTO_INCREMENT,
+    id int(255) UNSIGNED NOT NULL AUTO_INCREMENT,
     create_date date DEFAULT(CURRENT_DATE),
-    detail varchar(50) not null,
-    veterinaire varchar(50) NOT NULL ,
-    aniaml_id int(50) UNSIGNED NOT NULL ,
+    detail varchar(255) not null,
+    veterinaire varchar(255) NOT NULL ,
+    aniaml_id int(255) UNSIGNED NOT NULL ,
     primary key (id),
     CONSTRAINT  fk_veterinaire
         FOREIGN KEY (veterinaire)
@@ -87,14 +87,14 @@ CREATE TABLE IF NOT EXISTS rapport_veterinaire(
 )ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS image(
-    id int(50) UNSIGNED NOT NULL AUTO_INCREMENT,
+    id int(255) UNSIGNED NOT NULL AUTO_INCREMENT,
     image_data BLOB NOT NULL,
     PRIMARY KEY (id)
 )ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS habitat_image(
-    habitat_id int(50) UNSIGNED NOT NULL ,
-    image_id int(50) UNSIGNED NOT NULL ,
+    habitat_id int(255) UNSIGNED NOT NULL ,
+    image_id int(255) UNSIGNED NOT NULL ,
     PRIMARY KEY (habitat_id , image_id),
     CONSTRAINT fk_habitat_id
         FOREIGN KEY (habitat_id)
@@ -109,8 +109,8 @@ CREATE TABLE IF NOT EXISTS habitat_image(
 )ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS animal_image(
-    animal_id int(50) UNSIGNED NOT NULL ,
-    image_id int(50) UNSIGNED NOT NULL ,
+    animal_id int(255) UNSIGNED NOT NULL ,
+    image_id int(255) UNSIGNED NOT NULL ,
     PRIMARY KEY (animal_id , image_id),
     CONSTRAINT fk_animal_id
         FOREIGN KEY (animal_id)

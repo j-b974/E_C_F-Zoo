@@ -5,6 +5,9 @@ services:
     container_name: ZooJose
     environment:
       APACHE_DOCUMENT_ROOT: /var/www/ZooJose
+      PDO_HOST: db
+      PDO_USER: admin
+      PDO_PASSWORD: 1234
     ports:
       - "8000:80"
     volumes:
