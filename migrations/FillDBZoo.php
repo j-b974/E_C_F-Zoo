@@ -11,8 +11,19 @@ for($i=0;$i<= 7 ;$i++)
     $avis = new \App\Controller\entity\Avis();
     $avis->setPseudo($faker->firstName);
     $avis->setCommentaire($faker->realText(90));
+
     $Tavis->addAvis($avis);
 }
+$Tservice = new \App\Model\repository\TableService($bdd);
+for($i=0;$i<=7;$i++)
+{
+    $service = new \App\Controller\entity\Service();
+    $service->setNom($faker->lastName());
+    $service->setDescription($faker->realText(90));
+
+    $Tservice->addService($service);
+}
+
 
 
 echo "Terminé !!!";

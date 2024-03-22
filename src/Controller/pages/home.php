@@ -4,11 +4,10 @@ $pathView = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'View' .DIRECTORY_SEPARA
 use App\Model\DbZoo;
 
 $db = DbZoo::connection();
-$avis = new \App\Controller\entity\Avis();
-$avis->setPseudo('aaaa')->setCommentaire('0000')->setIsVisible(True)
-    ->setId(1);
-$Tavis = new \App\Model\repository\TableAvis($db);
-$Tavis->delectAvis($avis);
+$service = new \App\Controller\entity\Service();
+$service->setNom('AAA')->setDescription('00000')->setId(1);
+$Ta = new \App\Model\repository\TableService($db);
+$Ta->delectService($service);
 
 ob_start();
 ?>
