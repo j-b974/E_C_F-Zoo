@@ -4,10 +4,16 @@ $pathView = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'View' .DIRECTORY_SEPARA
 use App\Model\DbZoo;
 
 $db = DbZoo::connection();
-$service = new \App\Controller\entity\Service();
-$service->setNom('AAA')->setDescription('00000')->setId(1);
-$Ta = new \App\Model\repository\TableService($db);
-$Ta->delectService($service);
+$Tuseur = new \App\Model\repository\TableUtilisateur($db);
+$user = new \App\Controller\entity\Utilisateur();
+$role = new \App\Controller\entity\Role();
+$role->setId(9);
+$user->setUsername('aduhamel@lemaitre.fr')
+    ->setNom('0000')
+    ->setPrenom('99999')
+    ->setPassword('1111')
+    ->setRole($role);
+$Tuseur->delectUtilisateur($user);
 
 ob_start();
 ?>

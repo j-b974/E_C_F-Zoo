@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> <?= $titre ?? "Zoo" ?></title>
     <link rel="stylesheet" href="./asset/css/main.css" crossorigin="anonymous">
+   <link rel="icon" href="./asset/images/icon.png">
 
 <body>
     <div class="container-fluid">
