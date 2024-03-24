@@ -123,3 +123,38 @@ CREATE TABLE IF NOT EXISTS animal_image(
             ON DELETE CASCADE
             ON UPDATE RESTRICT
 )ENGINE= InnoDB;
+
+CREATE TRIGGER unique_admin_role_trigger
+    BEFORE INSERT ON utilisateur
+    FOR EACH ROW
+BEGIN
+    DECLARE admin_count INT;
+
+    IF NEW.role_id = (SELECT id FROM role WHERE label = 'administrateur') THEN
+        SELECT COUNT(*) INTO admin_count FROM utilisateur WHERE role_id = NEW.role_id;
+
+        IF admin_count > 0 THEN
+            SIGNAL SQLSTATE '45000'
+                SET MESSAGE_TEXT = 'Il ne peut y avoir qu\'un seul utilisateur avec le rôle admin.';
+        END IF;
+    END IF;
+END;
+
+CREATE TRIGGER unique_admin_role_update_trigger
+    BEFORE UPDATE ON utilisateur
+    FOR EACH ROW
+BEGIN
+    DECLARE admin_count INT;
+
+    IF NEW.role_id = (SELECT id FROM role WHERE label = 'administrateur') THEN
+        SELECT COUNT(*) INTO admin_count FROM utilisateur WHERE role_id = NEW.role_id;
+
+        IF admin_count > 0 THEN
+            IF (SELECT role_id FROM utilisateur WHERE username = NEW.username) != (SELECT id FROM role WHERE label = 'administrateur') THEN
+                SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'Le rôle admin ne peut être modifié que pour l\'utilisateur existant avec ce rôle.';
+            END IF;
+        END IF;
+
+    END IF;
+END;

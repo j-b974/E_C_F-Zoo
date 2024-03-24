@@ -37,8 +37,8 @@ services:
     container_name: myadminZoo
     environment:
       PMA_HOST: db
-      PMA_USER: admin
-      PMA_PASSWORD: 1234
+      PMA_USER: root
+      PMA_PASSWORD: jose
     restart: always
     depends_on:
       - db

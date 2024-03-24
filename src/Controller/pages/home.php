@@ -7,13 +7,13 @@ $db = DbZoo::connection();
 $Tuseur = new \App\Model\repository\TableUtilisateur($db);
 $user = new \App\Controller\entity\Utilisateur();
 $role = new \App\Controller\entity\Role();
-$role->setId(9);
-$user->setUsername('aduhamel@lemaitre.fr')
-    ->setNom('0000')
-    ->setPrenom('99999')
-    ->setPassword('1111')
+$role->setId(3);
+$user->setUsername('benjamin.')
+    ->setNom('777777777')
+    ->setPrenom('7777777')
+    ->setPassword('00000')
     ->setRole($role);
-$Tuseur->delectUtilisateur($user);
+$Tuseur->addUtilisateur($user);
 
 ob_start();
 ?>
