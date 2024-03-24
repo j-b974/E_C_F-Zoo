@@ -53,7 +53,6 @@ CREATE TABLE IF NOT EXISTS animal(
      etat varchar(255) NOT NULL,
      race_id int(255) UNSIGNED NOT NULL,
      habit_id int(255) UNSIGNED NOT NULL,
-     rapport_id int(255) UNSIGNED NULL ,
      PRIMARY KEY (id),
      CONSTRAINT fk_race
          FOREIGN KEY (race_id)

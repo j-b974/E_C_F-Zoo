@@ -58,5 +58,42 @@ for($i=0 ; $i <= 18 ; $i++)
     $Tutilisateur->addUtilisateur($utilisateur);
 }
 
+// remplir table race
+$Trace = new \App\Model\repository\TableRace($bdd);
+for($i=0; $i<= 47 ; $i++)
+{
+    $race = new \App\Controller\entity\Race();
+    $race->setLabel($faker->word());
+
+    $Trace->addRace($race);
+}
+
+// remplir table habitat
+$Thabitat = new \App\Model\repository\TableHabitat($bdd);
+for($i=0 ; $i <= 7 ; $i++)
+{
+    $habitat = new \App\Controller\entity\Habitat();
+    $habitat->setNom($faker->lastName())
+        ->setDescription($faker->paragraph(1))
+        ->setCommentaireHabitat($faker->realText(75));
+    $Thabitat->addHabit($habitat);
+}
+
+// remplire la table animal
+$lstHabit = $Thabitat->getAllHabitat();
+$lstRace = $Trace->getAllRace();
+$Tanimal = new \App\Model\repository\TableAnimal($bdd);
+
+for($i=0;$i <= 150 ; $i++)
+{
+
+    $animal = new \App\Controller\entity\Animal();
+    $animal->setPrenom($faker->firstName())
+        ->setEtat($faker->words(3,true))
+        ->setRace($faker->randomElements($lstRace)[0])
+        ->setHabitat($faker->randomElements($lstHabit)[0]);
+
+    $Tanimal->addAnimal($animal);
+}
 
 echo "Terminé !!!";
