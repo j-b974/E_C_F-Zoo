@@ -5,7 +5,6 @@ use App\Model\DbZoo;
 
 $db = DbZoo::connection();
 
-
 ob_start();
 ?>
     <h1 class = text-center > teste de routage </h1>

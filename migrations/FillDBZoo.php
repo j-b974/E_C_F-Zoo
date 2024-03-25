@@ -92,8 +92,19 @@ for($i=0;$i <= 150 ; $i++)
         ->setEtat($faker->words(3,true))
         ->setRace($faker->randomElements($lstRace)[0])
         ->setHabitat($faker->randomElements($lstHabit)[0]);
-
     $Tanimal->addAnimal($animal);
 }
 
+// remplire la table rapport vetto
+$TrapportVetto = new \App\Model\repository\TableRapportVeterinaire($bdd);
+$lstAnimal = $Tanimal->getAllAnimal();
+$lstVetto =$Tutilisateur->getAllVeterinaire();
+for($i=0; $i<=33; $i++)
+{
+    $rapportvetto = new \App\Controller\entity\RapportVeterinaire();
+    $rapportvetto->setDetail($faker->paragraph(1))
+        ->setVeterinaire($faker->randomElement($lstVetto))
+        ->setAnimal($faker->randomElement($lstAnimal));
+    $TrapportVetto->addRapportVeterinaire($rapportvetto);
+}
 echo "Terminé !!!";

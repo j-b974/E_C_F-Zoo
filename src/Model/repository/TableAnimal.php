@@ -13,6 +13,19 @@ class TableAnimal
         $this->bdd = $bdd;
 
     }
+
+    /**
+     * @return array<Animal>
+     */
+    public function getAllAnimal():array
+    {
+        $query = "SELECT id ,prenom , etat FROM animal ";
+        $req = $this->bdd->prepare($query);
+        $req->execute();
+        $req->setFetchMode(PDO::FETCH_CLASS, Animal::class);
+
+        return $req->fetchAll();
+    }
     public function addAnimal(Animal $animal):void
     {
 
