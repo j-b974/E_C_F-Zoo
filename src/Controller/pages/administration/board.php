@@ -4,6 +4,7 @@ $pathView = dirname(__DIR__, 3) . DIRECTORY_SEPARATOR . 'View' .DIRECTORY_SEPARA
 use App\Model\DbZoo;
 
 //$db = DbZoo::connection();
+\App\Controller\services\Verificateur::verifieConnection($router);
 
 ob_start();
 

@@ -3,6 +3,9 @@ require_once (dirname(__DIR__,3).DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATO
 $pathView = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'View' .DIRECTORY_SEPARATOR;
 use App\Model\DbZoo;
 
+\App\Controller\services\Verificateur::verifieNonConnection($router);
+
+
 if(isset($_POST['connection']))
 {
 
@@ -12,9 +15,15 @@ if(isset($_POST['connection']))
 
     if($v->valideur())
     {
+        $name = htmlentities($_POST['username']);
+        $utilisateur = $Tutilisateur->getUtilisateurByName($name);
 
-        session_start();
-        $_SESSION['auth']='1';
+        if (session_status() == PHP_SESSION_NONE)
+        {
+            session_start();
+        }
+
+        $_SESSION['utilisateur']=$utilisateur;
         header('Location:'.$router->url('dashboard'));
         exit();
 

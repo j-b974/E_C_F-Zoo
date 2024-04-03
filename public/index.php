@@ -7,9 +7,15 @@ require_once ("../vendor/autoload.php");
 
 $router = new \App\Controller\services\RouterZoo(PATH_CONTROLLER);
 
+// ===================== Route visiteur ================
 $router->map('/','pages/home','home');
-$router->mapBoth( '/connection', 'pages/connection','connection');
+
+// ===================== Route administration ===============
 $router->map('/dashBoard', 'pages/administration/board', 'dashboard');
+
+// ===================== Route connection/deconnectin =======
+$router->mapBoth( '/connection', 'pages/connection','connection');
+$router->map('/deconnection', 'pages/deconnection', 'deconnection');
 
 
 $router->run();
