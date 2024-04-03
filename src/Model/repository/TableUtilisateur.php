@@ -71,5 +71,21 @@ class TableUtilisateur
         $req->bindValue('user',$utilisateur->getUsername(), PDO::PARAM_STR);
         $req->execute();
     }
+    public function getUtilisateurByName(string $name)
+    {
+        $query ="SELECT username , password , nom , prenom FROM utilisateur WHERE username = :name";
+        $req = $this->bdd->prepare($query);
+        $req->bindValue('name', $name , PDO::PARAM_STR);
+        $req->setFetchMode(PDO::FETCH_CLASS , Utilisateur::class);
+        $req->execute();
+        return $req->fetch();
+    }
+    public function Validation(string $name , string $password)
+    {
+        $utilisateur =  $this->getUtilisateurByName($name);
+        if(!$utilisateur){return false;}
+        if($password !== $utilisateur->getPassword()){return false;}
+        return true;
+    }
 
 }

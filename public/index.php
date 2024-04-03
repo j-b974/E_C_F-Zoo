@@ -8,7 +8,8 @@ require_once ("../vendor/autoload.php");
 $router = new \App\Controller\services\RouterZoo(PATH_CONTROLLER);
 
 $router->map('/','pages/home','home');
-$router->map( '/connection', 'pages/connection','connection');
+$router->mapBoth( '/connection', 'pages/connection','connection');
+$router->map('/dashBoard', 'pages/administration/board', 'dashboard');
 
 
 $router->run();

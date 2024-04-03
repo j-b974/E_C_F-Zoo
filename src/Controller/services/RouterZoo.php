@@ -21,6 +21,12 @@ class RouterZoo {
     {
         $this->router->map('GET',$url,$pathFile,$nameRoute);
     }
+    public function mapBoth(string $route , string $fichier , ?string $nom = null): self
+    {
+        $this->router->map('POST|GET',$route , $fichier, $nom );
+        return $this;
+    }
+
     public function run()
     {
         $router = $this;
