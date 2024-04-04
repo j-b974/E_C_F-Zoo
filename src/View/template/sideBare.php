@@ -18,7 +18,7 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link text-white">
+            <a href="<?= $router->url('comptRenduVeto')?>" class="nav-link text-white">
                 <i class="bi bi-clipboard2-plus me-2"></i>
                 Compte Rendus Vétérinaire
             </a>
@@ -30,7 +30,7 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link text-white">
+            <a href="<?= $router->url('compte')?>" class="nav-link text-white">
                 <i class="bi bi-people me-2"></i>
                 gestion de comptes
             </a>

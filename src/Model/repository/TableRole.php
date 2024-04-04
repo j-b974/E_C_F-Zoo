@@ -2,6 +2,7 @@
 
 namespace App\Model\repository;
 use App\Controller\entity\Role;
+use App\Controller\entity\Utilisateur;
 use \PDO;
 class TableRole
 {
@@ -47,6 +48,17 @@ class TableRole
         $req->setFetchMode(PDO::FETCH_CLASS, Role::class);
 
         return $req->fetchAll();
+    }
+    public function addRoleUtilisateur(Utilisateur $utilisateur):void
+    {
+        $query = "SELECT role.id , role.label FROM role 
+                    JOIN utilisateur ON  role.id = utilisateur.role_id
+                    WHERE utilisateur.username = :user ";
+        $req= $this->bdd->prepare($query);
+        $req->bindValue('user', $utilisateur->getUsername(), PDO::PARAM_STR);
+        $req->setFetchMode(PDO::FETCH_CLASS , Role::class);
+        $req->execute();
+        $utilisateur->setRole($req->fetch());
     }
 
 

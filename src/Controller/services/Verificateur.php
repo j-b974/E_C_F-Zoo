@@ -30,5 +30,16 @@ class Verificateur
         }
 
     }
+    public static function checkRole($router , $lstRole)
+    {
+        self::verifieConnection($router);
+        $role = $_SESSION['utilisateur']->getrole()->getLabel();
+
+        if(!in_array($role , $lstRole)){
+            header('Location:'.$router->url('home'), true , 301);
+            exit();
+        }
+
+    }
 
 }

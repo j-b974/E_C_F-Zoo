@@ -11,9 +11,12 @@ class TableUtilisateur
 {
     private PDO $bdd;
 
+    private $Trole;
+
     public function __construct(PDO $bdd)
     {
         $this->bdd = $bdd;
+        $this->Trole = new TableRole($bdd);
     }
 
     /**
@@ -78,7 +81,10 @@ class TableUtilisateur
         $req->bindValue('name', $name , PDO::PARAM_STR);
         $req->setFetchMode(PDO::FETCH_CLASS , Utilisateur::class);
         $req->execute();
-        return $req->fetch();
+        $utilisateur =  $req->fetch();
+
+        $this->Trole->addRoleUtilisateur($utilisateur);
+        return $utilisateur;
     }
     public function Validation(string $name , string $password)
     {
