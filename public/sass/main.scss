@@ -1,7 +1,13 @@
-@import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";
+@import "../../node_modules/bootstrap-icons/font/bootstrap-icons.css";
 @import "custom.scss";
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
 
 .fontRoboto{
   font-family: "Roboto Slab", serif;
+}
+html,body{
+
+};
+.card-sidBare{
+  min-height: calc(100vh - 90px);
 }
