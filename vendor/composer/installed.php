@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'berti/zoo_jose',
-        'pretty_version' => 'dev-developpement',
-        'version' => 'dev-developpement',
-        'reference' => '2f5b88f95beb09e8d62a3698d657555f2cde7a82',
+        'pretty_version' => 'dev-connection',
+        'version' => 'dev-connection',
+        'reference' => '75568a9984331b7c707b7f03294813a1f00e2091',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -20,9 +20,9 @@
             'dev_requirement' => false,
         ),
         'berti/zoo_jose' => array(
-            'pretty_version' => 'dev-developpement',
-            'version' => 'dev-developpement',
-            'reference' => '2f5b88f95beb09e8d62a3698d657555f2cde7a82',
+            'pretty_version' => 'dev-connection',
+            'version' => 'dev-connection',
+            'reference' => '75568a9984331b7c707b7f03294813a1f00e2091',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -72,6 +72,15 @@
             'install_path' => __DIR__ . '/../symfony/var-dumper',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'vlucas/valitron' => array(
+            'pretty_version' => 'v1.4.11',
+            'version' => '1.4.11.0',
+            'reference' => 'fadce39f5f235755bb9794b2573af2d5bfcba85f',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../vlucas/valitron',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
     ),
 );
