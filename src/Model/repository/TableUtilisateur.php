@@ -83,7 +83,9 @@ class TableUtilisateur
         $req->execute();
         $utilisateur =  $req->fetch();
 
-        $this->Trole->addRoleUtilisateur($utilisateur);
+        if($utilisateur){
+            $this->Trole->addRoleUtilisateur($utilisateur);
+        }
         return $utilisateur;
     }
     public function Validation(string $name , string $password)

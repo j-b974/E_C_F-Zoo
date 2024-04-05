@@ -12,5 +12,5 @@ require $pathView.'Pages'.DIRECTORY_SEPARATOR.'administration'.DIRECTORY_SEPARAT
 
 $contenu = ob_get_clean();
 $titre = "administration";
-
+$utilisateur = $_SESSION['utilisateur'];
 require $pathView.'Pages'.DIRECTORY_SEPARATOR.'administration'.DIRECTORY_SEPARATOR.'index.php';

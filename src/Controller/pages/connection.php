@@ -40,5 +40,5 @@ require $pathView.'Pages'.DIRECTORY_SEPARATOR.'connection.php';
 
 $contenu = ob_get_clean();
 $titre = "Connection Employer ";
-
+$utilisateur = $_SESSION['utilisateur'] ?? false;
 require $pathView.'index.php';

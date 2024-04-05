@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   web:
-    image: image_zoo:latest
+    image: zoojose:latest
     container_name: ZooJose
     environment:
       APACHE_DOCUMENT_ROOT: /var/www/ZooJose
