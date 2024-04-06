@@ -5,7 +5,7 @@ namespace App\Controller\entity;
 class Role
 {
     protected int $id;
-    protected string $label;
+    protected ?string $label= null;
 
     /**
      * @return int
@@ -28,7 +28,7 @@ class Role
     /**
      * @return string
      */
-    public function getLabel(): string
+    public function getLabel(): ?string
     {
         return $this->label;
     }

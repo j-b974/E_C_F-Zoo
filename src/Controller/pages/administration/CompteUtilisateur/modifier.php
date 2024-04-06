@@ -1,0 +1,3 @@
+<?php
+
+$activeGestion = "active";

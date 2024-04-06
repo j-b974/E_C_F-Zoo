@@ -10,7 +10,10 @@ $router->map('/','pages/home','home');
 
 // ===================== Route administration ===============
 $router->map('/dashBoard', 'pages/administration/board', 'dashboard');
-$router->map('/gestion_de_compte', 'pages/administration/compte', 'compte');
+$router->map('/gestion-de-compte', 'pages/administration/CompteUtilisateur/compte', 'compte');
+$router->map('/compte-modifier', 'pages/administration/CompteUtilisateur/rajouter', 'modifCompte');
+$router->map('/compte-suprimer', 'pages/administration/CompteUtilisateur/suprime', 'suprimeCompte');
+$router->mapBoth('/creation-de-compte', 'pages/administration/CompteUtilisateur/rajouter', 'addCompte');
 $router->map('/compte_rendu_veterinaire', 'pages/administration/compteRenduVeterinaire', 'comptRenduVeto');
 
 

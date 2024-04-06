@@ -4,16 +4,16 @@ namespace App\Controller\entity;
 
 class Utilisateur
 {
-    protected string $username;
-    protected string $password;
-    protected string $nom;
-    protected string $prenom;
-    protected Role $role;
+    protected ?string $username= null;
+    protected ?string $password=null;
+    protected ?string $nom=null;
+    protected ?string $prenom=null;
+    protected ?Role $role=null;
 
     /**
      * @return string
      */
-    public function getUsername(): string
+    public function getUsername(): ?string
     {
         return $this->username;
     }
@@ -31,7 +31,7 @@ class Utilisateur
     /**
      * @return string
      */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -49,7 +49,7 @@ class Utilisateur
     /**
      * @return string
      */
-    public function getNom(): string
+    public function getNom(): ?string
     {
         return $this->nom;
     }
@@ -67,7 +67,7 @@ class Utilisateur
     /**
      * @return string
      */
-    public function getPrenom(): string
+    public function getPrenom(): ?string
     {
         return $this->prenom;
     }
@@ -85,7 +85,7 @@ class Utilisateur
     /**
      * @return Role
      */
-    public function getRole(): Role
+    public function getRole(): ?Role
     {
         return $this->role;
     }

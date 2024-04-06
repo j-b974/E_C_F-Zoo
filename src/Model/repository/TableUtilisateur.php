@@ -29,17 +29,16 @@ class TableUtilisateur
                   WHERE role.label = 'veterinaire' ";
         $req = $this->bdd->prepare($query);
         $req->execute();
-        $req->setFetchMode(PDO::FETCH_ASSOC );
-        $datas = $req->fetchAll();
+        return $this->dataFormatObjet($req->fetchAll(PDO::FETCH_ASSOC)) ;
+    }
+    public function getAllUtilisateur():array
+    {
+        $query ="SELECT utilisateur.* , role.* FROM utilisateur 
+                  left join role ON role.id = utilisateur.role_id ";
+        $req = $this->bdd->prepare($query);
+        $req->execute();
+        return $this->dataFormatObjet($req->fetchAll(PDO::FETCH_ASSOC));
 
-        $datasFromat=[];
-        foreach($datas as $donnee)
-        {
-            $utilisateur = SetterObjet::hydrate(new Utilisateur(),$donnee,array_keys($donnee) ) ;
-            $datasFromat[] = $utilisateur->setRole(SetterObjet::hydrate(new Role , $donnee , array_keys($donnee)));
-        }
-
-        return $datasFromat ;
     }
     public function addUtilisateur(Utilisateur $utilisateur):void
     {
@@ -94,6 +93,16 @@ class TableUtilisateur
         if(!$utilisateur){return false;}
         if($password !== $utilisateur->getPassword()){return false;}
         return true;
+    }
+    private function dataFormatObjet( array $data):array
+    {
+        $dataFromat= [];
+        foreach($data as $donnee)
+        {
+            $utilisateur = SetterObjet::hydrate(new Utilisateur(),$donnee,array_keys($donnee) ) ;
+            $dataFromat[] = $utilisateur->setRole(SetterObjet::hydrate(new Role , $donnee , array_keys($donnee)));
+        }
+        return $dataFromat;
     }
 
 }
