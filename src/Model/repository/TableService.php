@@ -26,7 +26,7 @@ class TableService
 
         $service->setId($this->bdd->lastInsertId());
     }
-    public function UpdateServie(Service $service)
+    public function UpdateService(Service $service)
     {
         $query ="UPDATE service SET nom = :nom , description = :desc 
                       WHERE id = :id LIMIT 1";
@@ -42,6 +42,23 @@ class TableService
         $req = $this->bdd->prepare($query);
         $req->bindValue('id',$service->getId(), PDO::PARAM_INT);
         $req->execute();
+    }
+    public function getAllservice():array
+    {
+        $query ="SELECT * FROM service";
+        $req = $this->bdd->prepare($query);
+        $req->setFetchMode(PDO::FETCH_CLASS , Service::class);
+        $req->execute();
+        return $req->fetchAll();
+    }
+    public function getServiceById(int $id):Service
+    {
+        $query ="SELECT * FROM service WHERE id = :id";
+        $req = $this->bdd->prepare($query);
+        $req->bindValue('id', $id, PDO::PARAM_INT);
+        $req->setFetchMode(PDO::FETCH_CLASS , Service::class);
+        $req->execute();
+        return $req->fetch();
     }
 
 }

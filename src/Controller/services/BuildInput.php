@@ -63,9 +63,9 @@ HTML;
     public function getTextarea($key, string $label): ?string
     {
         return <<<HTML
-        <div class="form-group">
-            <label class="font-weight-bold" for="{$key}">{$label}</label>
-            <textarea class="form-control {$this->getInvalid($key)}" type="text" name="{$key}" rows="15" id="{$key}">{$this->getMethode($key)}</textarea>
+        <div class="form-floating ">
+            <textarea class="form-control {$this->getInvalid($key)}" placeholder="Leave a comment here"  type="text" name="{$key}" id="floatingTextarea" style="height: 250px">{$this->getMethode($key)}</textarea>
+            <label class="text-dark" for="floatingTextarea">{$label}</label>
             {$this->getFeedback($key)}
         </div>
 HTML;

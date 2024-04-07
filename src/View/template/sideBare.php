@@ -29,12 +29,9 @@
                 Gestion Animaux
             </a>
         </li>
-        <li class="nav-item">
-            <a href="<?= $router->url('compte')?>" class="nav-link text-white <?= $activeGestion ?? "" ?>" aria-current="page">
-                <i class="bi bi-people me-2"></i>
-                gestion de comptes
-            </a>
-        </li>
+        <?php if($utilisateur->getRole()->getLabel()=='administrateur') : ?>
+            <?php require __DIR__.DIRECTORY_SEPARATOR.'Partials'.DIRECTORY_SEPARATOR.'liAdmin.php' ?>
+        <?php endif; ?>
     </ul>
     <hr>
     <div>
