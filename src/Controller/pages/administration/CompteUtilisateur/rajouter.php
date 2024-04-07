@@ -7,6 +7,7 @@ use App\Model\DbZoo;
 \App\Controller\services\Verificateur::checkRole($router ,['administrateur']);
 $user = new \App\Controller\entity\Utilisateur();
 $errors = [];
+
 if(isset($_POST['compte']))
 {
     $Tutilisateur = new \App\Model\repository\TableUtilisateur(DbZoo::connection());
@@ -22,15 +23,15 @@ if(isset($_POST['compte']))
 
     if($validator->valideur()) {
         $Tutilisateur->addUtilisateur($user);
-        header('Location:'.$router->url('compte').'?creation=success');
+        header('Location:'.$router->url('compte').'?infos=creer');
     }else{
                 $errors= $validator->get_errors();
     }
 
 }
 $htmlForm = new \App\Controller\services\BuildInput($user,$errors);
-
-
+$link = $router->url('addCompte');
+$btnLabel ="Créer";
 ob_start();
 
 require $pathView.'template'.DIRECTORY_SEPARATOR.'Formulaire'.DIRECTORY_SEPARATOR.'gestionCompte.php';

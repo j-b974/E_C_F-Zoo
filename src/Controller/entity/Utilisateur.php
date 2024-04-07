@@ -4,6 +4,24 @@ namespace App\Controller\entity;
 
 class Utilisateur
 {
+    /**
+     * @return int|null
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int|null $id
+     * @return Utilisateur
+     */
+    public function setId(?int $id): Utilisateur
+    {
+        $this->id = $id;
+        return $this;
+    }
+    protected ?int $id = null;
     protected ?string $username= null;
     protected ?string $password=null;
     protected ?string $nom=null;

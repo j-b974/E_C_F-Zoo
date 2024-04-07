@@ -20,12 +20,13 @@ CREATE TABLE IF NOT EXISTS role(
 )ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS utilisateur(
-    username varchar(255) NOT NULL ,
+    id int(255) UNSIGNED NOT NULL AUTO_INCREMENT,
+    username varchar(255) NOT NULL UNIQUE ,
     password varchar(255) NOT NULL ,
     nom varchar(255) NOT NULL ,
     prenom varchar(255) NOT NULL ,
     role_id int(255) UNSIGNED NOT NULL ,
-    primary key (username),
+    primary key (id),
     CONSTRAINT  fk_role
       FOREIGN KEY (role_id)
           REFERENCES role (id)

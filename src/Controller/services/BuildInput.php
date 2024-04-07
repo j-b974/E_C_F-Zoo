@@ -24,9 +24,10 @@ class BuildInput
         $opt = [];
         foreach ($option as $k => $v) {
             $select = null;
+            $role = (bool) $this->data->getRole() ;
+            if( $role) {
+                if ($v ==  $this->data->getRole()->getLabel()) {
 
-            if(isset($this->data->getRole)&&  $this->data->getRole() != null) {
-                if (in_array($k, [$this->data->getRole()->getLabel()] )) {
                     $select = ' selected';
                 }
             }
