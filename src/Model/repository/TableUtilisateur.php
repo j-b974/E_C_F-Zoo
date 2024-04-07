@@ -29,17 +29,16 @@ class TableUtilisateur
                   WHERE role.label = 'veterinaire' ";
         $req = $this->bdd->prepare($query);
         $req->execute();
-        $req->setFetchMode(PDO::FETCH_ASSOC );
-        $datas = $req->fetchAll();
+        return $this->dataFormatObjet($req->fetchAll(PDO::FETCH_ASSOC)) ;
+    }
+    public function getAllUtilisateur():array
+    {
+        $query ="SELECT utilisateur.id , utilisateur.username, utilisateur.role_id, utilisateur.password, utilisateur.nom, utilisateur.prenom, role.label FROM utilisateur
+                JOIN role ON role.id = utilisateur.role_id";
+        $req = $this->bdd->prepare($query);
+        $req->execute();
+        return $this->dataFormatObjet($req->fetchAll(PDO::FETCH_ASSOC));
 
-        $datasFromat=[];
-        foreach($datas as $donnee)
-        {
-            $utilisateur = SetterObjet::hydrate(new Utilisateur(),$donnee,array_keys($donnee) ) ;
-            $datasFromat[] = $utilisateur->setRole(SetterObjet::hydrate(new Role , $donnee , array_keys($donnee)));
-        }
-
-        return $datasFromat ;
     }
     public function addUtilisateur(Utilisateur $utilisateur):void
     {
@@ -51,32 +50,33 @@ class TableUtilisateur
         $req->bindValue('nom',$utilisateur->getNom() , PDO::PARAM_STR);
         $req->bindValue('prenom',$utilisateur->getPrenom() , PDO::PARAM_STR);
         $req->bindValue('role', $utilisateur->getRole()->getId(), PDO::PARAM_INT);
-
         $req->execute();
+        $utilisateur->setId($this->bdd->lastInsertId());
     }
     public function UpdateUtilisateur(Utilisateur $utilisateur)
     {
-        $query ="UPDATE utilisateur SET  password = :pass , nom = :nom , prenom = :prenom , role_id  = :role
-                      WHERE username = :user LIMIT 1";
+        $query ="UPDATE utilisateur SET  username = :user , password = :pass , nom = :nom , prenom = :prenom , role_id  = :role
+                      WHERE id = :id LIMIT 1";
         $req = $this->bdd->prepare($query);
         $req->bindValue('pass',$utilisateur->getPassword(), PDO::PARAM_STR);
         $req->bindValue('nom',$utilisateur->getNom(), PDO::PARAM_STR);
         $req->bindValue('prenom',$utilisateur->getPrenom() , PDO::PARAM_STR);
         $req->bindValue('role',$utilisateur->getRole()->getId() , PDO::PARAM_INT);
+        $req->bindValue('id',$utilisateur->getId() , PDO::PARAM_INT);
         $req->bindValue('user',$utilisateur->getUsername() , PDO::PARAM_STR);
 
         $req->execute();
     }
     public function delectUtilisateur(Utilisateur $utilisateur)
     {
-        $query = "DELETE FROM utilisateur WHERE username = :user LIMIT 1" ;
+        $query = "DELETE FROM utilisateur WHERE id = :id LIMIT 1" ;
         $req = $this->bdd->prepare($query);
-        $req->bindValue('user',$utilisateur->getUsername(), PDO::PARAM_STR);
+        $req->bindValue('id',$utilisateur->getId(), PDO::PARAM_INT);
         $req->execute();
     }
     public function getUtilisateurByName(string $name)
     {
-        $query ="SELECT username , password , nom , prenom FROM utilisateur WHERE username = :name";
+        $query ="SELECT id , username , password , nom , prenom FROM utilisateur WHERE username = :name";
         $req = $this->bdd->prepare($query);
         $req->bindValue('name', $name , PDO::PARAM_STR);
         $req->setFetchMode(PDO::FETCH_CLASS , Utilisateur::class);
@@ -88,12 +88,36 @@ class TableUtilisateur
         }
         return $utilisateur;
     }
+    public function getUtilisateurByID(int $id)
+    {
+        $query="SELECT id , username , password , nom , prenom FROM utilisateur WHERE id= :id";
+        $req = $this->bdd->prepare($query);
+        $req->bindValue('id',$id,PDO::PARAM_INT);
+        $req->setFetchMode(PDO::FETCH_CLASS , Utilisateur::class);
+        $req->execute();
+        $utilisateur =  $req->fetch();
+        if($utilisateur){
+            $this->Trole->addRoleUtilisateur($utilisateur);
+        }
+        return $utilisateur;
+
+    }
     public function Validation(string $name , string $password)
     {
         $utilisateur =  $this->getUtilisateurByName($name);
         if(!$utilisateur){return false;}
         if($password !== $utilisateur->getPassword()){return false;}
         return true;
+    }
+    private function dataFormatObjet( array $data):array
+    {
+        $dataFromat= [];
+        foreach($data as $donnee)
+        {
+            $utilisateur = SetterObjet::hydrate(new Utilisateur(),$donnee,array_keys($donnee) ) ;
+            $dataFromat[] = $utilisateur->setRole(SetterObjet::hydrate(new Role , $donnee , array_keys($donnee)));
+        }
+        return $dataFromat;
     }
 
 }

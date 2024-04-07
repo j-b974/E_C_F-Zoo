@@ -44,6 +44,16 @@ foreach ( $Trole->getAllRole() as $role)
 
 // remplir table Utilisateur
 $Tutilisateur = new \App\Model\repository\TableUtilisateur($bdd);
+$roleAdmin = new \App\Controller\entity\Role();
+$roleAdmin->setId(3)->setLabel('administrateur');
+$admin = new \App\Controller\entity\Utilisateur();
+$admin->setUsername('admin@admin.fr')
+    ->setRole($roleAdmin)
+    ->setNom('admin')
+    ->setPrenom('admin')
+    ->setPassword('admin');
+$Tutilisateur->addUtilisateur($admin);
+
 for($i=0 ; $i <= 18 ; $i++)
 {
     $rand = rand(0,99)<=83 ? 0 : 1;

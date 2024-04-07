@@ -36,6 +36,16 @@ class TableRole
 
         return $req->fetch();
     }
+    public function getRoleByLabel(string $label):Role
+    {
+        $query = "SELECT * FROM role WHERE label= :label";
+        $req = $this->bdd->prepare($query);
+        $req->bindValue("label", $label , PDO::PARAM_STR);
+        $req->execute();
+        $req->setFetchMode(PDO::FETCH_CLASS , Role::class);
+
+        return $req->fetch();
+    }
 
     /**
      * @return Role[]

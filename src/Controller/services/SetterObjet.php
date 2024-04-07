@@ -18,7 +18,7 @@ class SetterObjet
 
         foreach($lstfield as $field)
         {
-            if($data[$field] == null || $field === $exclude) continue;
+            if($field === $exclude || $data[$field] == null ) continue;
 
             $names = explode("_",$field);
             $name2 = array_map(function($n){
