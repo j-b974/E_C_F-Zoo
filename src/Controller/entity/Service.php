@@ -5,8 +5,8 @@ namespace App\Controller\entity;
 class Service
 {
     protected int $id;
-    protected string $nom;
-    protected string $description ;
+    protected ?string $nom = null;
+    protected ?string $description = null ;
     /**
      * @return int
      */
@@ -28,7 +28,7 @@ class Service
     /**
      * @return string
      */
-    public function getNom(): string
+    public function getNom(): ?string
     {
         return $this->nom;
     }
@@ -46,7 +46,7 @@ class Service
     /**
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
