@@ -63,8 +63,8 @@ HTML;
     public function getTextarea($key, string $label): ?string
     {
         return <<<HTML
-        <div class="form-floating ">
-            <textarea class="form-control {$this->getInvalid($key)}" placeholder="Leave a comment here"  type="text" name="{$key}" id="floatingTextarea" style="height: 250px">{$this->getMethode($key)}</textarea>
+        <div class="form-floating mb-3">
+            <textarea class="form-control {$this->getInvalid($key)}" placeholder="Leave a comment here"  type="text" name="{$key}" id="floatingTextarea" style="height: 200px">{$this->getMethode($key)}</textarea>
             <label class="text-dark" for="floatingTextarea">{$label}</label>
             {$this->getFeedback($key)}
         </div>

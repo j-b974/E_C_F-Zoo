@@ -10,3 +10,9 @@
         gestion de services
     </a>
 </li>
+<li class="nav-item">
+    <a href="<?= $router->url('habitat')?>" class="nav-link text-white <?= $activeHabitat ?? "" ?>" aria-current="page">
+        <i class="bi bi-bank me-2"></i>
+        gestion Habitats annimaux
+    </a>
+</li>

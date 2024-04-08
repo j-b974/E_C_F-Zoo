@@ -30,3 +30,14 @@
         </button>
     </div>
 <?php endif; ?>
+<?php if(isset($_GET['habitat'])): ?>
+    <div class="text-center alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Réussit :</strong>
+        <?= $_GET['habitat'] == "creer"?
+            "l'habitat à bien était rajourter  !!!" :
+            "l'habitat à bien était modifier !!!";
+        ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        </button>
+    </div>
+<?php endif; ?>
