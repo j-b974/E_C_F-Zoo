@@ -107,7 +107,7 @@ for($i=0;$i <= 150 ; $i++)
 
 // remplire la table rapport vetto
 $TrapportVetto = new \App\Model\repository\TableRapportVeterinaire($bdd);
-$lstAnimal = $Tanimal->getAllAnimal();
+$lstAnimal = $Tanimal->getAllAnnimal();
 $lstVetto =$Tutilisateur->getAllVeterinaire();
 for($i=0; $i<=33; $i++)
 {

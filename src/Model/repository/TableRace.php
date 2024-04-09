@@ -25,6 +25,15 @@ class TableRace
 
         return $req->fetchAll();
     }
+    public function getAllRaceArray():array
+    {
+        $query = "SELECT * FROM race ";
+        $req = $this->bdd->prepare($query);
+        $req->execute();
+        $req->setFetchMode(PDO::FETCH_ASSOC);
+
+        return $this->formatArrayNom($req->fetchAll());
+    }
     public function addRace(Race $race):void
     {
         $query = "INSERT INTO race (label ) VALUES (:label)";
@@ -49,5 +58,14 @@ class TableRace
         $req = $this->bdd->prepare($query);
         $req->bindValue('id',$race->getId(), PDO::PARAM_INT);
         $req->execute();
+    }
+    private function formatArrayNom($data)
+    {
+        $lst=[];
+        foreach ($data as $donne)
+        {
+            $lst[$donne['id']]=$donne['label'];
+        }
+        return $lst;
     }
 }

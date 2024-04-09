@@ -41,3 +41,14 @@
         </button>
     </div>
 <?php endif; ?>
+<?php if(isset($_GET['annimaux'])): ?>
+    <div class="text-center alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Réussit :</strong>
+        <?= $_GET['annimaux'] == "creer"?
+            "l'annimale à bien était rajourter !!!" :
+            "l'annimale à bien était modifier !!!";
+        ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        </button>
+    </div>
+<?php endif; ?>

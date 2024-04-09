@@ -30,6 +30,13 @@ $router->mapBoth('/gestion/habitat/modifier/[i:id]', 'pages/administration/gesti
 $router->mapBoth('/gestion/habitat/supprimer/[i:id]', 'pages/administration/gestionHabitat/supprimer' , 'habitatSupprimer');
 $router->mapBoth('/gestion/habitat/rajouter', 'pages/administration/gestionHabitat/rajouter' , 'habitatCreer');
 
+// ===================== Gestion annimaux ===================
+
+$router->map('/gestion/annimaux', 'pages/administration/gestionAnnimaux/annimaux' , 'annimaux');
+$router->mapBoth('/gestion/annimaux/rajouter', 'pages/administration/gestionAnnimaux/rajouter' , 'annimauxRajouter');
+$router->mapBoth('/gestion/annimaux/modifier/[i:id]', 'pages/administration/gestionAnnimaux/modifier' , 'annimauxModifier');
+$router->mapBoth('/gestion/annimaux/supprimer/[i:id]', 'pages/administration/gestionAnnimaux/supprimer' , 'annimauxSupprimer');
+
 // ===================== Route connection/deconnectin =======
 $router->mapBoth( '/connection', 'pages/connection','connection');
 $router->map('/deconnection', 'pages/deconnection', 'deconnection');

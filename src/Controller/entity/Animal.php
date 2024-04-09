@@ -5,10 +5,10 @@ namespace App\Controller\entity;
 class Animal
 {
     protected int $id;
-    protected string $prenom;
-    protected string $etat;
-    protected Race $race;
-    protected Habitat $habitat;
+    protected ?string $prenom = null;
+    protected ?string $etat = null;
+    protected ?Race $race = null;
+    protected ?Habitat $habitat = null;
 
     /**
      * @return int
@@ -31,7 +31,7 @@ class Animal
     /**
      * @return string
      */
-    public function getPrenom(): string
+    public function getPrenom(): ?string
     {
         return $this->prenom;
     }
@@ -49,7 +49,7 @@ class Animal
     /**
      * @return string
      */
-    public function getEtat(): string
+    public function getEtat(): ?string
     {
         return $this->etat;
     }
@@ -67,7 +67,7 @@ class Animal
     /**
      * @return Race
      */
-    public function getRace(): Race
+    public function getRace(): ?Race
     {
         return $this->race;
     }
@@ -85,7 +85,7 @@ class Animal
     /**
      * @return Habitat
      */
-    public function getHabitat(): Habitat
+    public function getHabitat(): ?Habitat
     {
         return $this->habitat;
     }

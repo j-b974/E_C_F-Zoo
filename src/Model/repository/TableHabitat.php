@@ -27,6 +27,13 @@ class TableHabitat
         return $req->fetchAll();
 
     }
+    public function getListeNom():array
+    {
+        $query ="SELECT habitat.id , habitat.nom FROM habitat ";
+        $req = $this->bdd->prepare($query);
+        $req->execute();
+        return $this->formatArrayListe($req->fetchAll());
+    }
     public function getHabitatById(int $id):Habitat
     {
         $query = "SELECT * FROM habitat WHERE id = :id";
@@ -65,6 +72,15 @@ class TableHabitat
         $req = $this->bdd->prepare($query);
         $req->bindValue('id',$habitat->getId(), PDO::PARAM_INT);
         $req->execute();
+    }
+    private function formatArrayListe($data)
+    {
+        $format = [];
+        foreach ($data as $list)
+        {
+            $format [$list['id']]= $list['nom'];
+        }
+        return $format;
     }
 
 

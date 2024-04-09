@@ -23,12 +23,6 @@
                 Compte Rendus Vétérinaire
             </a>
         </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link text-white">
-                <i class="bi bi-github me-2"></i>
-                Gestion Animaux
-            </a>
-        </li>
         <?php if($utilisateur->getRole()->getLabel()=='administrateur') : ?>
             <?php require __DIR__.DIRECTORY_SEPARATOR.'Partials'.DIRECTORY_SEPARATOR.'liAdmin.php' ?>
         <?php endif; ?>
