@@ -53,10 +53,17 @@ $admin->setUsername('admin@admin.fr')
     ->setPrenom('admin')
     ->setPassword('admin');
 $Tutilisateur->addUtilisateur($admin);
-
+$vetto = 3 ;
 for($i=0 ; $i <= 18 ; $i++)
 {
-    $rand = rand(0,99)<=83 ? 0 : 1;
+    $rand = 0 ;
+    if($vetto <= 0){
+        $rand = rand(0,99)<=83 ? 0 : 1;
+    }else{
+        $rand = 1;
+        $vetto--;
+    }
+
     $role = $roles[$rand];
 
     $utilisateur = new \App\Controller\entity\Utilisateur();
@@ -108,13 +115,33 @@ for($i=0;$i <= 150 ; $i++)
 // remplire la table rapport vetto
 $TrapportVetto = new \App\Model\repository\TableRapportVeterinaire($bdd);
 $lstAnimal = $Tanimal->getAllAnnimal();
-$lstVetto =$Tutilisateur->getAllVeterinaire();
-for($i=0; $i<=33; $i++)
+$lstVetto =$Tutilisateur->getAllUtilisateurByRole('veterinaire');
+foreach($lstAnimal as $animal)
 {
+    $quantite = (round((rand(100,800)/50))*50) .'gamme';
     $rapportvetto = new \App\Controller\entity\RapportVeterinaire();
-    $rapportvetto->setDetail($faker->paragraph(1))
+    $rapportvetto->setDetailEtat($faker->paragraph(1))
         ->setVeterinaire($faker->randomElement($lstVetto))
-        ->setAnimal($faker->randomElement($lstAnimal));
-    $TrapportVetto->addRapportVeterinaire($rapportvetto);
+        ->setDate($faker->dateTimeBetween('-15 years')->format('Y-m-d'))
+        ->setEtat($faker->word())
+        ->setNouriture($faker->words(3,true))
+        ->setQuantite($quantite);
+
+    $TrapportVetto->addRapportVeterinaire($rapportvetto , $animal->getId());
+}
+// remplire la table rapport employe
+$TrapportEmploye = new \App\Model\repository\TableRapportEmploye($bdd);
+$lstEmploy = $Tutilisateur->getAllUtilisateurByRole('employer');
+foreach($lstAnimal as $animal)
+{
+    $quantite = rand(100,800).'g';
+    $rapportEmploye = new \App\Controller\entity\RapportEmploye();
+    $rapportEmploye->setNouriture($faker->words(3 , true))
+        ->setEmployeId($faker->randomElement($lstEmploy))
+        ->setQuantite($quantite)
+        ->setDate($faker->dateTimeBetween('-15 years')->format('Y-m-d'))
+        ->setHeure($faker->time());
+
+    $TrapportEmploye->addRapportEmploye($rapportEmploye, $animal->getId());
 }
 echo "Terminé !!!";

@@ -1,12 +1,12 @@
 CREATE TABLE IF NOT EXISTS service(
-    id int(255) UNSIGNED NOT NULL AUTO_INCREMENT,
+    id int UNSIGNED NOT NULL AUTO_INCREMENT,
     nom varchar(255) NOT NULL ,
     description varchar(255) NOT NULL ,
     primary key (id)
 )ENGINE=InnoDB ;
 
 CREATE TABLE IF NOT EXISTS avis(
-    id int(255) UNSIGNED NOT NULL AUTO_INCREMENT,
+    id int UNSIGNED NOT NULL AUTO_INCREMENT,
     pseudo varchar(255) NOT NULL,
     commentaire varchar(255) NOT NULL,
     isVisible boolean default(false),
@@ -14,18 +14,18 @@ CREATE TABLE IF NOT EXISTS avis(
 )ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS role(
-    id int(255) UNSIGNED NOT NULL AUTO_INCREMENT,
+    id int UNSIGNED NOT NULL AUTO_INCREMENT,
     label varchar(255) NOT NULL ,
     primary key (id)
 )ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS utilisateur(
-    id int(255) UNSIGNED NOT NULL AUTO_INCREMENT,
+    id int UNSIGNED NOT NULL AUTO_INCREMENT,
     username varchar(255) NOT NULL UNIQUE ,
     password varchar(255) NOT NULL ,
     nom varchar(255) NOT NULL ,
     prenom varchar(255) NOT NULL ,
-    role_id int(255) UNSIGNED NOT NULL ,
+    role_id int UNSIGNED NOT NULL ,
     primary key (id),
     CONSTRAINT  fk_role
       FOREIGN KEY (role_id)
@@ -35,13 +35,13 @@ CREATE TABLE IF NOT EXISTS utilisateur(
 )ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS race(
-    id int(255) UNSIGNED NOT NULL AUTO_INCREMENT,
+    id int UNSIGNED NOT NULL AUTO_INCREMENT,
     label varchar(255) NOT NULL ,
     PRIMARY KEY (id)
 )ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS habitat(
-    id int(255) UNSIGNED NOT NULL AUTO_INCREMENT,
+    id int UNSIGNED NOT NULL AUTO_INCREMENT,
     nom varchar(255) NOT NULL,
     description varchar(255) NOT NULL,
     commentaire_habitat varchar(255) NOT NULL,
@@ -49,11 +49,11 @@ CREATE TABLE IF NOT EXISTS habitat(
 )ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS animal(
-     id int(255) UNSIGNED NOT NULL AUTO_INCREMENT,
+     id int UNSIGNED NOT NULL AUTO_INCREMENT,
      prenom varchar(255) NOT NULL,
      etat varchar(255) NOT NULL,
-     race_id int(255) UNSIGNED NOT NULL,
-     habit_id int(255) UNSIGNED NOT NULL,
+     race_id int UNSIGNED NOT NULL,
+     habit_id int UNSIGNED NOT NULL,
      PRIMARY KEY (id),
      CONSTRAINT fk_race
          FOREIGN KEY (race_id)
@@ -68,33 +68,79 @@ CREATE TABLE IF NOT EXISTS animal(
 )ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS rapport_veterinaire(
-    id int(255) UNSIGNED NOT NULL AUTO_INCREMENT,
-    create_date date DEFAULT(CURRENT_DATE),
-    detail varchar(255) not null,
-    veterinaire varchar(255) NOT NULL ,
-    aniaml_id int(255) UNSIGNED NOT NULL ,
+    id int UNSIGNED NOT NULL AUTO_INCREMENT,
+    date date DEFAULT(CURRENT_DATE),
+    nouriture varchar(255) NOT NULL,
+    quantite varchar(255) NOT NULL,
+    etat varchar(255) NOT NULL,
+    detail_etat varchar(255) not null,
+    veterinaire_id int UNSIGNED NOT NULL ,
     primary key (id),
     CONSTRAINT  fk_veterinaire
-        FOREIGN KEY (veterinaire)
-            REFERENCES utilisateur (username)
+        FOREIGN KEY (veterinaire_id)
+            REFERENCES utilisateur (id)
+            ON DELETE CASCADE
+            ON UPDATE RESTRICT
+
+)ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS rapport_veterinaire_annimaux(
+    id_rapport int UNSIGNED NOT NULL ,
+    id_animaux int UNSIGNED NOT NULL,
+    primary key (id_rapport , id_animaux),
+    CONSTRAINT  fk_rapport_veterianire
+        FOREIGN KEY (id_rapport)
+            REFERENCES rapport_veterinaire (id)
             ON DELETE CASCADE
             ON UPDATE RESTRICT,
-    CONSTRAINT fk_animal
-        FOREIGN KEY (aniaml_id)
+    CONSTRAINT  fk_rapport_animaux
+        FOREIGN KEY (id_animaux)
             REFERENCES animal (id)
             ON DELETE CASCADE
             ON UPDATE RESTRICT
+
 )ENGINE=InnoDB;
 
+CREATE TABLE IF NOT EXISTS rapport_employe(
+    id int UNSIGNED NOT NULL AUTO_INCREMENT,
+    nouriture VARCHAR(255) NOT NULL,
+    quantite VARCHAR(255) NOT NULL ,
+    date DATE DEFAULT(current_date),
+    heure time ,
+    employe_id int UNSIGNED NOT NULL ,
+    PRIMARY KEY (id),
+    CONSTRAINT fk_rapport_employe
+        FOREIGN KEY (employe_id)
+                REFERENCES utilisateur (id)
+                ON DELETE CASCADE
+                ON UPDATE RESTRICT
+)ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS rapport_employe_animal(
+    id_rapport_employe INT UNSIGNED NOT NULL ,
+    id_animaux INT UNSIGNED NOT NULL ,
+    PRIMARY KEY (id_rapport_employe , id_animaux),
+    CONSTRAINT fk_employ_rapport
+        FOREIGN KEY (id_rapport_employe)
+            REFERENCES rapport_employe (id)
+            ON DELETE CASCADE
+            ON UPDATE RESTRICT ,
+    CONSTRAINT fk_aniaux_rapport
+        FOREIGN KEY (id_animaux)
+            REFERENCES animal(id)
+            ON DELETE CASCADE
+            ON UPDATE RESTRICT
+)ENGINE = InnoDB;
+
 CREATE TABLE IF NOT EXISTS image(
-    id int(255) UNSIGNED NOT NULL AUTO_INCREMENT,
+    id int UNSIGNED NOT NULL AUTO_INCREMENT,
     image_data BLOB NOT NULL,
     PRIMARY KEY (id)
 )ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS habitat_image(
-    habitat_id int(255) UNSIGNED NOT NULL ,
-    image_id int(255) UNSIGNED NOT NULL ,
+    habitat_id int UNSIGNED NOT NULL ,
+    image_id int UNSIGNED NOT NULL ,
     PRIMARY KEY (habitat_id , image_id),
     CONSTRAINT fk_habitat_id
         FOREIGN KEY (habitat_id)
@@ -109,8 +155,8 @@ CREATE TABLE IF NOT EXISTS habitat_image(
 )ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS animal_image(
-    animal_id int(255) UNSIGNED NOT NULL ,
-    image_id int(255) UNSIGNED NOT NULL ,
+    animal_id int UNSIGNED NOT NULL ,
+    image_id int UNSIGNED NOT NULL ,
     PRIMARY KEY (animal_id , image_id),
     CONSTRAINT fk_animal_id
         FOREIGN KEY (animal_id)

@@ -21,13 +21,15 @@ class TableUtilisateur
 
     /**
      * @return array<Utilisateur>
+     * @param $role string['veterinaire','employer']
      */
-    public function getAllVeterinaire():array
+    public function getAllUtilisateurByRole(string $role):array
     {
-        $query = "SELECT utilisateur.* , role.* FROM utilisateur 
+        $query = "SELECT utilisateur.* , role.id AS role_id, role.label FROM utilisateur 
                   left join role ON role.id = utilisateur.role_id
-                  WHERE role.label = 'veterinaire' ";
+                  WHERE role.label = :role ";
         $req = $this->bdd->prepare($query);
+        $req->bindValue('role',$role,PDO::PARAM_STR);
         $req->execute();
         return $this->dataFormatObjet($req->fetchAll(PDO::FETCH_ASSOC)) ;
     }
@@ -115,7 +117,9 @@ class TableUtilisateur
         foreach($data as $donnee)
         {
             $utilisateur = SetterObjet::hydrate(new Utilisateur(),$donnee,array_keys($donnee) ) ;
-            $dataFromat[] = $utilisateur->setRole(SetterObjet::hydrate(new Role , $donnee , array_keys($donnee)));
+            $role = SetterObjet::hydrate(new Role , $donnee , array_keys($donnee));
+            $role->setid($donnee['role_id']);
+            $dataFromat[] = $utilisateur->setRole($role);
         }
         return $dataFromat;
     }

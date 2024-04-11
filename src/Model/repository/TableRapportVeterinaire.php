@@ -13,30 +13,39 @@ class TableRapportVeterinaire
         $this->bdd = $bdd;
 
     }
-    public function addRapportVeterinaire(RapportVeterinaire $rapportVeto):void
+    public function addRapportVeterinaire(RapportVeterinaire $rapportVeto , int $anialId):void
     {
 
-        $query = "INSERT INTO rapport_veterinaire ( detail , veterinaire , aniaml_id ) VALUES (:detail , :veto , :id_animal)";
+        $query = "INSERT INTO rapport_veterinaire (date , nouriture ,quantite , etat,  detail_etat , veterinaire_id   ) VALUES (:date , :nouriture , :quantite , :etat , :detail , :vetto )";
         $req = $this->bdd->prepare($query);
-        $req->bindValue('detail',$rapportVeto->getDetail() , PDO::PARAM_STR);
-        $req->bindValue('veto',$rapportVeto->getVeterinaire()->getUsername() , PDO::PARAM_STR);
-        $req->bindValue('id_animal',$rapportVeto->getAnimal()->getId() , PDO::PARAM_INT);
+        $req->bindValue('date',$rapportVeto->getDate()->format('Y-m-d'), PDO::PARAM_STR);
+        $req->bindValue('nouriture', $rapportVeto->getNouriture(),PDO::PARAM_STR);
+        $req->bindValue('quantite',$rapportVeto->getQuantite(), PDO::PARAM_STR);
+        $req->bindValue('etat', $rapportVeto->getEtat(), PDO::PARAM_STR);
+        $req->bindValue('detail',$rapportVeto->getDetailEtat() , PDO::PARAM_STR);
+        $req->bindValue('vetto',$rapportVeto->getVeterinaire()->getId() , PDO::PARAM_INT);
 
         $req->execute();
-
-        $rapportVeto->setId($this->bdd->lastInsertId());
+        $rapportVeto->setId((int) $this->bdd->lastInsertId());
+        $this->insertAnimal($rapportVeto->getId(), $anialId);
     }
-    public function UpdateRapportVeterinaire(RapportVeterinaire $rapportVeto):void
+    public function UpdateRapportVeterinaire(RapportVeterinaire $rapportVeto , int $animalId):void
     {
-        $query ="UPDATE rapport_veterinaire SET create_date = :date , detail = :detail , veterinaire = :veto , aniaml_id = :id_animal 
+        $query ="UPDATE rapport_veterinaire SET date = :date , detail_etat = :detail , veterinaire_id = :veto , nouriture = :nouriture , quantite = :quantite , etat= :etat
                       WHERE id = :id LIMIT 1";
         $req = $this->bdd->prepare($query);
-        $req->bindValue('detail',$rapportVeto->getDetail() , PDO::PARAM_STR);
-        $req->bindValue('veto',$rapportVeto->getVeterinaire()->getUsername() , PDO::PARAM_STR);
-        $req->bindValue('id_animal',$rapportVeto->getAnimal()->getId() , PDO::PARAM_INT);
-        $req->bindValue('date',$rapportVeto->getCreateDate()->format('Y-m-d') , PDO::PARAM_STR);
-        $req->bindValue('id',$rapportVeto->getId() , PDO::PARAM_INT);
+        $req->bindValue('detail',$rapportVeto->getDetailEtat() , PDO::PARAM_STR);
+        $req->bindValue('veto',$rapportVeto->getVeterinaire()->getId() , PDO::PARAM_INT);
+        $req->bindValue('date',$rapportVeto->getDate()->format('Y-m-d') , PDO::PARAM_STR);
+        $req->bindValue('nouriture',$rapportVeto->getNouriture() , PDO::PARAM_STR);
+        $req->bindValue('quantite',$rapportVeto->getQuantite() , PDO::PARAM_STR);
+        $req->bindValue('etat',$rapportVeto->getEtat(), PDO::PARAM_STR);
         $req->execute();
+
+        $req = $this->bdd->prepare("DELETE FROM rapport_veterinaire_annimaux WHERE id_rapport = :id LIMIT 1");
+        $req->execute(['id'=> $rapportVeto->getId()]);
+        $this->insertAnimal($rapportVeto->getId(), $animalId);
+
     }
     public function delectRapportVeterinaire(RapportVeterinaire $rapportVeto)
     {
@@ -44,6 +53,12 @@ class TableRapportVeterinaire
         $req = $this->bdd->prepare($query);
         $req->bindValue('id',$rapportVeto->getId(), PDO::PARAM_INT);
         $req->execute();
+    }
+    private function insertAnimal(int $idRapport , int $idAnimal)
+    {
+        $query ="INSERT INTO rapport_veterinaire_annimaux SET id_rapport = :r_id , id_animaux = :ani_id";
+        $req = $this->bdd->prepare($query);
+        $req->execute(['r_id'=> $idRapport ,'ani_id'=>$idAnimal]);
     }
 
 }
