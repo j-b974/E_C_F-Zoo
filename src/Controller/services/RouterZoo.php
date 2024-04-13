@@ -8,6 +8,7 @@ class RouterZoo {
     private $router ;
     private $pathDirectory;
 
+
     /**
      * @param $path
      */
@@ -15,6 +16,7 @@ class RouterZoo {
     {
         $this->router = new \AltoRouter();
         $this->pathDirectory = $path;
+
     }
 
     public function map (string $url , string $pathFile , string $nameRoute = null)

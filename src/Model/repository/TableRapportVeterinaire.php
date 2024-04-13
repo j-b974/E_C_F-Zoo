@@ -35,6 +35,16 @@ class TableRapportVeterinaire
         }
         return $lstRapport;
     }
+    public function getCompteRenduById(int $idRapport):RapportVeterinaire
+    {
+        $query ="SELECT id , date , nouriture , quantite ,etat ,detail_etat FROM rapport_veterinaire WHERE id = :id";
+        $req = $this->bdd->prepare($query);
+        $req->bindValue('id', $idRapport , PDO::PARAM_INT);
+        $req->setFetchMode(PDO::FETCH_CLASS , RapportVeterinaire::class);
+        $req->execute();
+        $rapport = $req->fetch();
+        return $rapport->setAnimal($this->getAnimalOfRapport($rapport));
+    }
     public function addRapportVeterinaire(RapportVeterinaire $rapportVeto , int $anialId):void
     {
 
@@ -62,6 +72,8 @@ class TableRapportVeterinaire
         $req->bindValue('nouriture',$rapportVeto->getNouriture() , PDO::PARAM_STR);
         $req->bindValue('quantite',$rapportVeto->getQuantite() , PDO::PARAM_STR);
         $req->bindValue('etat',$rapportVeto->getEtat(), PDO::PARAM_STR);
+        $req->bindValue('id',$rapportVeto->getId() , PDO::PARAM_INT);
+
         $req->execute();
 
         $req = $this->bdd->prepare("DELETE FROM rapport_veterinaire_annimaux WHERE id_rapport = :id LIMIT 1");
