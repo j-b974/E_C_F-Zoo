@@ -15,7 +15,7 @@ $router->map('/gestion-de-compte', 'pages/administration/CompteUtilisateur/compt
 $router->mapBoth('/compte/modifier/[i:id]', 'pages/administration/CompteUtilisateur/modifier', 'modifCompte');
 $router->mapBoth('/compte-supprimer/[i:id]', 'pages/administration/CompteUtilisateur/suprime', 'suprimeCompte');
 $router->mapBoth('/creation-de-compte', 'pages/administration/CompteUtilisateur/rajouter', 'addCompte');
-$router->map('/compte_rendu_veterinaire', 'pages/administration/compteRenduVeterinaire', 'comptRenduVeto');
+
 
 // ====================== Route gestion service ================
 
@@ -23,6 +23,7 @@ $router->map('/gestion/service', 'pages/administration/gestionService/service', 
 $router->mapBoth('/gestion/service/rajouter/', 'pages/administration/gestionService/rajouter', 'serviceRajouter');
 $router->mapBoth('/gestion/service/modifier/[i:id]', 'pages/administration/gestionService/modifier', 'serviceModifier');
 $router->mapBoth('/gestion/service/supprime/[i:id]', 'pages/administration/gestionService/supprimer', 'serviceSupprimer');
+
 // ====================== Route gestion habitat =================
 
 $router->map('/gestion/habitat', 'pages/administration/gestionHabitat/habitat' , 'habitat');
@@ -36,6 +37,14 @@ $router->map('/gestion/annimaux', 'pages/administration/gestionAnnimaux/annimaux
 $router->mapBoth('/gestion/annimaux/rajouter', 'pages/administration/gestionAnnimaux/rajouter' , 'annimauxRajouter');
 $router->mapBoth('/gestion/annimaux/modifier/[i:id]', 'pages/administration/gestionAnnimaux/modifier' , 'annimauxModifier');
 $router->mapBoth('/gestion/annimaux/supprimer/[i:id]', 'pages/administration/gestionAnnimaux/supprimer' , 'annimauxSupprimer');
+
+// ==================== Veterinaire compte rendu ===========
+
+$router->map('/compte_rendu_veterinaire', 'pages/administration/compteRenduVeterinaire/compteRenduVeterinaire', 'comptRenduVeto');
+$router->map('/compte_rendu_veterinaire/[i:id]', 'pages/administration/compteRenduVeterinaire/compteRenduVeterinaireSingle', 'comptRenduVetoSingle');
+$router->mapBoth('/compte_rendu_veterinaire/rediger' ,'pages/administration/compteRenduVeterinaire/rediger', 'creeCompteRenduVeto');
+$router->mapBoth('/compte_rendu_veterinaire/modifier/[i:id]' ,'pages/administration/compteRenduVeterinaire/modifier', 'modifierCompteRenduVeto');
+$router->mapBoth('/compte_rendu_veterinaire/suppresion/[i:id]' ,'pages/administration/compteRenduVeterinaire/supprimer', 'supprimerCompteRenduVeto');
 
 // ===================== Route connection/deconnectin =======
 $router->mapBoth( '/connection', 'pages/connection','connection');

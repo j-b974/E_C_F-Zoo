@@ -1,0 +1,9 @@
+<div  class="">
+    <h1 class="text-center fontRoboto">vos compte rendus</h1>
+    <div class=" mt-4 mb-4 ms-4">
+        <a class="btn btn-primary " href="<?= $router->url('creeCompteRenduVeto') ?>">créer un compte remdu</a>
+    </div>
+    <div  class ="row justify-content-lg-center justify-content-around">
+        <?php require dirname(__DIR__,3).DIRECTORY_SEPARATOR.'template'.DIRECTORY_SEPARATOR.'Cards'.DIRECTORY_SEPARATOR.'CardCompteRenduVeterinaire.php'; ?>
+    </div>
+</div>

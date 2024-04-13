@@ -11,6 +11,25 @@ class RapportVeterinaire
     protected ?string $nouriture = null ;
     protected  ?string $quantite = null;
     protected  ?string $etat = null;
+    protected  ?Animal $animal = null;
+
+    /**
+     * @return Animal|null
+     */
+    public function getAnimal(): ?Animal
+    {
+        return $this->animal;
+    }
+
+    /**
+     * @param Animal|null $animal
+     * @return RapportVeterinaire
+     */
+    public function setAnimal(?Animal $animal): RapportVeterinaire
+    {
+        $this->animal = $animal;
+        return $this;
+    }
 
     /**
      * @return string|null
@@ -108,7 +127,7 @@ class RapportVeterinaire
      */
     public function getDate(): ?\DateTime
     {
-        return new \DateTime($this->date);
+        return $this->date ? new \DateTime($this->date) : new \DateTime();
     }
 
     /**

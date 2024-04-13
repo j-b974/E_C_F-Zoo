@@ -17,12 +17,10 @@
                 Services du Zoo
             </a>
         </li>
-        <li class="nav-item">
-            <a href="<?= $router->url('comptRenduVeto')?>" class="nav-link text-white <?= $activeVeterinaire ?? "" ?>">
-                <i class="bi bi-clipboard2-plus me-2"></i>
-                Compte Rendus Vétérinaire
-            </a>
-        </li>
+        <?php if($utilisateur->getRole()->getLabel()=='veterinaire') : ?>
+            <?php require __DIR__.DIRECTORY_SEPARATOR.'Partials'.DIRECTORY_SEPARATOR.'liVeterinaire.php' ?>
+        <?php endif; ?>
+
         <?php if($utilisateur->getRole()->getLabel()=='administrateur') : ?>
             <?php require __DIR__.DIRECTORY_SEPARATOR.'Partials'.DIRECTORY_SEPARATOR.'liAdmin.php' ?>
         <?php endif; ?>

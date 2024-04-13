@@ -2,16 +2,38 @@
 
 namespace App\Model\repository;
 
+use App\Controller\entity\Animal;
 use App\Controller\entity\RapportVeterinaire;
 use \PDO;
 class TableRapportVeterinaire
 {
     private PDO $bdd;
+    private $Tanimaux ;
 
     public function __construct(PDO $bdd)
     {
         $this->bdd = $bdd;
+        $this->Tanimaux = new TableAnimal($bdd);
 
+    }
+
+    /**
+     * @param int $idVeterinaire
+     * @return RapportVeterinaire[]
+     */
+    public function getCompteRendusVeteriniareById(int $idVeterinaire):array
+    {
+        $query = "SELECT id , date , nouriture , quantite ,etat ,detail_etat FROM rapport_veterinaire WHERE veterinaire_id = :idVetto ORDER BY date DESC ";
+        $req = $this->bdd->prepare($query);
+        $req->bindValue('idVetto', $idVeterinaire , PDO::PARAM_INT);
+        $req->execute();
+        $req->setFetchMode(PDO::FETCH_CLASS , RapportVeterinaire::class);
+        $lstRapport = $req->fetchAll();
+        foreach($lstRapport as $rapport)
+        {
+            $rapport->setAnimal($this->getAnimalOfRapport($rapport));
+        }
+        return $lstRapport;
     }
     public function addRapportVeterinaire(RapportVeterinaire $rapportVeto , int $anialId):void
     {
@@ -59,6 +81,15 @@ class TableRapportVeterinaire
         $query ="INSERT INTO rapport_veterinaire_annimaux SET id_rapport = :r_id , id_animaux = :ani_id";
         $req = $this->bdd->prepare($query);
         $req->execute(['r_id'=> $idRapport ,'ani_id'=>$idAnimal]);
+    }
+    public function getAnimalOfRapport(RapportVeterinaire $rapportVeterinaire):Animal
+    {
+        $query = "SELECT id_animaux  FROM rapport_veterinaire_annimaux WHERE id_rapport = :idRapport
+                ";
+        $req = $this->bdd->prepare($query);
+        $req->bindValue('idRapport', $rapportVeterinaire->getId() , PDO::PARAM_STR);
+        $req->execute();
+       return $this->Tanimaux->getAnimalById( $req->fetchColumn());
     }
 
 }

@@ -10,6 +10,25 @@ class RapportEmploye
     protected ?string $date = null;
     protected ?string $heure = null;
     protected ?Utilisateur $employe_id = null;
+    protected ?Animal $animal = null ;
+
+    /**
+     * @return Animal|null
+     */
+    public function getAnimal(): ?Animal
+    {
+        return $this->animal;
+    }
+
+    /**
+     * @param Animal|null $animal
+     * @return RapportEmploye
+     */
+    public function setAnimal(?Animal $animal): RapportEmploye
+    {
+        $this->animal = $animal;
+        return $this;
+    }
 
     /**
      * @return int

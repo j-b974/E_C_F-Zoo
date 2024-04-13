@@ -84,6 +84,17 @@ HTML;
             </div>
 HTML;
     }
+    public function getInputDate(string $key, string $label)
+    {
+        return <<<HTML
+            <div class="form-floating mb-3  text-dark">
+                
+                <input class="form-control {$this->getInvalid($key)}" type="date" name="{$key}" id="floatingInput" value = "{$this->getMethode($key)}" placeholder="{$key}@example.com">
+                <label class="font-weight-bold" for="floatingInput">{$label}</label>
+                {$this->getFeedback($key)}
+            </div>
+HTML;
+    }
 
     public function getTextarea($key, string $label): ?string
     {
@@ -103,7 +114,7 @@ HTML;
 
         $methode = $this->data->$met();
         if ($methode instanceof \DateTimeInterface) {
-            return $methode->format('Y-m-d h:i:s');
+            return $methode->format('Y-m-d');
         }
         return $methode;
     }

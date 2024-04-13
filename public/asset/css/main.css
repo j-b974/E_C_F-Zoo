@@ -11904,4 +11904,8 @@ textarea.form-control-lg {
   height: calc(100vh - 90px);
 }
 
+body {
+  background: #eeeded;
+}
+
 /*# sourceMappingURL=main.css.map */
