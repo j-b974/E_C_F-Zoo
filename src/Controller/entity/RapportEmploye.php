@@ -89,7 +89,7 @@ class RapportEmploye
      */
     public function getDate(): ?\DateTime
     {
-        return new \DateTime($this->date);
+        return $this->date ? new \DateTime($this->date) : new \DateTime();
     }
 
     /**
@@ -107,7 +107,7 @@ class RapportEmploye
      */
     public function getHeure(): ?\DateTime
     {
-        return new \DateTime($this->heure);
+        return $this->heure ? new \DateTime($this->heure) : new \DateTime();
     }
 
     /**

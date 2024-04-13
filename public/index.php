@@ -46,6 +46,14 @@ $router->mapBoth('/compte_rendu_veterinaire/rediger' ,'pages/administration/comp
 $router->mapBoth('/compte_rendu_veterinaire/modifier/[i:id]' ,'pages/administration/compteRenduVeterinaire/modifier', 'modifierCompteRenduVeto');
 $router->mapBoth('/compte_rendu_veterinaire/suppresion/[i:id]' ,'pages/administration/compteRenduVeterinaire/supprimer', 'supprimerCompteRenduVeto');
 
+// ===================== Route compte rendu Employer ==========
+
+$router->map('/Compte_rendu_employe', 'pages/administration/compteRenduEmployer/CompteRendu','compteRenduEmploye');
+$router->mapBoth('/Compte_rendu_employe/rediger', 'pages/administration/compteRenduEmployer/rediger','compteRenduEmployeRediger');
+$router->mapBoth('/Compte_rendu_employe/modifier/[i:id]', 'pages/administration/compteRenduEmployer/modifier','compteRenduEmployeModifier');
+$router->mapBoth('/Compte_rendu_employe/supprimer/[i:id]', 'pages/administration/compteRenduEmployer/supprimer','compteRenduEmployeSupprimer');
+
+
 // ===================== Route connection/deconnectin =======
 $router->mapBoth( '/connection', 'pages/connection','connection');
 $router->map('/deconnection', 'pages/deconnection', 'deconnection');

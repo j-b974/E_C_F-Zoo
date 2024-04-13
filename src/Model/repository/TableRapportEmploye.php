@@ -2,18 +2,42 @@
 
 namespace App\Model\repository;
 
+use App\Controller\entity\Animal;
 use App\Controller\entity\RapportEmploye;
+use App\Controller\entity\RapportVeterinaire;
+use App\Model\DbZoo;
 use \PDO;
 
 class TableRapportEmploye
 {
     private PDO $bdd;
+    private $Tanimaux;
 
     public function __construct(PDO $bdd)
     {
         $this->bdd = $bdd;
+        $this->Tanimaux = new TableAnimal($bdd);
 
+    }
 
+    /**
+     * @param int $id
+     * @return RapportEmploye[]
+     */
+    public function getAllRapportByEmployeId(int $id):array
+    {
+
+        $query = "SELECT id , nouriture ,quantite , date , heure FROM rapport_employe WHERE employe_id = :id ORDER BY date DESC ";
+        $req = $this->bdd->prepare($query);
+        $req->bindValue('id', $id, PDO::PARAM_INT);
+        $req->setFetchMode(PDO::FETCH_CLASS , RapportEmploye::class);
+        $req->execute();
+        $lstRapport = $req->fetchAll();
+        foreach ($lstRapport as $rapport)
+        {
+            $rapport->setAnimal($this->getAnimalOfRapport($rapport));
+        }
+        return $lstRapport;
     }
 
     public function addRapportEmploye(RapportEmploye $RapEmploye , int $idAnimaux)
@@ -61,5 +85,14 @@ class TableRapportEmploye
         $query ="INSERT INTO rapport_employe_animal SET id_rapport_employe = :r_id , id_animaux = :ani_id";
         $req = $this->bdd->prepare($query);
         $req->execute(['r_id'=>$IdEmploye ,'ani_id'=>$idAnimaux]);
+    }
+    public function getAnimalOfRapport(RapportEmploye $rapportVeterinaire):Animal
+    {
+        $query = "SELECT id_animaux  FROM rapport_veterinaire_annimaux WHERE id_rapport = :idRapport
+                ";
+        $req = $this->bdd->prepare($query);
+        $req->bindValue('idRapport', $rapportVeterinaire->getId() , PDO::PARAM_STR);
+        $req->execute();
+        return $this->Tanimaux->getAnimalById( $req->fetchColumn());
     }
 }
