@@ -3,7 +3,11 @@
 namespace App\Model\repository;
 
 use App\Controller\entity\Animal;
+use App\Controller\entity\Habitat;
+use App\Controller\entity\Race;
+use App\Controller\services\SetterObjet;
 use \PDO;
+
 class TableAnimal
 {
     private PDO $bdd;
@@ -17,14 +21,32 @@ class TableAnimal
     /**
      * @return array<Animal>
      */
-    public function getAllAnimal():array
+    public function getAllAnnimal():array
     {
-        $query = "SELECT id ,prenom , etat FROM animal ";
+        $query = "SELECT animal.id ,animal.prenom , animal.etat  ,
+                    race.id AS race_id , race.label ,
+                    habitat.id AS habitat_id , habitat.nom , habitat.description , habitat.commentaire_habitat
+                    FROM animal 
+                    join race on race.id = animal.race_id 
+                    join habitat on habitat.id = animal.habit_id";
         $req = $this->bdd->prepare($query);
         $req->execute();
-        $req->setFetchMode(PDO::FETCH_CLASS, Animal::class);
+        $req->setFetchMode(PDO::FETCH_ASSOC);
+        return $this->dataFormatObjet($req->fetchAll());
+ ;   }
+    public function getAnimalById(int $id):Animal
+    {
+        $query ="SELECT animal.id, animal.prenom , animal.etat ,
+                race.id AS race_id, race.label ,
+                habitat.id AS habitat_id , habitat.nom , habitat.description , habitat.commentaire_habitat
+                FROM animal 
+                JOIN race ON race.id = animal.race_id
+                JOIN habitat ON  habitat.id = animal.habit_id
+                WHERE animal.id = $id";
+        $req = $this->bdd->prepare($query);
+        $req->execute();
+        return $this->dataFormatObjet($req->fetchAll(PDO::FETCH_ASSOC))[0];
 
-        return $req->fetchAll();
     }
     public function addAnimal(Animal $animal):void
     {
@@ -58,5 +80,22 @@ class TableAnimal
         $req = $this->bdd->prepare($query);
         $req->bindValue('id',$animal->getId(), PDO::PARAM_INT);
         $req->execute();
+    }
+    private function dataFormatObjet( array $data):array
+    {
+        $dataFromat= [];
+        foreach($data as $donnee)
+        {
+            $animal = SetterObjet::hydrate(new Animal(),$donnee,array_keys($donnee) ) ;
+
+            $race = SetterObjet::hydrate(new Race(),$donnee,array_keys($donnee));
+            $race->setId($donnee['race_id']);
+
+            $habitat = SetterObjet::hydrate(new Habitat(),$donnee,array_keys($donnee));
+            $habitat->setId($donnee['habitat_id']);
+
+            $dataFromat[] = $animal->setRace($race)->setHabitat($habitat);
+        }
+        return $dataFromat;
     }
 }

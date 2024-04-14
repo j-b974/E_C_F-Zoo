@@ -16,3 +16,9 @@
         gestion Habitats annimaux
     </a>
 </li>
+<li class="nav-item">
+    <a href="<?= $router->url('annimaux')?>" class="nav-link text-white <?= $activeAnnimaux ?? "" ?>" aria-current="page">
+        <i class="bi bi-github me-2"></i>
+        gestion annimaux
+    </a>
+</li>

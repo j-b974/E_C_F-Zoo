@@ -47,6 +47,31 @@ class BuildInput
 HTML;
     }
 
+    public function selectFloating(string $key, string $label, array $option , $value=null)
+    {
+
+        $nb_cat = count($option);
+        $opt =[];
+
+        foreach ($option as $k => $v)
+        {
+            $select = null;
+
+            if($value == $k ){$select = ' selected';}
+
+            $opt[]= '<option value =\''.$k.'\''. $select .'>'.htmlentities($v).'</option>';
+        }
+        $opt_str = implode('',$opt);
+        return <<<HTML
+        <div class="form-floating mb-3">
+            <select class="form-control {$this->getInvalid($key)} " name ="{$key}" id="floatingSelect" aria-label="Floating label select example">
+                {$opt_str}
+            </select>
+            <label for="floatingSelect">$label</label> 
+            {$this->getFeedback($key)}
+        </div>
+HTML;
+    }
     public function getInput(string $key, string $label)
     {
         $type = $key === 'password' ? 'password' : 'text';
