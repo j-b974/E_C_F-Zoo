@@ -5,9 +5,9 @@ namespace App\Controller\entity;
 class Habitat
 {
     protected int $id;
-    protected string $nom;
-    protected string $description;
-    protected string $commentaire_habitat;
+    protected ?string $nom = null;
+    protected ?string $description = null;
+    protected ?string $commentaire_habitat =null;
 
     /**
      * @return int
@@ -30,7 +30,7 @@ class Habitat
     /**
      * @return string
      */
-    public function getNom(): string
+    public function getNom(): ?string
     {
         return $this->nom;
     }
@@ -48,7 +48,7 @@ class Habitat
     /**
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -66,7 +66,7 @@ class Habitat
     /**
      * @return string
      */
-    public function getCommentaireHabitat(): string
+    public function getCommentaireHabitat(): ?string
     {
         return $this->commentaire_habitat;
     }

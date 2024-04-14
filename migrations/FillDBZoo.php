@@ -86,7 +86,7 @@ for($i=0 ; $i <= 7 ; $i++)
     $habitat->setNom($faker->lastName())
         ->setDescription($faker->paragraph(1))
         ->setCommentaireHabitat($faker->realText(75));
-    $Thabitat->addHabit($habitat);
+    $Thabitat->addHabitat($habitat);
 }
 
 // remplire la table animal

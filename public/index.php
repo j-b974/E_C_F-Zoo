@@ -13,7 +13,7 @@ $router->map('/','pages/home','home');
 $router->map('/dashBoard', 'pages/administration/board', 'dashboard');
 $router->map('/gestion-de-compte', 'pages/administration/CompteUtilisateur/compte', 'compte');
 $router->mapBoth('/compte/modifier/[i:id]', 'pages/administration/CompteUtilisateur/modifier', 'modifCompte');
-$router->mapBoth('/compte-suprimer/[i:id]', 'pages/administration/CompteUtilisateur/suprime', 'suprimeCompte');
+$router->mapBoth('/compte-supprimer/[i:id]', 'pages/administration/CompteUtilisateur/suprime', 'suprimeCompte');
 $router->mapBoth('/creation-de-compte', 'pages/administration/CompteUtilisateur/rajouter', 'addCompte');
 $router->map('/compte_rendu_veterinaire', 'pages/administration/compteRenduVeterinaire', 'comptRenduVeto');
 
@@ -23,7 +23,12 @@ $router->map('/gestion/service', 'pages/administration/gestionService/service', 
 $router->mapBoth('/gestion/service/rajouter/', 'pages/administration/gestionService/rajouter', 'serviceRajouter');
 $router->mapBoth('/gestion/service/modifier/[i:id]', 'pages/administration/gestionService/modifier', 'serviceModifier');
 $router->mapBoth('/gestion/service/supprime/[i:id]', 'pages/administration/gestionService/supprimer', 'serviceSupprimer');
+// ====================== Route gestion habitat =================
 
+$router->map('/gestion/habitat', 'pages/administration/gestionHabitat/habitat' , 'habitat');
+$router->mapBoth('/gestion/habitat/modifier/[i:id]', 'pages/administration/gestionHabitat/modifier' , 'habitatModifier');
+$router->mapBoth('/gestion/habitat/supprimer/[i:id]', 'pages/administration/gestionHabitat/supprimer' , 'habitatSupprimer');
+$router->mapBoth('/gestion/habitat/rajouter', 'pages/administration/gestionHabitat/rajouter' , 'habitatCreer');
 
 // ===================== Route connection/deconnectin =======
 $router->mapBoth( '/connection', 'pages/connection','connection');

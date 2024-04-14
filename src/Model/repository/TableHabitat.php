@@ -27,7 +27,16 @@ class TableHabitat
         return $req->fetchAll();
 
     }
-    public function addHabit(Habitat $habitat):void
+    public function getHabitatById(int $id):Habitat
+    {
+        $query = "SELECT * FROM habitat WHERE id = :id";
+        $req = $this->bdd->prepare($query);
+        $req->bindValue('id',$id,PDO::PARAM_INT);
+        $req->setFetchMode(PDO::FETCH_CLASS, Habitat::class);
+        $req->execute();
+        return $req->fetch();
+    }
+    public function addHabitat(Habitat $habitat):void
     {
         $query = "INSERT INTO habitat ( nom , description, commentaire_habitat ) VALUES (:nom , :desc , :com)";
         $req = $this->bdd->prepare($query);
