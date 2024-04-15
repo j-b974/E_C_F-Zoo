@@ -39,6 +39,16 @@ class TableRapportEmploye
         }
         return $lstRapport;
     }
+    public function getCompteRenduById(int $id):RapportEmploye
+    {
+        $query ="SELECT id , nouriture ,quantite , date , heure FROM rapport_employe WHERE id = :id";
+        $req = $this->bdd->prepare($query);
+        $req->bindValue('id', $id, PDO::PARAM_INT);
+        $req->setFetchMode(PDO::FETCH_CLASS , RapportEmploye::class);
+        $req->execute();
+        $rapport = $req->fetch();
+        return $rapport->setAnimal($this->getAnimalOfRapport($rapport));
+    }
 
     public function addRapportEmploye(RapportEmploye $RapEmploye , int $idAnimaux)
     {
@@ -56,7 +66,7 @@ class TableRapportEmploye
     }
     public function updateRapportEmploye(RapportEmploye $RapEmploye , int $idAnimaux)
     {
-        $query = "UPDATE rapport_employe SET nouriture = :nouriture , quantite = :quantite , date = :date , heure = :heure , employe_id = :idEmploye WHERE id = :idrap";
+        $query = "UPDATE rapport_employe SET nouriture = :nouriture , quantite = :quantite , date = :date , heure = :heure , employe_id = :idEmploye WHERE id = :idrap LIMIT  1";
         $req = $this->bdd->prepare($query);
         $req->bindValue('nouriture' , $RapEmploye->getNouriture() , PDO::PARAM_STR);
         $req->bindValue('quantite' , $RapEmploye->getQuantite() , PDO::PARAM_STR);
@@ -67,7 +77,7 @@ class TableRapportEmploye
 
         $req->execute();
 
-        $req = $this->bdd->prepare("DELETE FROM rapport_veterinaire_annimaux WHERE id_rapport = :idrap LIMIT 1");
+        $req = $this->bdd->prepare("DELETE FROM rapport_employe_animal WHERE id_rapport_employe = :id LIMIT 1");
         $req->execute(['id'=> $RapEmploye->getId()]);
         $this->insertAnimal($RapEmploye->getId(), $idAnimaux);
 
@@ -88,7 +98,7 @@ class TableRapportEmploye
     }
     public function getAnimalOfRapport(RapportEmploye $rapportVeterinaire):Animal
     {
-        $query = "SELECT id_animaux  FROM rapport_veterinaire_annimaux WHERE id_rapport = :idRapport
+        $query = "SELECT id_animaux  FROM rapport_employe_animal WHERE id_rapport_employe = :idRapport
                 ";
         $req = $this->bdd->prepare($query);
         $req->bindValue('idRapport', $rapportVeterinaire->getId() , PDO::PARAM_STR);
