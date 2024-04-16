@@ -8,16 +8,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Services</a>
+                    <a class="nav-link <?= $serviceActive ?? "" ?>" aria-current="page" href="<?= $router->url('serviceZoo')?>">Services</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Habitat</a>
+                    <a class="nav-link <?= $habitatActive ?? "" ?>" href="<?= $router->url('habitatZoo')?>">Habitat</a>
                 </li>
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <?php if(!$utilisateur) : ?>
                 <li class="nav-item me-4" >
-                    <a class="nav-link active" aria-current="page" href="#">Contact</a>
+                    <a class="nav-link <?= $contactActive ?? "" ?> " aria-current="page" href="<?= $router->url('contact') ?>">Contact</a>
                 </li>
                 <?php else : ?>
                     <a class="btn  btn-dark text-white me-4" aria-current="page" href="<?= $router->url('dashboard') ?>">Administration</a>
