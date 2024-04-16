@@ -5,24 +5,14 @@
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto ">
-        <li class="nav-item">
-            <a href="#" class="nav-link text-white <?= $activeVisiteur ?? "" ?>" >
-                <i class="bi bi-calendar2-minus me-2"></i>
-                Avis Visiteurs
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link text-white <?= $activeService ?? "" ?>">
-                <i class="bi bi-card-text me-2"></i>
-                Services du Zoo
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="<?= $router->url('comptRenduVeto')?>" class="nav-link text-white <?= $activeVeterinaire ?? "" ?>">
-                <i class="bi bi-clipboard2-plus me-2"></i>
-                Compte Rendus Vétérinaire
-            </a>
-        </li>
+        <?php if($utilisateur->getRole()->getLabel()=='employer') : ?>
+            <?php require __DIR__.DIRECTORY_SEPARATOR.'Partials'.DIRECTORY_SEPARATOR.'liEmployer.php' ?>
+        <?php endif; ?>
+
+        <?php if($utilisateur->getRole()->getLabel()=='veterinaire') : ?>
+            <?php require __DIR__.DIRECTORY_SEPARATOR.'Partials'.DIRECTORY_SEPARATOR.'liVeterinaire.php' ?>
+        <?php endif; ?>
+
         <?php if($utilisateur->getRole()->getLabel()=='administrateur') : ?>
             <?php require __DIR__.DIRECTORY_SEPARATOR.'Partials'.DIRECTORY_SEPARATOR.'liAdmin.php' ?>
         <?php endif; ?>

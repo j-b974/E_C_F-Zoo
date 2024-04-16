@@ -42,4 +42,17 @@ class Verificateur
 
     }
 
+    /**
+     * @param int $idParam la id paramettre actuelle
+     * @param array $lstIdParam la liste des id des paramettre autoriser
+     * @return void
+     */
+    public static function checkRestrition( int $idParam , array $lstIdParam, $router):void
+    {
+        if(!in_array($idParam,$lstIdParam))
+        {
+            header('Location:'.$router->url('dashboard'), true , 301);
+        }
+    }
+
 }

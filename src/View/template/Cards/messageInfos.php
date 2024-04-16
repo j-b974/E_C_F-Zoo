@@ -52,3 +52,14 @@
         </button>
     </div>
 <?php endif; ?>
+<?php if(isset($_GET['CompteRenduVeto'])): ?>
+    <div class="text-center alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Réussit :</strong>
+        <?= $_GET['CompteRenduVeto'] == "creer"?
+            "le rapport à bien était créer !!!" :
+            "le rapport à bien était modifier !!!";
+        ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        </button>
+    </div>
+<?php endif; ?>
