@@ -4,8 +4,10 @@
             <img class="card-img-top" src="http://localhost:8888/asset/images/tigre.jpg" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title fontRoboto"><?= htmlspecialchars( $CompteRendu->getAnimal()->getPrenom()) ?></h5>
-                <div class="d-flex justify-content-between">
-                    <h6 class="card-subtitle mb-2 text-muted">rapport n°<?= htmlspecialchars($CompteRendu->getId()) ?> créé le <?= htmlspecialchars($CompteRendu->getDate()->format('d F Y')  ) ?></h6>
+                <div class="d-flex flex-column">
+                    <h6 class="card-subtitle mb-2 text-muted">rapport n°<?= htmlspecialchars($CompteRendu->getId()) ?>
+                    <h6 class="card-subtitle mb-2 text-muted">créé le <?= htmlspecialchars($CompteRendu->getDate()->format('d F Y')  ) ?></h6>
+
                 </div>
                 <hr>
                 <p class="card-text">nouriture: <?= htmlspecialchars( $CompteRendu->getNouriture()) ?></p>

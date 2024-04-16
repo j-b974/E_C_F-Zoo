@@ -5,6 +5,7 @@ namespace App\Model\repository;
 use App\Controller\entity\Animal;
 use App\Controller\entity\RapportEmploye;
 use App\Controller\entity\RapportVeterinaire;
+use App\Controller\entity\Utilisateur;
 use App\Model\DbZoo;
 use \PDO;
 
@@ -12,12 +13,13 @@ class TableRapportEmploye
 {
     private PDO $bdd;
     private $Tanimaux;
+    private $Tutilisateur ;
 
     public function __construct(PDO $bdd)
     {
         $this->bdd = $bdd;
         $this->Tanimaux = new TableAnimal($bdd);
-
+        $this->Tutilisateur = new TableUtilisateur($bdd);
     }
 
     /**
@@ -48,6 +50,26 @@ class TableRapportEmploye
         $req->execute();
         $rapport = $req->fetch();
         return $rapport->setAnimal($this->getAnimalOfRapport($rapport));
+    }
+    /**
+     * @param int $idAnimal
+     * @return RapportEmploye[]
+     */
+    public function getAllRapportEmployeByIdAnimal(int $idAnimal):array
+    {
+        $query ="SELECT id_rapport_employe AS id FROM rapport_employe_animal where id_animaux = :id";
+        $req = $this->bdd->prepare($query);
+        $req->bindValue('id',$idAnimal , PDO::PARAM_INT );
+        $req->execute();
+        $lstIdRapport = $req->fetchAll();
+        $lstRapport= [];
+        foreach ($lstIdRapport as $idRapport)
+        {
+            $rapport = $this->getCompteRenduById(($idRapport['id']));
+
+            $lstRapport[]= $rapport->setEmployeId($this->getUtilisateurOfRapport($rapport));
+        }
+        return $lstRapport;
     }
 
     public function addRapportEmploye(RapportEmploye $RapEmploye , int $idAnimaux)
@@ -96,13 +118,21 @@ class TableRapportEmploye
         $req = $this->bdd->prepare($query);
         $req->execute(['r_id'=>$IdEmploye ,'ani_id'=>$idAnimaux]);
     }
-    public function getAnimalOfRapport(RapportEmploye $rapportVeterinaire):Animal
+    public function getAnimalOfRapport(RapportEmploye $rapportEmploye):Animal
     {
         $query = "SELECT id_animaux  FROM rapport_employe_animal WHERE id_rapport_employe = :idRapport
                 ";
         $req = $this->bdd->prepare($query);
-        $req->bindValue('idRapport', $rapportVeterinaire->getId() , PDO::PARAM_STR);
+        $req->bindValue('idRapport', $rapportEmploye->getId() , PDO::PARAM_STR);
         $req->execute();
         return $this->Tanimaux->getAnimalById( $req->fetchColumn());
+    }
+    public function getUtilisateurOfRapport(RapportEmploye $rapportEmploye):Utilisateur
+    {
+        $query ="SELECT employe_id FROM rapport_employe WHERE id = :id";
+        $req = $this->bdd->prepare($query);
+        $req->bindValue('id', $rapportEmploye->getId(), PDO::PARAM_INT);
+        $req->execute();
+        return $this->Tutilisateur->getUtilisateurByID($req->fetchColumn());
     }
 }

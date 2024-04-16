@@ -5,6 +5,7 @@ namespace App\Model\repository;
 use App\Controller\entity\Animal;
 use App\Controller\entity\Habitat;
 use App\Controller\entity\Race;
+use App\Controller\entity\RapportEmploye;
 use App\Controller\services\SetterObjet;
 use \PDO;
 
@@ -33,7 +34,7 @@ class TableAnimal
         $req->execute();
         $req->setFetchMode(PDO::FETCH_ASSOC);
         return $this->dataFormatObjet($req->fetchAll());
- ;   }
+    }
     public function getAnimalById(int $id):Animal
     {
         $query ="SELECT animal.id, animal.prenom , animal.etat ,

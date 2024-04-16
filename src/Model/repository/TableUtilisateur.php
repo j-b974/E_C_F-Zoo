@@ -90,7 +90,7 @@ class TableUtilisateur
         }
         return $utilisateur;
     }
-    public function getUtilisateurByID(int $id)
+    public function getUtilisateurByID(int $id):Utilisateur
     {
         $query="SELECT id , username , password , nom , prenom FROM utilisateur WHERE id= :id";
         $req = $this->bdd->prepare($query);

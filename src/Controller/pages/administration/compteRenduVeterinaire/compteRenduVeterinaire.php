@@ -9,7 +9,6 @@ $utilisateur = $_SESSION['utilisateur'];
 
 $TcompteRendu = new \App\Model\repository\TableRapportVeterinaire(DbZoo::connection());
 $allCompte = $TcompteRendu->getCompteRendusVeteriniareById($utilisateur->getId());
-
 ob_start();
 
 require $pathView.'Pages'.DIRECTORY_SEPARATOR.'administration'.DIRECTORY_SEPARATOR.'veterinaire'.DIRECTORY_SEPARATOR.'compteRenduVeterinaire.php';

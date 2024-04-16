@@ -101,7 +101,8 @@ class TableRapportVeterinaire
         $req = $this->bdd->prepare($query);
         $req->bindValue('idRapport', $rapportVeterinaire->getId() , PDO::PARAM_STR);
         $req->execute();
-       return $this->Tanimaux->getAnimalById( $req->fetchColumn());
+        return $this->Tanimaux->getAnimalById( $req->fetchColumn());
+
     }
 
 }
