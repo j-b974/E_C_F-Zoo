@@ -10,9 +10,9 @@
 <body>
     <div class="container-fluid">
         <?php require 'template'.DIRECTORY_SEPARATOR.'navBar.php' ?>
+        <?php require 'template'.DIRECTORY_SEPARATOR.'Cards'.DIRECTORY_SEPARATOR.'messageInfosPublic.php' ?>
         <?= $contenu ?>
     </div>
-
 
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>

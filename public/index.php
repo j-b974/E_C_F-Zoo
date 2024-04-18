@@ -7,6 +7,10 @@ $router = new \App\Controller\services\RouterZoo(PATH_CONTROLLER);
 
 // ===================== Route visiteur ================
 $router->map('/','pages/home','home');
+$router->map('/service-du-zoo','pages/serviceZoo','serviceZoo');
+$router->mapBoth('/Contact','pages/contact','contact');
+$router->map('/habitat-du-zoo','pages/habitat/habitat','habitatZoo');
+
 
 // ===================== Route administration ===============
 
