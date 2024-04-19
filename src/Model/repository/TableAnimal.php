@@ -35,6 +35,20 @@ class TableAnimal
         $req->setFetchMode(PDO::FETCH_ASSOC);
         return $this->dataFormatObjet($req->fetchAll());
     }
+
+    /**
+     * @param int $HabitatId
+     * @return Aniaml[]
+     */
+    public function getAllAnimalByHabitatId(int $HabitatId):array
+    {
+        $query = "SELECT id , prenom FROM animal WHERE habit_id = :id";
+        $req = $this->bdd->prepare($query);
+        $req->bindValue('id', $HabitatId , PDO::PARAM_INT);
+        $req->setFetchMode(PDO::FETCH_CLASS , Animal::class);
+        $req->execute();
+        return $req->fetchAll();
+    }
     public function getAnimalById(int $id):Animal
     {
         $query ="SELECT animal.id, animal.prenom , animal.etat ,
