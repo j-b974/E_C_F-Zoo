@@ -9,14 +9,15 @@ if (session_status() != PHP_SESSION_ACTIVE) {
     session_start();
 }
 $Thabitat = new \App\Model\repository\TableHabitat(DbZoo::connection());
+$Tanimal = new \App\Model\repository\TableAnimal(DbZoo::connection());
 
-$lstHabitat = $Thabitat->getAllHabitat();
-
+$Habitat = $Thabitat->getHabitatById((int) $params['id']);
+$lstAnimal = $Tanimal->getAllAnimalByHabitatId($Habitat->getId());
 
 ob_start();
-require $pathView . 'Pages' . DIRECTORY_SEPARATOR . 'habitat.php';
+require $pathView . 'Pages' . DIRECTORY_SEPARATOR . 'SingleHabitat.php';
 $contenu = ob_get_clean();
-$titre = "les Habitats du Zoo de josé";
+$titre = " Habitats {$Habitat->getNom()}";
 $utilisateur = $_SESSION['utilisateur'] ?? false;
 $habitatActive = "active";
 require $pathView . 'index.php';

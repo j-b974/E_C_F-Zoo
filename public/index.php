@@ -10,7 +10,8 @@ $router->map('/','pages/home','home');
 $router->map('/service-du-zoo','pages/serviceZoo','serviceZoo');
 $router->mapBoth('/Contact','pages/contact','contact');
 $router->map('/habitat-du-zoo','pages/habitat/habitat','habitatZoo');
-
+$router->map('/habitat/animaux/[i:id]','pages/habitat/habitatSingle','habitatZooSingle');
+$router->map('/animal/[i:id]', 'pages/habitat/animal','habitatAnimal');
 
 // ===================== Route administration ===============
 
