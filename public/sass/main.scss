@@ -14,3 +14,36 @@ html,body{
 body {
   background: #eeeded;
 }
+.bannier {
+  position: relative;
+  width: 100%;
+  height: 35vh;
+  border-radius: 5px;
+  background-image: url('http://localhost:8888/asset/images/tigre.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #eeeded;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.65); /* Couleur noire avec une opacité de 0.5 */
+  }
+  .cardZoo{
+    z-index: 1;
+    background: transparent;
+    border: none;
+    padding: 11px;
+
+  }
+  p {
+
+  }
+}
