@@ -12,8 +12,11 @@
         <?php require 'template'.DIRECTORY_SEPARATOR.'navBar.php' ?>
         <?php require 'template'.DIRECTORY_SEPARATOR.'Cards'.DIRECTORY_SEPARATOR.'messageInfosPublic.php' ?>
         <?= $contenu ?>
+        <?php require 'template'.DIRECTORY_SEPARATOR.'footer.php' ?>
     </div>
 
     <script src="http://localhost:8888/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="http://localhost:8888/asset/js/main.js"></script>
+
 </body>
 </html>

@@ -34,6 +34,10 @@ foreach ($randKey as $key)
 {
     $lstAnimal[]= $animals[$key];
 }
+
+// ============= list des Avis ==================
+$Tavis = new \App\Model\repository\TableAvis(DbZoo::connection());
+$lstAvis = $Tavis->getAllAvisVisible();
 ob_start();
 
     require $pathView.'Pages'.DIRECTORY_SEPARATOR.'home.php';

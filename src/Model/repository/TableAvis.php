@@ -24,6 +24,19 @@ class TableAvis
 
         $avis->setId($this->bdd->lastInsertId());
     }
+
+    /**
+     * @return Avis[]
+     */
+    public function  getAllAvisVisible(): array
+    {
+        $query ="SELECT id , pseudo , commentaire FROM avis WHERE  isVisible = true";
+        $req = $this->bdd->prepare($query);
+        $req->setFetchMode(PDO::FETCH_CLASS , Avis::class);
+        $req->execute();
+        return $req->fetchAll();
+    }
+
     public function UpdateAvis(Avis $avis)
     {
         $query ="UPDATE avis SET pseudo = :pseudo , commentaire = :comment , isVisible = :visible 

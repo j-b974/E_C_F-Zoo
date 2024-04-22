@@ -12,7 +12,7 @@ $router->mapBoth('/Contact','pages/contact','contact');
 $router->map('/habitat-du-zoo','pages/habitat/habitat','habitatZoo');
 $router->map('/habitat/animaux/[i:id]','pages/habitat/habitatSingle','habitatZooSingle');
 $router->map('/animal/[i:id]', 'pages/habitat/animal','habitatAnimal');
-
+$router->mapBoth('/avis', 'pages/avis', 'avis');
 // ===================== Route administration ===============
 
 $router->map('/dashBoard', 'pages/administration/board', 'dashboard');

@@ -1,4 +1,4 @@
-<form class="w-75" action="<?= $router->url('connection') ?>" method="POST">
+<form class="w-75 h-75" action="<?= $router->url('connection') ?>" method="POST">
     <h3 class="text-center">connection</h3>
     <div class="form-floating mb-3 text-dark">
         <input type="email" class="form-control" id="floatingInput" name="username" placeholder="name@example.com">

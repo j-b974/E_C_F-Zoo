@@ -15,3 +15,11 @@
         </button>
     </div>
 <?php endif; ?>
+<?php if(isset($_GET['avis']) && $_GET['avis']=='envoyer') :?>
+    <div class="text-center alert alert-success alert-dismissible fade show" role="alert">
+        <strong> Avis : </strong>
+        votre avis à bien était envoyer
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        </button>
+    </div>
+    <?php endif; ?>
