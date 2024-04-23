@@ -1,4 +1,4 @@
-<h3 class="text-center">rediger le compte rendu</h3>
+<h3 class="text-center"><?= htmlentities($btnLabel)?> le compte rendu</h3>
 <div class= "w-50 m-auto p-4 bg-dark text-white ">
     <form action="<?= $link?>" method="post">
         <?= $htmlForm->selectFloating('animal','la race de l\'animal',$lstAnimal, $animalSelect ) ?>

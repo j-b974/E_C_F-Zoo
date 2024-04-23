@@ -1,4 +1,4 @@
-<h3 class="text-center">ajouter un  service </h3>
+<h3 class="text-center"><?= htmlentities($btnLabel)?> un  service </h3>
 <div class= "w-50 m-auto p-4 bg-dark text-white ">
     <form action="<?= $link?>" method="post">
         <?= $htmlForm->getInput('prenom','le prenom de l\'annimale',)?>
