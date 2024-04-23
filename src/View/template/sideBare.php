@@ -12,6 +12,12 @@
                 Avis Visiteurs
             </a>
         </li>
+            <li class="nav-item">
+                <a href="<?= $router->url('service')?>" class="nav-link text-white <?= $activeGestionService ?? "" ?>" aria-current="page">
+                    <i class="bi bi-basket3 me-2"></i>
+                    gestion de services
+                </a>
+            </li>
         <?php endif; ?>
         <?php if($utilisateur->getRole()->getLabel()=='employer') : ?>
             <?php require __DIR__.DIRECTORY_SEPARATOR.'Partials'.DIRECTORY_SEPARATOR.'liEmployer.php' ?>

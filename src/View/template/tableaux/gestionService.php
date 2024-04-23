@@ -19,11 +19,13 @@
                     <button class="btn btn-warning " type="submit">Modifier </button>
                 </form>
             </td>
-            <td class="text-center">
-                <form method='POST' action='<?= $router->url('serviceSupprimer',['id'=>$Service->getId()]) ?>'>
-                    <button class="btn btn-danger text-white" type="submit">Supprimer </button>
-                </form>
-            </td>
+            <?php if($utilisateur->getRole()->getLabel()=='administrateur') : ?>
+                <td class="text-center">
+                    <form method='POST' action='<?= $router->url('serviceSupprimer',['id'=>$Service->getId()]) ?>'>
+                        <button class="btn btn-danger text-white" type="submit">Supprimer </button>
+                    </form>
+                </td>
+            <?php endif ; ?>
         </tr>
     <?php endforeach; ?>
     </tbody>

@@ -1,5 +1,5 @@
 <div class="ms-4 ">
-    <h1 class="text-center fontRoboto">gestion de habitat</h1>
+    <h1 class="text-center mb-5 fontRoboto">gestion de habitat</h1>
     <div class=" mt-4 mb-4">
         <a class="btn btn-primary " href="<?= $router->url('habitatCreer') ?>">créer un habitat pour les annimaux</a>
     </div>

@@ -1,4 +1,4 @@
-<h3 class="text-center">ajouter un  utilisateur </h3>
+<h3 class="text-center"><?= htmlentities($btnLabel)?> un  utilisateur </h3>
 <div class= "w-50 m-auto p-4 bg-dark text-white ">
     <form action="<?= $link?>" method="post">
         <?= $htmlForm->getInput('username','Username')?>
