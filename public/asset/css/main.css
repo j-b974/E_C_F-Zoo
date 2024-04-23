@@ -11906,6 +11906,7 @@ textarea.form-control-lg {
 
 body {
   background: #eeeded;
+  min-height: 100vh;
 }
 
 .bannier {

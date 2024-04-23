@@ -15,3 +15,9 @@
 <div class="d-flex justify-content-around flex-wrap  flex-md-row">
     <?php require dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'template' . DIRECTORY_SEPARATOR . 'Cards' . DIRECTORY_SEPARATOR . 'CardAnimalHome.php'; ?>
 </div>
+<?php if(isset($lstAvis) && !empty($lstAvis)) : ?>
+<h3 class="text-center fontRoboto m-5 ">ils donnent leur avis </h3>
+<div class=" row flex-wrap justify-content-center">
+    <?php require dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'template' . DIRECTORY_SEPARATOR . 'Cards' . DIRECTORY_SEPARATOR . 'CardAvisHome.php'; ?>
+</div>
+<?php endif ; ?>

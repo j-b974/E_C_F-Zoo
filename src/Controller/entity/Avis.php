@@ -5,8 +5,8 @@ namespace App\Controller\entity;
 class Avis
 {
     protected int $id;
-    protected string $pseudo;
-    protected string $commentaire;
+    protected ?string $pseudo = null;
+    protected ?string $commentaire = null;
     protected bool $isVisible;
 
     /**
@@ -30,7 +30,7 @@ class Avis
     /**
      * @return string
      */
-    public function getPseudo(): string
+    public function getPseudo(): ?string
     {
         return $this->pseudo;
     }
@@ -48,7 +48,7 @@ class Avis
     /**
      * @return string
      */
-    public function getCommentaire(): string
+    public function getCommentaire(): ?string
     {
         return $this->commentaire;
     }

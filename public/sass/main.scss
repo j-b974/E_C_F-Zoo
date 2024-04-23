@@ -5,14 +5,13 @@
 .fontRoboto{
   font-family: "Roboto Slab", serif;
 }
-html,body{
 
-};
 .card-sidBare{
   height: calc(100vh - 90px);
 };
 body {
   background: #eeeded;
+  min-height: 100vh;
 }
 .bannier {
   position: relative;

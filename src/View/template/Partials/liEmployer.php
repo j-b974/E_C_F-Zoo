@@ -1,9 +1,4 @@
-<li class="nav-item">
-    <a href="#" class="nav-link text-white <?= $activeAvisVisiteur ?? "" ?>" >
-        <i class="bi bi-calendar2-minus me-2"></i>
-        Avis Visiteurs
-    </a>
-</li>
+
 <li class="nav-item">
     <a href="#" class="nav-link text-white <?= $activeModifService ?? "" ?>">
         <i class="bi bi-card-text me-2"></i>
