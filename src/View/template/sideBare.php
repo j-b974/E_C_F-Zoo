@@ -5,6 +5,14 @@
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto ">
+        <?php if($utilisateur->getRole()->getLabel()=='employer' || $utilisateur->getRole()->getLabel()=='administrateur') : ?>
+        <li class="nav-item">
+            <a href="<?= $router->url('gestionAvis',['id'=> 0])?>" class="nav-link text-white <?= $activeAvisVisiteur ?? "" ?>" >
+                <i class="bi bi-calendar2-minus me-2"></i>
+                Avis Visiteurs
+            </a>
+        </li>
+        <?php endif; ?>
         <?php if($utilisateur->getRole()->getLabel()=='employer') : ?>
             <?php require __DIR__.DIRECTORY_SEPARATOR.'Partials'.DIRECTORY_SEPARATOR.'liEmployer.php' ?>
         <?php endif; ?>

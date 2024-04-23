@@ -13,6 +13,10 @@ $router->map('/habitat-du-zoo','pages/habitat/habitat','habitatZoo');
 $router->map('/habitat/animaux/[i:id]','pages/habitat/habitatSingle','habitatZooSingle');
 $router->map('/animal/[i:id]', 'pages/habitat/animal','habitatAnimal');
 $router->mapBoth('/avis', 'pages/avis', 'avis');
+// ================ route gestion Avis =================
+$router->mapBoth('/administration/avis/[i:id]', 'pages/administration/gestionAvis/avis','gestionAvis');
+$router->mapBoth('/administration/avis/supprimer/[i:id]', 'pages/administration/gestionAvis/supprimer','gestionAvisSupprimer');
+
 // ===================== Route administration ===============
 
 $router->map('/dashBoard', 'pages/administration/board', 'dashboard');
