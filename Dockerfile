@@ -12,12 +12,19 @@ RUN apt-get update \
         libwebp-dev \
         libonig-dev \
         libzip-dev \
+        libssl-dev \
+        libcurl4-openssl-dev \
+        pkg-config \
         unzip \
         git \
         curl
 
 # Installation des extensions PHP nécessaires
 RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
+
+#  Installer l'extension MongoDB
+  RUN pecl install mongodb \
+      && docker-php-ext-enable mongodb
 
 # Installation de Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
