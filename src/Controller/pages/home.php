@@ -2,11 +2,14 @@
 require_once (dirname(__DIR__,3).DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'autoload.php');
 $pathView = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'View' .DIRECTORY_SEPARATOR;
 use App\Model\DbZoo;
+
 if (session_status() != PHP_SESSION_ACTIVE) {
     session_start();
 }
+
 $Tservice = new \App\Model\repository\TableService(DbZoo::connection());
 $lstServices = $Tservice->getAllservice();
+
 //  ======== tire au sort 2 service =============
 $lstService = [];
 $randKey = array_rand($lstServices , 2);

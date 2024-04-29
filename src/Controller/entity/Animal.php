@@ -9,6 +9,25 @@ class Animal
     protected ?string $etat = null;
     protected ?Race $race = null;
     protected ?Habitat $habitat = null;
+    protected ?int $vue = null;
+
+    /**
+     * @return int|null
+     */
+    public function getVue(): ?int
+    {
+        return $this->vue;
+    }
+
+    /**
+     * @param int|null $vue
+     * @return Animal
+     */
+    public function setVue(?int $vue): Animal
+    {
+        $this->vue = $vue;
+        return $this;
+    }
 
     /**
      * @return int

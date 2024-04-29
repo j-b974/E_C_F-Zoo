@@ -7,10 +7,14 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Valitron\\' => array($vendorDir . '/vlucas/valitron/src/Valitron'),
+    'Symfony\\Polyfill\\Php81\\' => array($vendorDir . '/symfony/polyfill-php81'),
+    'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Component\\VarDumper\\' => array($vendorDir . '/symfony/var-dumper'),
+    'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
+    'MongoDB\\' => array($vendorDir . '/mongodb/mongodb/src'),
     'Faker\\' => array($vendorDir . '/fakerphp/faker/src/Faker'),
     'App\\' => array($baseDir . '/src'),
 );
