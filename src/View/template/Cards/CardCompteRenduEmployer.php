@@ -1,6 +1,6 @@
 <?php foreach($allCompte as $CompteRendu) : ?>
     <div class=" col-lg-3 m-3">
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="max-width: 18rem;">
             <img class="card-img-top" src="http://localhost:8888/asset/images/tigre.jpg" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title fontRoboto"><?= htmlspecialchars( $CompteRendu->getAnimal()->getPrenom()) ?></h5>
@@ -19,10 +19,10 @@
             </div>
             <div class="card-footer d-flex justify-content-between">
                 <form method='POST' action='<?= $router->url('compteRenduEmployeModifier',['id'=> $CompteRendu->getId()]) ?>'>
-                    <button class="btn btn-warning " type="submit">Modifier </button>
+                    <button class="btn btn-warning btn-sm " type="submit">Modifier </button>
                 </form>
                 <form method='POST' action='<?= $router->url('compteRenduEmployeSupprimer',['id'=>$CompteRendu->getId()]) ?>'>
-                    <button class="btn btn-danger text-white" type="submit">Supprimer </button>
+                    <button class="btn btn-danger btn-sm text-white" type="submit">Supprimer </button>
                 </form>
             </div>
         </div>

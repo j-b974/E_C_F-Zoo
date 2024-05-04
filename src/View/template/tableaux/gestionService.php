@@ -1,4 +1,5 @@
-<table class="table table-striped table-bordered table-hover text-dark">
+<div class="table-responsive">
+<table class="table table-striped table-bordered table-hover table-responsive-sm text-dark">
     <thead class="thead-light fontRoboto">
     <tr>
         <th scope="col">#</th>
@@ -16,13 +17,13 @@
             <td><?=  htmlentities($Service->getDescription())?></td>
             <td class="text-center">
                 <form method='POST' action='<?= $router->url('serviceModifier',['id'=> $Service->getId()]) ?>'>
-                    <button class="btn btn-warning " type="submit">Modifier </button>
+                    <button class="btn btn-warning btn-sm " type="submit">Modifier </button>
                 </form>
             </td>
             <?php if($utilisateur->getRole()->getLabel()=='administrateur') : ?>
                 <td class="text-center">
                     <form method='POST' action='<?= $router->url('serviceSupprimer',['id'=>$Service->getId()]) ?>'>
-                        <button class="btn btn-danger text-white" type="submit">Supprimer </button>
+                        <button class="btn btn-danger btn-sm text-white" type="submit">Supprimer </button>
                     </form>
                 </td>
             <?php endif ; ?>
@@ -30,3 +31,4 @@
     <?php endforeach; ?>
     </tbody>
 </table>
+</div>

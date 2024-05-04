@@ -1,5 +1,5 @@
-<h3 class="text-center"><?= htmlentities($btnLabel)?> un  service </h3>
-<div class= "w-50 m-auto p-4 bg-dark text-white ">
+<h3 class="text-center fontRoboto"><?= htmlentities($btnLabel)?> </h3>
+<div class= "m-auto p-4 bg-dark text-white " style="max-width: 52rem;">
     <form action="<?= $link?>" method="post">
         <?= $htmlForm->getInput('nom','nom de l\'habitat')?>
 

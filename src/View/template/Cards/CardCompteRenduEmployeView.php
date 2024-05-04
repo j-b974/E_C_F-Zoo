@@ -1,6 +1,6 @@
 <?php foreach($allCompte as $CompteRendu) : ?>
     <div class=" m-3">
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="min-width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title fontRoboto">animal : <?= htmlspecialchars( $CompteRendu->getAnimal()->getPrenom()) ?></h5>
                 <div class="d-flex flex-column">
