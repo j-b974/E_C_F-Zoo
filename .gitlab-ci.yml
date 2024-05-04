@@ -24,7 +24,7 @@ build-job:
     # Installez Docker Compose
     - apk update && apk add docker-compose
     # Configurez Docker-in-Docker pour permettre l'exécution de Docker Compose
-    - docker-compose --version
+    - docker-compose version
   after_script:
     # Arrêtez les services Docker Compose après la construction
     - docker-compose down
