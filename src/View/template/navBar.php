@@ -16,11 +16,13 @@
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <?php if(!$utilisateur) : ?>
-                <li class="nav-item me-4" >
+                <li class="nav-item me-4 mb-2" >
                     <a class="nav-link <?= $contactActive ?? "" ?> " aria-current="page" href="<?= $router->url('contact') ?>">Contact</a>
                 </li>
                 <?php else : ?>
+                <li class="nav-item mb-2">
                     <a class="btn  btn-dark text-white me-4" aria-current="page" href="<?= $router->url('dashboard') ?>">Administration</a>
+                </li>
                 <?php endif ; ?>
                 <li class="nav-item">
                     <?php if(!$utilisateur) : ?>

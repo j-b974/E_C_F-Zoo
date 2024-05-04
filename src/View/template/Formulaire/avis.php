@@ -1,4 +1,4 @@
-<div class= "w-50 m-auto p-4 bg-dark text-white " id="footer">
+<div class= "m-auto bg-dark text-white mb-3" id="footer" style="max-width: 38rem;">
     <form action="#footer" method="get">
 
         <div class="form-floating mb-3  text-dark" id="">

@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center m-3">
-    <div class="card" style="width: 40rem;">
+    <div class="card" >
         <img class="card-img-top" src="http://localhost:8888/asset/images/tigre.jpg" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title fontRoboto"><?= htmlspecialchars( $CompteRendu->getAnimal()->getPrenom()) ?></h5>

@@ -1,8 +1,8 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark fontRoboto card-sidBare " style="min-width: 325px;">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark fontRoboto card-sidBare " style="min-width: 17rem;">
+    <div class="d-flex align-items-center justify-content-between mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
         <span class="fs-4">Sidebar</span>
-    </a>
+        <button type="button" class="btn-close text-reset d-md-none bg-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto ">
         <?php if($utilisateur->getRole()->getLabel()=='employer' || $utilisateur->getRole()->getLabel()=='administrateur') : ?>

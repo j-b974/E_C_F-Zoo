@@ -1,4 +1,4 @@
-<div class= "w-50 m-auto p-4 bg-dark text-white ">
+<div class= " m-auto p-4 bg-dark text-white " style="max-width: 52rem;">
     <form action="<?= $link?>" method="post">
 
         <?= $htmlForm->selectFloating('animal','la race de l\'animal',$lstAnimal, $animalSelect ) ?>

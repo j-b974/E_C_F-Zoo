@@ -1,5 +1,5 @@
 
-<footer class="row bg-dark text-white m-0 mt-5 p-3">
+<footer class="row bg-dark text-white m-0 mt-5 p-md-3 pt-3">
     <div class="col-md-9">
         <?php require dirname(__DIR__,1).DIRECTORY_SEPARATOR.'template'.DIRECTORY_SEPARATOR.'Formulaire'.DIRECTORY_SEPARATOR.'avis.php'?>
     </div>

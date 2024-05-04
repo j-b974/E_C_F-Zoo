@@ -1,7 +1,6 @@
-<div  class="mb-3 m-auto"style="width: 48rem;">
+<div  class="mb-3 m-auto" style="min-width: 17rem;">
     <h1 class="text-center fontRoboto mb-5">compte rendus</h1>
-
-    <div  class ="row justify-content-lg-center justify-content-around">
+    <div  class ="d-flex justify-content-lg-center justify-content-around">
         <?php require dirname(__DIR__,3).DIRECTORY_SEPARATOR.'template'.DIRECTORY_SEPARATOR.'Cards'.DIRECTORY_SEPARATOR.'CardSingleRapportVeterinaire.php'; ?>
     </div>
     <h3>rapport d'employer</h3>

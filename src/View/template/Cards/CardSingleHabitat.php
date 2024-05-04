@@ -1,4 +1,4 @@
-<div class="card w-75 m-auto ">
+<div class="card m-auto ">
     <img class="card-img-top" src="http://localhost:8888/asset/images/tigre.jpg" alt="Card image cap">
 
     <div class="card-body">
@@ -9,8 +9,9 @@
     </div>
     <div class="card-footer ">
         <h5 class="card-title"> les animaux de cet habitat</h5>
-        <div class ="d-flex  m-auto flex-nowrap m-3 bg-primary text-white overflow-auto" >
+        <div class=" m-auto m-3 bg-primary text-white" >
             <?php require __DIR__.DIRECTORY_SEPARATOR.'CardAnimal.php' ?>
         </div>
     </div>
+
 </div>

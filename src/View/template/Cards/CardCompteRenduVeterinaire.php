@@ -1,5 +1,5 @@
 <?php foreach($allCompte as $CompteRendu) : ?>
-    <div class=" col-lg-3 col-md-4 m-3">
+    <div class=" m-3">
         <div class="card" style="width: 18rem;">
             <img class="card-img-top" src="http://localhost:8888/asset/images/tigre.jpg" alt="Card image cap">
             <div class="card-body">
