@@ -5,10 +5,13 @@ stages:
 
 variables:
   PHP_VERSION: "8.2"  # Version de PHP à utiliser
+  docker_image: "docker:stable"
 
 build-job:
   stage: build
-  image: php:8.2-apache  # Utilisation d'une image Docker PHP
+  image: $docker_image  # Utilisation d'une image Docker avec Docker préinstallé
+  services:
+    - docker:dind  # Service Docker in Docker (DinD)
   script:
     - echo "Construction de l'image Docker"
     # Construction de l'image Docker à partir du Dockerfile
@@ -21,6 +24,7 @@ test-job:
     - echo "Tests de l'application"
     # Démarrage d'un conteneur Docker à partir de l'image construite
     - docker run --name mon_app_test zoojose:latest php ./tests/test.php
+
 
 deploy-job:
   stage: deploy
