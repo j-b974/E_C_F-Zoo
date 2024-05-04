@@ -16,6 +16,21 @@ build-job:
     - echo "Construction de l'image Docker"
     # Construction de l'image Docker à partir du Dockerfile
     - docker build -t zoojose:latest .
+    # Démarrage des services avec Docker Compose
+    - docker-compose up -d
+    # Affichage des conteneurs en cours d'exécution pour vérification
+    - docker ps -a
+  before_script:
+    # Installez Docker Compose
+    - apk update && apk add docker-compose
+    # Configurez Docker-in-Docker pour permettre l'exécution de Docker Compose
+    - docker-compose --version
+  after_script:
+    # Arrêtez les services Docker Compose après la construction
+    - docker-compose down
+  artifacts:
+    paths:
+      - .docker/
 
 test-job:
   stage: test
