@@ -39,6 +39,8 @@ test-job:
   image: php:$PHP_VERSION  # Utilisation d'une image Docker PHP
   script:
     - echo "Tests de l'application !"
+    # teste la version de docker
+    - docker -v
     # Démarrage d'un conteneur Docker à partir de l'image construite
     - docker run --name mon_app_test zoojose:latest php ./tests/test.php
 
