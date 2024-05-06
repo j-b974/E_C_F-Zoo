@@ -35,8 +35,9 @@ RUN a2enmod rewrite
 # Copie des fichiers de l'application dans le conteneur
 COPY ./ /var/www/ZooJose
 
-# Copie Composer.json
+# Copie Composer.json & composer.lock
 COPY ./composer.json /var/www/ZooJose
+COPY ./composer.lock /var/www/ZooJose
 
 # remplace la configuration de apache
 COPY ./ServerZoo.conf /etc/apache2/sites-available/000-default.conf
@@ -52,6 +53,9 @@ RUN cd /var/www/ZooJose && \
     composer install --no-scripts --no-interaction
 # change emplacement curseur commande
 WORKDIR /var/www/ZooJose
+
+# lance les commande a la création du contenaire
+ENTRYPOINT ["bash", "docker.sh"]
 
 #Exposition du port 80
 EXPOSE 80
