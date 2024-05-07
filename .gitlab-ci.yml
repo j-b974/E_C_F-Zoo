@@ -36,11 +36,13 @@ build-job:
 
 test-job:
   stage: test
-  image: zoojose:latest  # Utilisation d'une image Docker zoo
+  image: $docker_image  # Utilisation d'une image Docker avec Docker préinstallé
   script:
     - echo "Tests de l'application !"
     # teste la version de docker
     - docker -v
+    # Construction de l'image Docker à partir du Dockerfile
+    - docker build -t zoojose:latest .
     # Démarrage des services avec Docker Compose
     - docker-compose up -d
     # lancement des testes
