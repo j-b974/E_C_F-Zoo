@@ -14,6 +14,7 @@ services:
       - ./:/var/www/ZooJose
     depends_on:
       - db
+      - mongo
     networks:
       - dev
   db:
