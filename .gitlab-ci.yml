@@ -37,6 +37,8 @@ build-job:
 test-job:
   stage: test
   image: $docker_image  # Utilisation d'une image Docker avec Docker préinstallé
+  services:
+    - docker:dind  # Service Docker in Docker (DinD)
   script:
     - echo "Tests de l'application !"
     # teste la version de docker
