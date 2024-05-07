@@ -36,7 +36,7 @@ build-job:
 
 test-job:
   stage: test
-  image: php:$PHP_VERSION  # Utilisation d'une image Docker PHP
+  image: zoojose:latest  # Utilisation d'une image Docker zoo
   script:
     - echo "Tests de l'application !"
     # teste la version de docker
