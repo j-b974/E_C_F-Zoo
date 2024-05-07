@@ -41,8 +41,18 @@ test-job:
     - echo "Tests de l'application !"
     # teste la version de docker
     - docker -v
-    # Démarrage d'un conteneur Docker à partir de l'image construite
-    - docker run --name mon_app_test zoojose:latest php ./tests/test.php
+    # Démarrage des services avec Docker Compose
+    - docker-compose up -d
+    # lancement des testes
+    - php ./vendor/bin/phpunit tests
+  before_script:
+    # Installez Docker Compose
+    - apk update && apk add docker-compose
+    # Configurez Docker-in-Docker pour permettre l'exécution de Docker Compose
+    - docker-compose version
+  after_script:
+    # Arrêtez les services Docker Compose après la construction
+    - docker-compose down
 
 
 deploy-job:
