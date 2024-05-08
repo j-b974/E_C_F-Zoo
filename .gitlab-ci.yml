@@ -16,7 +16,7 @@ build-job:
     - echo "Construction de l'image Docker"
     # Construction de l'image Docker à partir du Dockerfile
     - docker build -t zoojose:latest .
-        # Configurez Docker-in-Docker pour permettre l'exécution de Docker Compose
+    # Configurez Docker-in-Docker pour permettre l'exécution de Docker Compose
     - docker-compose version
     # Démarrage des services avec Docker Compose
     - docker-compose up -d
@@ -47,6 +47,7 @@ test-job:
     - docker build -t zoojose:latest .
     # Démarrage des services avec Docker Compose
     - docker-compose up -d
+    - docker exec ZooJose ls vendor
     # lancement des testes
     - docker exec ZooJose php ./vendor/bin/phpunit tests
   before_script:
