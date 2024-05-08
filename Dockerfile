@@ -56,7 +56,7 @@ RUN cd /var/www/ZooJose \
 # change emplacement curseur commande
 WORKDIR /var/www/ZooJose
 
-RUN ls -al
+RUN ls -al vendor
 
 # lance les commande a la création du contenaire
 ENTRYPOINT ["bash", "docker.sh"]
