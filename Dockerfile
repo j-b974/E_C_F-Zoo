@@ -37,7 +37,7 @@ COPY ./ /var/www/ZooJose
 
 # Copie Composer.json & composer.lock
 COPY ./composer.json /var/www/ZooJose
-COPY ./composer.lock /var/www/ZooJose
+COPY composer.lock /var/www/ZooJose/composer.lock
 
 
 # remplace la configuration de apache
