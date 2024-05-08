@@ -48,7 +48,7 @@ test-job:
     # Démarrage des services avec Docker Compose
     - docker-compose up -d
     # lancement des testes
-    - php ./vendor/bin/phpunit tests
+    - docker exec ZooJose php ./vendor/bin/phpunit tests
   before_script:
     # Installez Docker Compose
     - apk update && apk add docker-compose
