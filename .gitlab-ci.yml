@@ -27,9 +27,9 @@ build-job:
     - apk update && apk add docker-compose
     # Configurez Docker-in-Docker pour permettre l'exécution de Docker Compose
     - docker-compose version
-  after_script:
+  #after_script:
     # Arrêtez les services Docker Compose après la construction
-    - docker-compose down
+    # docker-compose down
   artifacts:
     paths:
       - .docker/
@@ -42,11 +42,7 @@ test-job:
   script:
     - echo "Tests de l'application !"
     # teste la version de docker
-    - docker -v
-    # Construction de l'image Docker à partir du Dockerfile
-    - docker build -t zoojose:latest .
-    # Démarrage des services avec Docker Compose
-    - docker-compose up -d
+    - docker ps -a 
     - docker exec ZooJose ls vendor
     # lancement des testes
     - docker exec ZooJose php ./vendor/bin/phpunit tests
@@ -58,6 +54,7 @@ test-job:
   after_script:
     # Arrêtez les services Docker Compose après la construction
     - docker-compose down
+
 
 
 deploy-job:
