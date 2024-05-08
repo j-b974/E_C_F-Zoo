@@ -35,10 +35,10 @@ RUN a2enmod rewrite
 # Copie des fichiers de l'application dans le conteneur
 COPY ./ /var/www/ZooJose
 
-# Copie Composer.json & composer.lock
-COPY ./composer.json /var/www/ZooJose
-COPY composer.lock /var/www/ZooJose/composer.lock
+RUN ls -al
 
+# Copie Composer.json & composer.lock
+COPY ./composer.* /var/www/ZooJose
 
 # remplace la configuration de apache
 COPY ./ServerZoo.conf /etc/apache2/sites-available/000-default.conf
