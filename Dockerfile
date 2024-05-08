@@ -37,6 +37,7 @@ COPY ./ /var/www/ZooJose
 
 # Copie Composer.json & composer.lock
 COPY ./composer.json /var/www/ZooJose
+COPY ./composer.lock /var/www/ZooJose
 
 # remplace la configuration de apache
 COPY ./ServerZoo.conf /etc/apache2/sites-available/000-default.conf
@@ -49,7 +50,8 @@ RUN chown -R www-data:www-data /var/www/ZooJose
 
 # Installation des dépendances avec Composer
 RUN cd /var/www/ZooJose && \
-    composer install --no-scripts --no-interaction
+    composer install --no-scripts --no-interaction --no-cache && \
+    chown -R www-data:www-data /var/www/ZooJose/vendor
 # change emplacement curseur commande
 WORKDIR /var/www/ZooJose
 
