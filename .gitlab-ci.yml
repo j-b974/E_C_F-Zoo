@@ -22,7 +22,7 @@ build-job:
     - docker-compose up -d
     # Affichage des conteneurs en cours d'exécution pour vérification
     - docker ps -a
-    - docker exec ZooJose ls vendor
+    - docker exec ZooJose ls -al vendor
   before_script:
     # Installez Docker Compose
     - apk update && apk add docker-compose
@@ -50,7 +50,7 @@ test-job:
     - docker-compose up -d
     # teste la version de docker
     - docker ps -a 
-    - docker exec ZooJose ls vendor
+    - docker exec ZooJose ls -al vendor
     # lancement des testes
     - docker exec ZooJose php ./vendor/bin/phpunit tests
   before_script:
