@@ -35,8 +35,6 @@ RUN a2enmod rewrite
 # Copie des fichiers de l'application dans le conteneur
 COPY ./ /var/www/ZooJose
 
-RUN ls -al
-
 # Copie Composer.json & composer.lock
 COPY ./composer.* /var/www/ZooJose
 
@@ -50,11 +48,15 @@ RUN chown -R www-data:www-data /etc/apache2/sites-available/000-default.conf
 RUN chown -R www-data:www-data /var/www/ZooJose
 
 # Installation des dépendances avec Composer
-RUN cd /var/www/ZooJose && \
-    composer install --no-scripts --no-interaction --no-cache && \
-    chown -R www-data:www-data /var/www/ZooJose/vendor
+RUN cd /var/www/ZooJose \
+    && composer install --no-scripts --no-interaction --no-cache \
+    && composer update --no-scripts --no-interaction \
+    && chown -R www-data:www-data /var/www/ZooJose/vendor
+
 # change emplacement curseur commande
 WORKDIR /var/www/ZooJose
+
+RUN ls -al
 
 # lance les commande a la création du contenaire
 ENTRYPOINT ["bash", "docker.sh"]
