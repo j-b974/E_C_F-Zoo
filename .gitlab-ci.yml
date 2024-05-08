@@ -22,6 +22,7 @@ build-job:
     - docker-compose up -d
     # Affichage des conteneurs en cours d'exécution pour vérification
     - docker ps -a
+    - docker exec ZooJose ls vendor
   before_script:
     # Installez Docker Compose
     - apk update && apk add docker-compose
@@ -51,9 +52,6 @@ test-job:
     - apk update && apk add docker-compose
     # Configurez Docker-in-Docker pour permettre l'exécution de Docker Compose
     - docker-compose version
-  after_script:
-    # Arrêtez les services Docker Compose après la construction
-    - docker-compose down
 
 
 
