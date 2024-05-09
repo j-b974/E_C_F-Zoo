@@ -1,23 +1,73 @@
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  PHP_VERSION: "8.2"  # Version de PHP à utiliser
+  docker_image: "docker:stable"
+
 build-job:
   stage: build
+  image: $docker_image  # Utilisation d'une image Docker avec Docker préinstallé
+  services:
+    - docker:dind  # Service Docker in Docker (DinD)
   script:
-    - echo "Hello, $GITLAB_USER_LOGIN!"
+    - echo "Construction de l'image Docker"
+    # Construction de l'image Docker à partir du Dockerfile
+    - docker build -t zoojose:latest .
+    # Configurez Docker-in-Docker pour permettre l'exécution de Docker Compose
+    - docker-compose version
+    # Démarrage des services avec Docker Compose
+    - docker-compose up -d
+    # Affichage des conteneurs en cours d'exécution pour vérification
+    - docker ps -a
+    - docker exec ZooJose ls -al vendor
+  before_script:
+    # Installez Docker Compose
+    - apk update && apk add docker-compose
+    # Configurez Docker-in-Docker pour permettre l'exécution de Docker Compose
+    - docker-compose version
+  #after_script:
+    # Arrêtez les services Docker Compose après la construction
+    # docker-compose down
+  artifacts:
+    paths:
+      - .docker/
 
-test-job1:
+test-job:
   stage: test
+  image: $docker_image  # Utilisation d'une image Docker avec Docker préinstallé
+  services:
+    - docker:dind  # Service Docker in Docker (DinD)
   script:
-    - echo "This job tests something"
+    - echo "Tests de l'application !"
+    # Construction de l'image Docker à partir du Dockerfile
+    - docker build -t zoojose:latest .
+    # Configurez Docker-in-Docker pour permettre l'exécution de Docker Compose
+    - docker-compose version
+    # Démarrage des services avec Docker Compose
+    - docker-compose up -d
+    # teste la version de docker
+    - docker ps -a 
+    - docker exec ZooJose ls -al vendor
+    # lancement des testes
+    - docker exec ZooJose php ./vendor/bin/phpunit tests
+  before_script:
+    # Installez Docker Compose
+    - apk update && apk add docker-compose
+    # Configurez Docker-in-Docker pour permettre l'exécution de Docker Compose
+    - docker-compose version
 
-test-job2:
-  stage: test
-  script:
-    - echo "This job tests something, but takes more time than test-job1."
-    - echo "After the echo commands complete, it runs the sleep command for 20 seconds"
-    - echo "which simulates a test that runs 20 seconds longer than test-job1"
-    - sleep 20
 
-deploy-prod:
+
+deploy-job:
   stage: deploy
   script:
-    - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
-  environment: production
+    - echo "Déploiement de l'application"  # Ajoutez les commandes de déploiement ici
+    # Exemple: déploiement sur un serveur distant avec SSH
+    - ssh user@server "cd /path/to/app && git pull origin master"
+    # Ajoutez d'autres commandes de déploiement ici
+  environment:
+    name: production
+    url: https://example.com  # URL de l'environnement de production
