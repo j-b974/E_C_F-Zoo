@@ -36,7 +36,6 @@ RUN a2enmod rewrite
 COPY ./ /var/www/ZooJose
 
 # Copie Composer.json & composer.lock
-
 COPY ./composer.* /var/www/ZooJose
 
 # remplace la configuration de apache
