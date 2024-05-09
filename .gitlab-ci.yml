@@ -15,7 +15,7 @@ build-job:
   script:
     - echo "Construction de l'image Docker"
     # Construction de l'image Docker à partir du Dockerfile
-    - docker build -t zoojose:latest . --file Dockerfile --build-arg HTTP_PROXY=http://proxy.example.com:80 --build-arg HTTPS_PROXY=https://proxy.example.com:443
+    - docker build -t zoojose:latest . --file Dockerfile
     # Configurez Docker-in-Docker pour permettre l'exécution de Docker Compose
     - docker-compose version
     # Démarrage des services avec Docker Compose
