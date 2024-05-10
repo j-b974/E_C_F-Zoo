@@ -12,6 +12,9 @@ build-job:
   image: $docker_image  # Utilisation d'une image Docker avec Docker préinstallé
   services:
     - docker:dind  # Service Docker in Docker (DinD)
+  cache:
+    paths:
+        - vendor/
   script:
     - echo "Construction de l'image Docker"
     # Construction de l'image Docker à partir du Dockerfile
@@ -34,9 +37,7 @@ build-job:
   artifacts:
     paths:
       - .docker/
-  cache:
-    paths:
-        - vendor/
+
 
 
 test-job:
