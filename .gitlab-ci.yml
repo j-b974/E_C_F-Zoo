@@ -10,6 +10,7 @@ stages:
 variables:
   PHP_VERSION: "8.2"  # Version de PHP à utiliser
   docker_image: "docker:stable"
+  IMAGE_APP: "zoojose:latest"
 
 build-job:
   stage: build
@@ -19,7 +20,7 @@ build-job:
   script:
     - echo "Construction de l'image Docker"
     # Construction de l'image Docker à partir du Dockerfile
-    - docker build -t zoojose:latest . --file Dockerfile
+    - docker build -t $IMAGE_APP . --file Dockerfile
     # Configurez Docker-in-Docker pour permettre l'exécution de Docker Compose
     - docker-compose version
     # Démarrage des services avec Docker Compose
@@ -38,7 +39,6 @@ build-job:
   artifacts:
     paths:
       - .docker/
-      - .vendor/
 
 test-job:
   stage: test
