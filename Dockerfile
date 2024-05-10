@@ -48,6 +48,9 @@ RUN chown -R www-data:www-data /etc/apache2/sites-available/000-default.conf
 RUN chown -R www-data:www-data /var/www/ZooJose
 
 # Installation des dépendances avec Composer
+RUN cd /var/www/ZooJose \
+    && composer install --no-scripts --no-interaction \
+    && chown -R www-data:www-data /var/www/ZooJose/vendor
 
 # change emplacement curseur commande
 WORKDIR /var/www/ZooJose
