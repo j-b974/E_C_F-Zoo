@@ -16,15 +16,12 @@ build-job:
   stage: build
   image: $docker_image  # Utilisation d'une image Docker avec Docker préinstallé
   services:
-    - docker:dind  # Service Docker in Docker (DinD)
+    - name: docker:dind
+      alias: docker
   script:
     - echo "Construction de l'image Docker"
     # Construction de l'image Docker à partir du Dockerfile
     - docker build -t $IMAGE_APP . --file Dockerfile
-    # Configurez Docker-in-Docker pour permettre l'exécution de Docker Compose
-    - docker-compose version
-    # Démarrage des services avec Docker Compose
-    - docker-compose up -d
     # Affichage des conteneurs en cours d'exécution pour vérification
     - docker ps -a
     - docker exec ZooJose ls -al vendor
@@ -33,9 +30,8 @@ build-job:
     - apk update && apk add docker-compose
     # Configurez Docker-in-Docker pour permettre l'exécution de Docker Compose
     - docker-compose version
-  #after_script:
-    # Arrêtez les services Docker Compose après la construction
-    # docker-compose down
+    # Démarrage des services avec Docker Compose
+    - docker-compose up -d
   artifacts:
     paths:
       - .docker/
@@ -44,15 +40,10 @@ test-job:
   stage: test
   image: $docker_image  # Utilisation d'une image Docker avec Docker préinstallé
   services:
-    - docker:dind  # Service Docker in Docker (DinD)
+    - name: docker:dind
+      alias: docker
   script:
     - echo "Tests de l'application !"
-    # Construction de l'image Docker à partir du Dockerfile
-    - docker build -t zoojose:latest .
-    # Configurez Docker-in-Docker pour permettre l'exécution de Docker Compose
-    - docker-compose version
-    # Démarrage des services avec Docker Compose
-    - docker-compose up -d
     # teste la version de docker
     - docker ps -a 
     - docker exec ZooJose ls -al vendor
@@ -63,6 +54,9 @@ test-job:
     - apk update && apk add docker-compose
     # Configurez Docker-in-Docker pour permettre l'exécution de Docker Compose
     - docker-compose version
+    # Démarrage des services avec Docker Compose
+    - docker-compose up -d
+
 
 deploy-job:
   stage: deploy
