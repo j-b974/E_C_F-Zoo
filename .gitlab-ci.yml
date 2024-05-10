@@ -14,7 +14,7 @@ build-job:
     - docker:dind  # Service Docker in Docker (DinD)
   cache:
     paths:
-      - vendor/
+      - .vendor/
   script:
     - echo "Construction de l'image Docker"
     # Construction de l'image Docker à partir du Dockerfile
