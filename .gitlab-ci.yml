@@ -12,9 +12,6 @@ build-job:
   image: $docker_image  # Utilisation d'une image Docker avec Docker préinstallé
   services:
     - docker:dind  # Service Docker in Docker (DinD)
-  cache:
-    paths:
-        - vendor/
   script:
     - echo "Construction de l'image Docker"
     # Construction de l'image Docker à partir du Dockerfile
@@ -26,6 +23,9 @@ build-job:
     # Affichage des conteneurs en cours d'exécution pour vérification
     - docker ps -a
     - docker exec ZooJose ls -al vendor
+  cache:
+    paths:
+      - vendor/
   before_script:
     # Installez Docker Compose
     - apk update && apk add docker-compose
