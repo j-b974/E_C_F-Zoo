@@ -1,6 +1,7 @@
 cache:
   paths:
     - vendor/
+
 stages:
   - build
   - test
@@ -38,8 +39,6 @@ build-job:
     paths:
       - .docker/
 
-
-
 test-job:
   stage: test
   image: $docker_image  # Utilisation d'une image Docker avec Docker préinstallé
@@ -63,8 +62,6 @@ test-job:
     - apk update && apk add docker-compose
     # Configurez Docker-in-Docker pour permettre l'exécution de Docker Compose
     - docker-compose version
-
-
 
 deploy-job:
   stage: deploy
