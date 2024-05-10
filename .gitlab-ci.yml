@@ -34,6 +34,10 @@ build-job:
   artifacts:
     paths:
       - .docker/
+  cache:
+    paths:
+        - vendor/
+
 
 test-job:
   stage: test
