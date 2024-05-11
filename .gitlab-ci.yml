@@ -24,7 +24,6 @@ build-job:
     - docker build -t $IMAGE_APP . --file Dockerfile
     # Affichage des conteneurs en cours d'exécution pour vérification
     - docker ps -a
-    - docker exec ZooJose ls -al vendor
   before_script:
     # Installez Docker Compose
     - apk update && apk add docker-compose
@@ -33,6 +32,7 @@ build-job:
     # Démarrage des services avec Docker Compose
   after_script:
     - docker-compse up -d
+    - docker exec ZooJose ls -al vendor
   artifacts:
     paths:
       - .docker/
