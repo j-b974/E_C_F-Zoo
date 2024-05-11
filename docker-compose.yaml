@@ -10,8 +10,6 @@ services:
       PDO_PASSWORD: 1234
     ports:
       - "8888:80"
-    volumes:
-      - ./:/var/www/ZooJose
     depends_on:
       - db
       - mongo
