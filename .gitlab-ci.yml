@@ -31,7 +31,8 @@ build-job:
     # Configurez Docker-in-Docker pour permettre l'exécution de Docker Compose
     - docker-compose version
     # Démarrage des services avec Docker Compose
-    - docker-compose up -d
+  after_script:
+    - docker-compse up -d
   artifacts:
     paths:
       - .docker/
