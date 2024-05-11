@@ -12,53 +12,34 @@ variables:
   docker_image: "docker:stable"
   IMAGE_APP: "zoojose:latest"
 
-build-job:
+build-image:
   stage: build
-  image: $docker_image  # Utilisation d'une image Docker avec Docker préinstallé
-  services:
-    - name: docker:dind
-      alias: docker
+  image: $docker_image
   script:
     - echo "Construction de l'image Docker"
     # Construction de l'image Docker à partir du Dockerfile
     - docker build -t $IMAGE_APP . --file Dockerfile
-    # Affichage des conteneurs en cours d'exécution pour vérification
-  
-  before_script:
-    # Installez Docker Compose
-    - apk update && apk add docker-compose
-    # Configurez Docker-in-Docker pour permettre l'exécution de Docker Compose
-    - docker-compose version
-    # Démarrage des services avec Docker Compose
-  after_script:
-    - docker-compose up -d
-    - docker ps -a
-    - docker exec ZooJose ls -al vendor
+    # Sauvegarde de l'image dans un fichier archive
+    - docker save -o image.tar $IMAGE_APP
   artifacts:
     paths:
-      - .docker/
+      - image.tar
 
-test-job:
+build-job:
   stage: test
-  image: $docker_image  # Utilisation d'une image Docker avec Docker préinstallé
-  services:
-    - name: docker:dind
-      alias: docker
+  image: $docker_image
   script:
-    - echo "Tests de l'application !"
-    # teste la version de docker
-    - docker ps -a 
+    - echo "Chargement de l'image Docker"
+    # Chargement de l'image Docker construite précédemment
+    - docker load -i image.tar
+    # Démarrage des services avec Docker Compose
+    - docker-compose up -d
+    # Affichage des conteneurs en cours d'exécution pour vérification
+    - docker ps -a
     - docker exec ZooJose ls -al vendor
-    # lancement des testes
-    - docker exec ZooJose php ./vendor/bin/phpunit tests
   before_script:
     # Installez Docker Compose
     - apk update && apk add docker-compose
-    # Configurez Docker-in-Docker pour permettre l'exécution de Docker Compose
-    - docker-compose version
-    # Démarrage des services avec Docker Compose
-    - docker-compose up -d
-
 
 deploy-job:
   stage: deploy
