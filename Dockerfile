@@ -1,5 +1,6 @@
 # Utiliser une image PHP officielle avec Apache
 FROM php:8.2-apache
+
 # Configuration de l'environnement
 ENV APACHE_DOCUMENT_ROOT=/var/www/ZooJose
 
@@ -17,14 +18,18 @@ RUN apt-get update \
         pkg-config \
         unzip \
         git \
-        curl
+        curl \
+        gnupg2
+
+# Installer curl pour l'installation de MongoDB et de Composer
+RUN apt-get install -y curl
 
 # Installation des extensions PHP nécessaires
 RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
 
-#  Installer l'extension MongoDB
-  RUN pecl install mongodb \
-      && docker-php-ext-enable mongodb
+# Installer l'extension MongoDB
+RUN pecl install mongodb \
+    && docker-php-ext-enable mongodb
 
 # Installation de Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -38,13 +43,11 @@ COPY ./ /var/www/ZooJose
 # Copie Composer.json & composer.lock
 COPY ./composer.* /var/www/ZooJose
 
-# remplace la configuration de apache
+# Remplacer la configuration d'Apache
 COPY ./ServerZoo.conf /etc/apache2/sites-available/000-default.conf
 
-# droit ecriture
+# Changer le propriétaire des fichiers
 RUN chown -R www-data:www-data /etc/apache2/sites-available/000-default.conf
-
-# Configuration du propriétaire des fichiers
 RUN chown -R www-data:www-data /var/www/ZooJose
 
 # Installation des dépendances avec Composer
@@ -52,15 +55,13 @@ RUN cd /var/www/ZooJose \
     && composer install --no-scripts --no-interaction \
     && chown -R www-data:www-data /var/www/ZooJose/vendor
 
-# change emplacement curseur commande
+# Configuration de cgroups
+RUN echo "cgroup /sys/fs/cgroup cgroup defaults 0 0" >> /etc/fstab
+
+# Changement d'emplacement de travail
 WORKDIR /var/www/ZooJose
 
-RUN ls -al vendor
-
-# lance les commande a la création du contenaire
-ENTRYPOINT ["bash", "docker.sh"]
-
-#Exposition du port 80
+# Exposition du port 80
 EXPOSE 80
 
 # Commande pour exécuter Apache
