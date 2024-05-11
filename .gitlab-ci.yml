@@ -19,7 +19,7 @@ build-image:
     - echo "Construction de l'image Docker"
     # Construction de l'image Docker à partir du Dockerfile
     - docker build -t $IMAGE_APP . --file Dockerfile
-    # Sauvegarde de l'image dans un fichier archive
+    # Sauvegarde de l'image dans un fichier archive;
     - docker save -o image.tar $IMAGE_APP
   artifacts:
     paths:
