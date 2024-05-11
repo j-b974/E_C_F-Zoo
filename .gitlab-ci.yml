@@ -41,6 +41,7 @@ build-job:
     # Affichage des conteneurs en cours d'exécution pour vérification
     - docker ps -a
     - docker exec ZooJose php ./vendor/bin/phpunit tests
+    - docker exec db_zoo tail -f /var/log/mysql/error.log
   before_script:
     # Installez Docker Compose
     - apk update && apk add docker-compose
