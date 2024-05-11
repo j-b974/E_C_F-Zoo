@@ -15,6 +15,8 @@ variables:
 build-image:
   stage: build
   image: $docker_image
+  services:
+    - docker:stable-dind
   script:
     - echo "Construction de l'image Docker"
     # Construction de l'image Docker à partir du Dockerfile
@@ -28,6 +30,8 @@ build-image:
 build-job:
   stage: test
   image: $docker_image
+  services:
+    - docker:stable-dind
   script:
     - echo "Chargement de l'image Docker"
     # Chargement de l'image Docker construite précédemment
