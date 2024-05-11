@@ -6,7 +6,7 @@ ENV APACHE_DOCUMENT_ROOT=/var/www/ZooJose
 
 # Installation des dépendances nécessaires
 RUN apt-get update \
-    && apt-get install -y \
+    && apt-get install -y --no-install-recommends \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng-dev \
@@ -19,7 +19,8 @@ RUN apt-get update \
         unzip \
         git \
         curl \
-        gnupg2
+        gnupg2 \
+        --no-cgroups
 
 # Installer curl pour l'installation de MongoDB et de Composer
 RUN apt-get install -y curl
