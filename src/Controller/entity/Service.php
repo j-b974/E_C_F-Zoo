@@ -7,6 +7,25 @@ class Service
     protected int $id;
     protected ?string $nom = null;
     protected ?string $description = null ;
+    protected ?string $image = null;
+
+    /**
+     * @return string|null
+     */
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string|null $image
+     * @return Service
+     */
+    public function setImage(?string $image): Service
+    {
+        $this->image = $image;
+        return $this;
+    }
     /**
      * @return int
      */

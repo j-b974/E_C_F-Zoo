@@ -14,6 +14,9 @@ abstract class Valide
         $v = new Validator($data);
         $this->validator = $v;
 
+        $this->validator::addRule('image' , function($champ , $valeur , array $param , array $fields){
+            return false;
+        }, " n'est pas valide !!!");
     }
     public function valideur(): bool
     {
@@ -24,6 +27,5 @@ abstract class Valide
     {
         return $this->validator->errors();
     }
-
 
 }

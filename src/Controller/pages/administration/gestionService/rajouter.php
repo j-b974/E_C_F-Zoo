@@ -11,8 +11,9 @@ $service = new \App\Controller\entity\Service();
 $errors= [];
 if(isset($_POST['compte']))
 {
-    $validator = new \App\Controller\services\Validateur\ValideService($_POST);
-    \App\Controller\services\SetterObjet::hydrate($service,$_POST,array_keys($_POST));
+    $validator = new \App\Controller\services\Validateur\ValideService(array_merge($_POST,$_FILES));
+    \App\Controller\services\SetterObjet::hydrate($service,$_POST,array_keys($_POST), 'image');
+
     if($validator->valideur()){
 
         $Tservice->addService($service);
@@ -22,6 +23,7 @@ if(isset($_POST['compte']))
         $errors = $validator->get_errors();
     }
 }
+
 
 $htmlForm = new \App\Controller\services\BuildInput($service,$errors);
 $link = $router->url('serviceRajouter');

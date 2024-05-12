@@ -119,6 +119,17 @@ HTML;
 HTML;
 
     }
+    public function getInputFile( $key  , string $label): ?string
+    {
+        return <<<HTML
+        <div class="mb-3">
+            <label for="formFile{$key}" class="form-label">$label</label>
+            <input class="form-control {$this->getInvalid($key)}" type="file" id="formFile{$key}" name="$key">
+            {$this->getFeedback($key)}
+        </div>
+HTML;
+
+    }
 
     private function getMethode($key)
     {
