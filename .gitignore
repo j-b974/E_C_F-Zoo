@@ -1,4 +1,5 @@
 .idea/
+/.env.local/
 node_modules/
 /vendor/*
 Makefile
