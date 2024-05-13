@@ -1,5 +1,6 @@
 <?php
 define('PATH_CONTROLLER', dirname(__DIR__,1).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'Controller');
+define('PATH_IMAGE' , 'asset'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR);
 $_SERVER['HTTP_HOST_ZOO'] = 'http://localhost:8888/';
 require_once ("../vendor/autoload.php");
 

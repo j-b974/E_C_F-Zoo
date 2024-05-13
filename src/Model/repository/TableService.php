@@ -17,10 +17,11 @@ class TableService
     public function addService(Service $service):void
     {
 
-        $query = "INSERT INTO service (nom , description  ) VALUES (:nom , :desc)";
+        $query = "INSERT INTO service (nom , description , image  ) VALUES (:nom , :desc , :image)";
         $req = $this->bdd->prepare($query);
         $req->bindValue('nom',$service->getNom() , PDO::PARAM_STR);
         $req->bindValue('desc',$service->getDescription() , PDO::PARAM_STR);
+        $req->bindValue('image',$service->getImage() , PDO::PARAM_STR);
 
         $req->execute();
 
@@ -28,14 +29,16 @@ class TableService
     }
     public function UpdateService(Service $service)
     {
-        $query ="UPDATE service SET nom = :nom , description = :desc 
+        $query = "UPDATE service SET nom = :nom , description = :desc , image = :image
                       WHERE id = :id LIMIT 1";
         $req = $this->bdd->prepare($query);
-        $req->bindValue('nom',$service->getNom() , PDO::PARAM_STR);
-        $req->bindValue('desc',$service->getDescription() , PDO::PARAM_STR);
-        $req->bindValue('id',$service->getId() , PDO::PARAM_INT);
+        $req->bindValue('nom', $service->getNom(), PDO::PARAM_STR);
+        $req->bindValue('desc', $service->getDescription(), PDO::PARAM_STR);
+        $req->bindValue('image', $service->getImage(), PDO::PARAM_STR);
+        $req->bindValue('id', $service->getId(), PDO::PARAM_INT);
         $req->execute();
     }
+
     public function delectService(Service $service)
     {
         $query = "DELETE FROM service WHERE id = :id LIMIT 1" ;

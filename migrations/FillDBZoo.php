@@ -18,11 +18,19 @@ for($i=0;$i<= 7 ;$i++)
 
 // remplir table Service
 $Tservice = new \App\Model\repository\TableService($bdd);
-for($i=0;$i<=7;$i++)
+$dataSetSrvice = [
+    ['name'=>'atelier pedagoque' , 'image'=>'atelier_pedagogique.jpg' ],
+    ['name'=>'stade de barbe à papa' , 'image'=>'barbe_a_papa.jpg' ],
+    ['name'=>'contact avec les serpents' , 'image'=>'contact_avec_serpents.jpg' ],
+    ['name'=>'jeux de piste' , 'image'=>'jeux_de_piste.jpg' ],
+    ['name'=>'visite guider dans tous le zoo' , 'image'=>'visite_guide.jpg' ]
+];
+for($i=0;$i<5;$i++)
 {
     $service = new \App\Controller\entity\Service();
-    $service->setNom($faker->lastName());
-    $service->setDescription($faker->realText(90));
+    $service->setNom($dataSetSrvice[$i]['name']);
+    $service->setDescription($faker->realText(190));
+    $service->setImage($dataSetSrvice[$i]['image']);
 
     $Tservice->addService($service);
 }

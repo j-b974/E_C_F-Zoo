@@ -16,7 +16,9 @@
 
             <td><?=  htmlentities($Service->getNom())?></td>
             <td><?=  htmlentities($Service->getDescription())?></td>
-            <td><img src="<?=$_SERVER['HTTP_HOST_ZOO'].'asset/images/services/visite_guide.jpg' ?>" alt="image-<?= $Service->getNom() ?>" style="width:7rem"></td>
+            <td>
+                <img src="<?= $_SERVER['HTTP_HOST_ZOO'].PATH_IMAGE.'services'.DIRECTORY_SEPARATOR.$Service->getImage() ?>" alt="<?= $Service->getNom() ?>"  style=" max-width: 8rem;">
+            </td>
             <td class="text-center">
                 <form method='POST' action='<?= $router->url('serviceModifier',['id'=> $Service->getId()]) ?>'>
                     <button class="btn btn-warning btn-sm " type="submit">Modifier </button>

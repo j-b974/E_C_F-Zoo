@@ -8,6 +8,8 @@ class Service
     protected ?string $nom = null;
     protected ?string $description = null ;
     protected ?string $image = null;
+    protected ?string $oldImage = null;
+    protected ?bool $uploaded = true;
 
     /**
      * @return string|null
@@ -18,12 +20,24 @@ class Service
     }
 
     /**
-     * @param string|null $image
+     * @param  $image
      * @return Service
      */
-    public function setImage(?string $image): Service
+    public function setImage( $image): Service
     {
-        $this->image = $image;
+        if(is_array($image) && !empty($image['tmp_name']) ){
+
+            // pour connaitre l'image a supprimer
+            if(!empty($this->image)){
+                $this->oldImage = $this->image;
+            }
+            $this->uploaded = false;
+            $this->image = $image['tmp_name'];
+        }
+        if(is_string($image) && !empty($image)){
+            $this->image = $image;
+        }
+
         return $this;
     }
     /**
@@ -78,5 +92,13 @@ class Service
     {
         $this->description = $description;
         return $this;
+    }
+    public function getOldImage(): ?string
+    {
+        return $this->oldImage;
+    }
+    public function isUploaded(): ?bool
+    {
+        return $this->uploaded;
     }
 }
