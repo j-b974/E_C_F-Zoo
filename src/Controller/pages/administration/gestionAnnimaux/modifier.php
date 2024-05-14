@@ -22,8 +22,9 @@ $errors = [];
 
 if(isset($_POST['compte']))
 {
-    $validator = new \App\Controller\services\Validateur\ValideAnnimale($_POST, $lstRace, $lsthabitat);
-    \App\Controller\services\SetterObjet::hydrate($animaux,$_POST,array_keys($_POST),['raceID','habitatID']);
+    $data = array_merge($_POST , $_FILES);
+    $validator = new \App\Controller\services\Validateur\ValideAnnimale($data, $lstRace, $lsthabitat);
+    \App\Controller\services\SetterObjet::hydrate($animaux,$data,array_keys($data),['raceID','habitatID']);
 
     $race = new \App\Controller\entity\Race();
     $race->setId((int)$_POST['label']);
@@ -35,6 +36,7 @@ if(isset($_POST['compte']))
 
     if($validator->valideur()) {
 
+        \App\Controller\services\UploadImageZoo::upload($animaux , 'animaux');
         $Tanimaux->UpdateAnimal($animaux);
         header('Location:'.$router->url('annimaux').'?annimaux=mosifire');
     }else{

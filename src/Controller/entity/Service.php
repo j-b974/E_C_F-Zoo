@@ -37,7 +37,6 @@ class Service
         if(is_string($image) && !empty($image)){
             $this->image = $image;
         }
-
         return $this;
     }
     /**

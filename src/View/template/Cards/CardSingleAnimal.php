@@ -1,5 +1,5 @@
 <div class="card w-75 m-auto mb-3">
-    <img class="card-img-top" src="http://localhost:8888/asset/images/tigre.jpg" alt="Card image cap">
+    <img class="card-img-top" src="<?= $_SERVER['HTTP_HOST_ZOO'].PATH_IMAGE.'animaux'.DIRECTORY_SEPARATOR.$animal->getImage() ?>" alt="<?= $animal->getPrenom() ?>" style="max-width:100%;">
 
     <div class="card-body">
         <h5 class="card-title"> <?= htmlspecialchars($animal->getPrenom()) ?></h5>

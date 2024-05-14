@@ -25,5 +25,16 @@ class UploadImageZoo
         $Objet->setImage($fileName);
 
     }
+    public static function deleteImage($Objet , string $pathDirectory)
+    {
+        if(!empty($Objet->getImage()))
+        {
+            $file = PATH_IMAGE.$pathDirectory.DIRECTORY_SEPARATOR.$Objet->getImage();
+            if(file_exists($file))
+            {
+                unlink($file);
+            }
+        }
+    }
 
 }

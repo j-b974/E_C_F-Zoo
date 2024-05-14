@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS habitat(
     nom varchar(255) NOT NULL,
     description varchar(255) NOT NULL,
     commentaire_habitat varchar(255) NOT NULL,
+    image varchar(255) NULL ,
     PRIMARY KEY (id)
 )ENGINE=InnoDB;
 
@@ -53,6 +54,7 @@ CREATE TABLE IF NOT EXISTS animal(
      id int UNSIGNED NOT NULL AUTO_INCREMENT,
      prenom varchar(255) NOT NULL,
      etat varchar(255) NOT NULL,
+     image varchar(255) NULL ,
      race_id int UNSIGNED NOT NULL,
      habit_id int UNSIGNED NOT NULL,
      PRIMARY KEY (id),

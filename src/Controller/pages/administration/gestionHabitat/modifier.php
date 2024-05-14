@@ -3,7 +3,6 @@ require_once (dirname(__DIR__,5).DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATO
 $pathView = dirname(__DIR__, 4).DIRECTORY_SEPARATOR.'View'.DIRECTORY_SEPARATOR;
 use App\Model\DbZoo;
 
-//$db = DbZoo::connection();
 \App\Controller\services\Verificateur::checkRole($router ,['administrateur']);
 
 $errors = [];
@@ -12,14 +11,15 @@ $habitat = $THabitat->getHabitatById((int) $params['id']);
 
 if(isset($_POST['compte']))
 {
+    $data = array_merge($_POST , $_FILES);
+    $validator = new \App\Controller\services\Validateur\ValideHabitat($data);
 
-    $validator = new \App\Controller\services\Validateur\ValideHabitat($_POST);
-
-    \App\Controller\services\SetterObjet::hydrate($habitat, $_POST, array_keys($_POST), );
+    \App\Controller\services\SetterObjet::hydrate($habitat, $data, array_keys($data) );
 
 
     if($validator->valideur()) {
 
+        \App\Controller\services\UploadImageZoo::upload($habitat , 'habitat');
         $THabitat->UpdateHabitat($habitat);
         header('Location:'.$router->url('habitat').'?habitat=modifier');
     }else{

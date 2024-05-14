@@ -1,7 +1,7 @@
 <?php foreach($allCompte as $CompteRendu) : ?>
     <div class=" m-3">
         <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="http://localhost:8888/asset/images/tigre.jpg" alt="Card image cap">
+            <img class="card-img-top" src="<?= $_SERVER['HTTP_HOST_ZOO'].PATH_IMAGE.'animaux'.DIRECTORY_SEPARATOR.$CompteRendu->getAnimal()->getImage() ?>" alt="<?= $CompteRendu->getAnimal()->getPrenom()?>">
             <div class="card-body">
                 <h5 class="card-title fontRoboto"><?= htmlspecialchars( $CompteRendu->getAnimal()->getPrenom()) ?></h5>
                 <div class="d-flex justify-content-between">

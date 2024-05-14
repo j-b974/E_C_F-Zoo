@@ -4,7 +4,7 @@
 
         <div class="carousel-item <?= ($key == 0) ? 'active' : '' ?>">
             <a href="<?= $router->url('habitatAnimal',['id'=>$animal->getId()]) ?>">
-                <img src="http://localhost:8888/asset/images/tigre.jpg" class="d-block w-100" alt="...">
+                <img class="d-block w-100" src="<?= $_SERVER['HTTP_HOST_ZOO'].PATH_IMAGE.'animaux'.DIRECTORY_SEPARATOR.$animal->getImage() ?>" alt="<?= $animal->getPrenom() ?>" style="max-width:100%;">
                 <div class="carousel-caption m-auto" style="max-width: 18rem;">
                     <h5 class="fontRoboto text-primary bg-light">Voir <?= htmlspecialchars($animal->getPrenom()) ?></h5>
                 </div>
