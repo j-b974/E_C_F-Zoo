@@ -18,11 +18,19 @@ for($i=0;$i<= 7 ;$i++)
 
 // remplir table Service
 $Tservice = new \App\Model\repository\TableService($bdd);
-for($i=0;$i<=7;$i++)
+$dataSetService = [
+    ['name'=>'atelier pedagoque' , 'image'=>'atelier_pedagogique.jpg' ],
+    ['name'=>'stade de barbe à papa' , 'image'=>'barbe_a_papa.jpg' ],
+    ['name'=>'contact avec les serpents' , 'image'=>'contact_avec_serpents.jpg' ],
+    ['name'=>'jeux de piste' , 'image'=>'jeux_de_piste.jpg' ],
+    ['name'=>'visite guider dans tous le zoo' , 'image'=>'visite_guide.jpg' ]
+];
+for($i=0;$i<5;$i++)
 {
     $service = new \App\Controller\entity\Service();
-    $service->setNom($faker->lastName());
-    $service->setDescription($faker->realText(90));
+    $service->setNom($dataSetService[$i]['name']);
+    $service->setDescription($faker->realText(190));
+    $service->setImage($dataSetService[$i]['image']);
 
     $Tservice->addService($service);
 }
@@ -51,7 +59,7 @@ $admin->setUsername('admin@admin.fr')
     ->setRole($roleAdmin)
     ->setNom('admin')
     ->setPrenom('admin')
-    ->setPassword('admin');
+    ->setPassword(password_hash('admin',PASSWORD_BCRYPT));
 $Tutilisateur->addUtilisateur($admin);
 $vetto = 3 ;
 for($i=0 ; $i <= 18 ; $i++)
@@ -70,7 +78,7 @@ for($i=0 ; $i <= 18 ; $i++)
     $utilisateur->setUsername($faker->email())
         ->setPrenom($faker->firstName())
         ->setNom($faker->lastName())
-        ->setPassword('1234')
+        ->setPassword(password_hash(1234,PASSWORD_BCRYPT))
         ->setRole($role);
     $Tutilisateur->addUtilisateur($utilisateur);
 }
@@ -87,12 +95,20 @@ for($i=0; $i<= 47 ; $i++)
 
 // remplir table habitat
 $Thabitat = new \App\Model\repository\TableHabitat($bdd);
-for($i=0 ; $i <= 7 ; $i++)
+$dataSetHabitat = [
+    ['nom'=>'Jungle', 'image'=>'jungle.jpg'],
+    ['nom'=>'Marais', 'image'=>'marais.jpg'],
+    ['nom'=>'Savane', 'image'=>'savane.jpg'],
+    ['nom'=>'Terrarium', 'image'=>'terrarium.jpg'],
+    ['nom'=>'Vivarium', 'image'=>'vivarium.jpg']
+];
+for($i=0 ; $i < 5 ; $i++)
 {
     $habitat = new \App\Controller\entity\Habitat();
-    $habitat->setNom($faker->lastName())
-        ->setDescription($faker->paragraph(1))
-        ->setCommentaireHabitat($faker->realText(75));
+    $habitat->setNom($dataSetHabitat[$i]['nom'])
+        ->setDescription($faker->realText(37))
+        ->setImage($dataSetHabitat[$i]['image'])
+        ->setCommentaireHabitat($faker->realText(195));
     $Thabitat->addHabitat($habitat);
 }
 
@@ -100,15 +116,22 @@ for($i=0 ; $i <= 7 ; $i++)
 $lstHabit = $Thabitat->getAllHabitat();
 $lstRace = $Trace->getAllRace();
 $Tanimal = new \App\Model\repository\TableAnimal($bdd);
-
+$dataSetAnimal = [
+    'Jungle'=>'fauve',
+    'Marais'=>'reptile',
+    'Savane'=>'herbivore',
+    'Terrarium'=>'invertebres',
+    'Vivarium'=>'vivarium'
+];
 for($i=0;$i <= 150 ; $i++)
 {
-
+    $randHabitat = $faker->randomElements($lstHabit)[0];
     $animal = new \App\Controller\entity\Animal();
     $animal->setPrenom($faker->firstName())
         ->setEtat($faker->words(3,true))
         ->setRace($faker->randomElements($lstRace)[0])
-        ->setHabitat($faker->randomElements($lstHabit)[0]);
+        ->setImage($dataSetAnimal[$randHabitat->getNom()].rand(1,5).'.jpg')
+        ->setHabitat($randHabitat);
     $Tanimal->addAnimal($animal);
 }
 

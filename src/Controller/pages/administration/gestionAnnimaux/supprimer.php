@@ -9,6 +9,7 @@ use App\Model\DbZoo;
 $Tanimal = new \App\Model\repository\TableAnimal(DbZoo::connection());
 
 $animal = $Tanimal->getAnimalById((int) $params['id']);
+\App\Controller\services\UploadImageZoo::deleteImage($animal , 'animaux');
 $Tanimal->delectAnimal($animal);
 header('Location:'.$router->url('annimaux').'?supression='.$animal->getPrenom());
 exit();

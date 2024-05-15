@@ -10,15 +10,15 @@ $errors = [];
 $habitat = new \App\Controller\entity\Habitat();
 if(isset($_POST['compte']))
 {
+    $data = array_merge($_POST , $_FILES);
+    $validator = new \App\Controller\services\Validateur\ValideHabitat($data);
 
-    $validator = new \App\Controller\services\Validateur\ValideHabitat($_POST);
-
-     \App\Controller\services\SetterObjet::hydrate($habitat, $_POST, array_keys($_POST), );
+     \App\Controller\services\SetterObjet::hydrate($habitat, $data, array_keys($data) );
 
 
     if($validator->valideur()) {
-        $THabitat =new \App\Model\repository\TableHabitat(DbZoo::connection()
-        );
+        $THabitat =new \App\Model\repository\TableHabitat(DbZoo::connection());
+        \App\Controller\services\UploadImageZoo::upload($habitat , 'habitat');
         $THabitat->addHabitat($habitat);
         header('Location:'.$router->url('habitat').'?habitat=creer');
     }else{

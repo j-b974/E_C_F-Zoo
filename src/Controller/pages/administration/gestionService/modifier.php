@@ -11,10 +11,12 @@ $service = $Tservice->getServiceById($params['id']);
 $errors= [];
 if(isset($_POST['compte']))
 {
-    $validator = new \App\Controller\services\Validateur\ValideService($_POST);
-    \App\Controller\services\SetterObjet::hydrate($service,$_POST,array_keys($_POST));
+    $data= array_merge($_POST,$_FILES);
+    $validator = new \App\Controller\services\Validateur\ValideService($data);
+    \App\Controller\services\SetterObjet::hydrate($service,$data,array_keys($data));
     if($validator->valideur()){
 
+        \App\Controller\services\UploadImageZoo::upload($service,'services');
         $Tservice->UpdateService($service);
         header('Location:'.$router->url('serviceModifier',['id'=> $service->getId()]).'?infosService=modifier');
 

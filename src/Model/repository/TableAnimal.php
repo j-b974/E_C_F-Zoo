@@ -24,7 +24,7 @@ class TableAnimal
      */
     public function getAllAnnimal():array
     {
-        $query = "SELECT animal.id ,animal.prenom , animal.etat  ,
+        $query = "SELECT animal.id ,animal.prenom , animal.etat , animal.image,
                     race.id AS race_id , race.label ,
                     habitat.id AS habitat_id , habitat.nom , habitat.description , habitat.commentaire_habitat
                     FROM animal 
@@ -42,7 +42,7 @@ class TableAnimal
      */
     public function getAllAnimalByHabitatId(int $HabitatId):array
     {
-        $query = "SELECT id , prenom FROM animal WHERE habit_id = :id";
+        $query = "SELECT id , prenom , image FROM animal WHERE habit_id = :id";
         $req = $this->bdd->prepare($query);
         $req->bindValue('id', $HabitatId , PDO::PARAM_INT);
         $req->setFetchMode(PDO::FETCH_CLASS , Animal::class);
@@ -51,7 +51,7 @@ class TableAnimal
     }
     public function getAnimalById(int $id):Animal
     {
-        $query ="SELECT animal.id, animal.prenom , animal.etat ,
+        $query ="SELECT animal.id, animal.prenom , animal.etat , animal.image ,
                 race.id AS race_id, race.label ,
                 habitat.id AS habitat_id , habitat.nom , habitat.description , habitat.commentaire_habitat
                 FROM animal 
@@ -66,10 +66,11 @@ class TableAnimal
     public function addAnimal(Animal $animal):void
     {
 
-        $query = "INSERT INTO animal (prenom , etat , race_id , habit_id ) VALUES (:prenom , :etat , :id_race , :id_habitat)";
+        $query = "INSERT INTO animal (prenom , etat , race_id , habit_id , image) VALUES (:prenom , :etat , :id_race , :id_habitat , :image)";
         $req = $this->bdd->prepare($query);
         $req->bindValue('prenom',$animal->getPrenom() , PDO::PARAM_STR);
         $req->bindValue('etat',$animal->getEtat() , PDO::PARAM_STR);
+        $req->bindValue('image',$animal->getImage(), PDO::PARAM_STR);
         $req->bindValue('id_race',$animal->getRace()->getId() , PDO::PARAM_INT);
         $req->bindValue('id_habitat',$animal->getHabitat()->getId() , PDO::PARAM_INT);
 
@@ -79,11 +80,12 @@ class TableAnimal
     }
     public function UpdateAnimal(Animal $animal):void
     {
-        $query ="UPDATE animal SET prenom = :prenom , etat = :etat , race_id = :id_race , habit_id = :id_habitat
+        $query ="UPDATE animal SET prenom = :prenom , etat = :etat , race_id = :id_race , habit_id = :id_habitat, image = :image
                       WHERE id = :id LIMIT 1";
         $req = $this->bdd->prepare($query);
         $req->bindValue('prenom',$animal->getPrenom() , PDO::PARAM_STR);
         $req->bindValue('etat',$animal->getEtat(), PDO::PARAM_STR);
+        $req->bindValue('image',$animal->getImage(), PDO::PARAM_STR);
         $req->bindValue('id_race',$animal->getRace()->getId() , PDO::PARAM_INT);
         $req->bindValue('id_habitat',$animal->getHabitat()->getId() , PDO::PARAM_INT);
         $req->bindValue('id',$animal->getId() , PDO::PARAM_INT);

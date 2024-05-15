@@ -1,7 +1,9 @@
 <?php
+/**
+ * @descript verifier accée au router
+ */
 
 namespace App\Controller\services;
-
 
 class Verificateur
 {

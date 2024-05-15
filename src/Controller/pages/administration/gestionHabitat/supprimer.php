@@ -8,6 +8,7 @@ use App\Model\DbZoo;
 
 $Thabitat = new \App\Model\repository\TableHabitat(DbZoo::connection());
 $habitat = $Thabitat->getHabitatById((int) $params['id']);
+\App\Controller\services\UploadImageZoo::deleteImage($habitat , 'habitat');
 $Thabitat->delectHabitat($habitat);
 header('Location:'.$router->url('habitat').'?supression='.$habitat->getNom());
 exit();

@@ -1,6 +1,7 @@
 <?php
 define('PATH_CONTROLLER', dirname(__DIR__,1).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'Controller');
-
+define('PATH_IMAGE' , 'asset'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR);
+$_SERVER['HTTP_HOST_ZOO'] = 'http://localhost:8888/';
 require_once ("../vendor/autoload.php");
 
 $router = new \App\Controller\services\RouterZoo(PATH_CONTROLLER);
@@ -43,9 +44,9 @@ $router->mapBoth('/gestion/habitat/rajouter', 'pages/administration/gestionHabit
 // ===================== Gestion annimaux ===================
 
 $router->map('/gestion/annimaux', 'pages/administration/gestionAnnimaux/annimaux' , 'annimaux');
-$router->mapBoth('/gestion/annimaux/rajouter', 'pages/administration/gestionAnnimaux/rajouter' , 'annimauxRajouter');
-$router->mapBoth('/gestion/annimaux/modifier/[i:id]', 'pages/administration/gestionAnnimaux/modifier' , 'annimauxModifier');
-$router->mapBoth('/gestion/annimaux/supprimer/[i:id]', 'pages/administration/gestionAnnimaux/supprimer' , 'annimauxSupprimer');
+$router->mapBoth('/gestion/animaux/rajouter', 'pages/administration/gestionAnnimaux/rajouter' , 'annimauxRajouter');
+$router->mapBoth('/gestion/animaux/modifier/[i:id]', 'pages/administration/gestionAnnimaux/modifier' , 'annimauxModifier');
+$router->mapBoth('/gestion/animaux/supprimer/[i:id]', 'pages/administration/gestionAnnimaux/supprimer' , 'animauxSupprimer');
 
 // ==================== Veterinaire compte rendu ===========
 

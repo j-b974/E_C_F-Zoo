@@ -45,10 +45,11 @@ class TableHabitat
     }
     public function addHabitat(Habitat $habitat):void
     {
-        $query = "INSERT INTO habitat ( nom , description, commentaire_habitat ) VALUES (:nom , :desc , :com)";
+        $query = "INSERT INTO habitat ( nom , description, commentaire_habitat , image) VALUES (:nom , :desc , :com, :image)";
         $req = $this->bdd->prepare($query);
         $req->bindValue('nom',$habitat->getNom() , PDO::PARAM_STR);
         $req->bindValue('desc',$habitat->getDescription() , PDO::PARAM_STR);
+        $req->bindValue('image',$habitat->getImage() , PDO::PARAM_STR);
         $req->bindValue('com',$habitat->getCommentaireHabitat() , PDO::PARAM_STR);
 
         $req->execute();
@@ -57,12 +58,13 @@ class TableHabitat
     }
     public function UpdateHabitat(Habitat $habitat):void
     {
-        $query ="UPDATE habitat SET nom= :nom , description= :desc , commentaire_habitat = :com 
+        $query ="UPDATE habitat SET nom= :nom , description= :desc , commentaire_habitat = :com , image= :image
                       WHERE id = :id LIMIT 1";
         $req = $this->bdd->prepare($query);
         $req->bindValue('nom',$habitat->getNom() , PDO::PARAM_STR);
         $req->bindValue('desc',$habitat->getDescription() , PDO::PARAM_STR);
         $req->bindValue('com',$habitat->getCommentaireHabitat() , PDO::PARAM_STR);
+        $req->bindValue('image',$habitat->getImage() , PDO::PARAM_STR);
         $req->bindValue('id',$habitat->getId() , PDO::PARAM_INT);
         $req->execute();
     }

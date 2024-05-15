@@ -108,8 +108,8 @@ class TableUtilisateur
     {
         $utilisateur =  $this->getUtilisateurByName($name);
         if(!$utilisateur){return false;}
-        if($password !== $utilisateur->getPassword()){return false;}
-        return true;
+        return password_verify($password , $utilisateur->getPassword());
+
     }
     private function dataFormatObjet( array $data):array
     {

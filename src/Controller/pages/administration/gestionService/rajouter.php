@@ -11,10 +11,16 @@ $service = new \App\Controller\entity\Service();
 $errors= [];
 if(isset($_POST['compte']))
 {
-    $validator = new \App\Controller\services\Validateur\ValideService($_POST);
-    \App\Controller\services\SetterObjet::hydrate($service,$_POST,array_keys($_POST));
+
+    $data = array_merge($_POST,$_FILES);
+    $validator = new \App\Controller\services\Validateur\ValideService($data);
+
+    \App\Controller\services\SetterObjet::hydrate($service, $data, array_keys($data) );
+
+
     if($validator->valideur()){
 
+        \App\Controller\services\UploadImageZoo::upload($service,"services");
         $Tservice->addService($service);
         header('Location:'.$router->url('service').'?infosService=creer');
 
@@ -22,6 +28,7 @@ if(isset($_POST['compte']))
         $errors = $validator->get_errors();
     }
 }
+
 
 $htmlForm = new \App\Controller\services\BuildInput($service,$errors);
 $link = $router->url('serviceRajouter');
