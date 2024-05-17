@@ -41,8 +41,12 @@ class RouterZoo {
             $file = $match['target'];
             require $this->pathDirectory.DIRECTORY_SEPARATOR.$file.'.php';
         }else{
-            require(dirname(__DIR__,3).DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."404.html");
+            $this->getErrorPage();
         }
+    }
+    public function getErrorPage()
+    {
+        require(dirname(__DIR__,3).DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."404.html");
     }
     public function url(string $nom , ?array $donne = [])
     {

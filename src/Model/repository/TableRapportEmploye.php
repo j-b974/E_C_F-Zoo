@@ -41,7 +41,7 @@ class TableRapportEmploye
         }
         return $lstRapport;
     }
-    public function getCompteRenduById(int $id):RapportEmploye
+    public function getCompteRenduById(int $id): ?RapportEmploye
     {
         $query ="SELECT id , nouriture ,quantite , date , heure FROM rapport_employe WHERE id = :id";
         $req = $this->bdd->prepare($query);
@@ -49,7 +49,10 @@ class TableRapportEmploye
         $req->setFetchMode(PDO::FETCH_CLASS , RapportEmploye::class);
         $req->execute();
         $rapport = $req->fetch();
-        return $rapport->setAnimal($this->getAnimalOfRapport($rapport));
+        if($rapport){
+            $rapport->setAnimal($this->getAnimalOfRapport($rapport));
+        }
+        return $rapport ? $rapport : null ;
     }
     /**
      * @param int $idAnimal

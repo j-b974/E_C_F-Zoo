@@ -13,6 +13,11 @@ session_start();
 
 $Tanimal = new \App\Model\repository\TableAnimal(DbZoo::connection());
 $animal = $Tanimal->getAnimalById((int) $params['id']);
+if(!$animal)
+{
+    $router->getErrorPage();
+    exit();
+}
 
 // =========== ajoute annimal vue a mongodb ================
 $bdzoo = \App\Model\MongodbZoo::connection();

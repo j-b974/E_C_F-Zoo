@@ -8,6 +8,12 @@ use App\Model\DbZoo;
 
 
 $TcompteRendu = new \App\Model\repository\TableRapportVeterinaire(DbZoo::connection());
+$CompteRendu = $TcompteRendu->getCompteRenduById( (int) $params['id'] ) ;
+if(!$CompteRendu)
+{
+    $router->getErrorPage();
+    exit();
+}
 
 $utilisateur = $_SESSION['utilisateur'];
 
@@ -20,12 +26,11 @@ foreach($allCompte as $rapport)
     $lstIdRapport[] = $rapport->getId();
 }
 
-\App\Controller\services\Verificateur::checkRestrition($params['id'] , $lstIdRapport,$router);
+\App\Controller\services\Verificateur::checkRestrition($CompteRendu->getId() , $lstIdRapport,$router);
 // ================================================================
 
 $Tanimal = new \App\Model\repository\TableAnimal(DbZoo::connection());
 
-$CompteRendu = $TcompteRendu->getCompteRenduById( (int) $params['id'] ) ;
 $TrapportEmploy = new \App\Model\repository\TableRapportEmploye(DbZoo::connection());
 $allCompte= $TrapportEmploy->getAllRapportEmployeByIdAnimal($CompteRendu->getAnimal()->getId());
 

@@ -34,14 +34,15 @@ class TableHabitat
         $req->execute();
         return $this->formatArrayListe($req->fetchAll());
     }
-    public function getHabitatById(int $id):Habitat
+    public function getHabitatById(int $id): ?Habitat
     {
         $query = "SELECT * FROM habitat WHERE id = :id";
         $req = $this->bdd->prepare($query);
         $req->bindValue('id',$id,PDO::PARAM_INT);
         $req->setFetchMode(PDO::FETCH_CLASS, Habitat::class);
         $req->execute();
-        return $req->fetch();
+        $rep = $req->fetch();
+        return $rep ? $rep : null ;
     }
     public function addHabitat(Habitat $habitat):void
     {

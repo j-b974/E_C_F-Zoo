@@ -8,6 +8,11 @@ use App\Model\DbZoo;
 $Tservice = new \App\Model\repository\TableService(DbZoo::connection());
 
 $service = $Tservice->getServiceById($params['id']);
+if(!$service)
+{
+    $router->getErrorPage();
+    exit();
+}
 $errors= [];
 if(isset($_POST['compte']))
 {

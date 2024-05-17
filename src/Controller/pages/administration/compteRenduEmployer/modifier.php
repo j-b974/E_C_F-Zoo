@@ -22,8 +22,13 @@ $Tanimal = new \App\Model\repository\TableAnimal(DbZoo::connection());
 
 
 $comptRendu = $TcomteRendu->getCompteRenduById((int) $params['id']);
+if(!$comptRendu)
+{
+    $router->getErrorPage();
+    exit();
+}
 
-\App\Controller\services\Verificateur::checkRestrition($params['id'] , $lstIdRapport,$router);
+\App\Controller\services\Verificateur::checkRestrition((int)$params['id'] , $lstIdRapport,$router);
 //======================================================================
 
 $errors = [];

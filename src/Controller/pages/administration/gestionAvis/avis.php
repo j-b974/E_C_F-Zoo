@@ -14,6 +14,11 @@ $id = $params['id'];
 if($id > 0)
 {
     $avis = $Tavis->getAvisById($id);
+    if(!$avis)
+    {
+        $router->getErrorPage();
+        exit();
+    }
     $avis->setIsVisible(true);
     $Tavis->UpdateAvis($avis);
     unset($avis);

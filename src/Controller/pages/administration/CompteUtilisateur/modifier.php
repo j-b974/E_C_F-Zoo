@@ -9,6 +9,11 @@ $user = new \App\Controller\entity\Utilisateur();
 $errors = [];
 $Tutilisateur = new \App\Model\repository\TableUtilisateur(DbZoo::connection());
 $user= $Tutilisateur->getUtilisateurByID((int)$params['id'] );
+if(!$user)
+{
+    $router->getErrorPage();
+    exit();
+}
 
 if(isset($_POST['compte']))
 {

@@ -1,6 +1,8 @@
 .idea/
 /.env.local/
 node_modules/
+README.local.md
+docker-compose.local.yml
 /vendor/*
 Makefile
 *.log
