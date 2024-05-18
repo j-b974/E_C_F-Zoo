@@ -4,3 +4,5 @@ node_modules/
 /vendor/*
 Makefile
 *.log
+README.local.md
+docker-compose.local.yml
