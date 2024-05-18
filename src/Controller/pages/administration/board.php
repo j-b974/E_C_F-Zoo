@@ -15,7 +15,7 @@ if($utilisateur->getrole()->getlabel() == 'veterinaire')
 }
 if($utilisateur->getrole()->getlabel() == 'employer')
 {
-    header('Location:'.$router->url('gestionAvis') , true ,301);;
+    header('Location:'.$router->url('gestionAvis',['id'=>0]) , true ,301);;
     exit();
 }
 
