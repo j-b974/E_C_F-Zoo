@@ -54,14 +54,15 @@ class TableService
         $req->execute();
         return $req->fetchAll();
     }
-    public function getServiceById(int $id):Service
+    public function getServiceById(int $id): ?Service
     {
         $query ="SELECT * FROM service WHERE id = :id";
         $req = $this->bdd->prepare($query);
         $req->bindValue('id', $id, PDO::PARAM_INT);
         $req->setFetchMode(PDO::FETCH_CLASS , Service::class);
         $req->execute();
-        return $req->fetch();
+        $rep = $req->fetch();
+        return $rep ? $rep : null ;
     }
 
 }

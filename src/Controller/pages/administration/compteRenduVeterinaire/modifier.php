@@ -7,6 +7,13 @@ use App\Model\DbZoo;
 \App\Controller\services\Verificateur::checkRole($router ,['veterinaire']);
 
 $TcompteRendu = new \App\Model\repository\TableRapportVeterinaire(DbZoo::connection());
+$comptRendu = $TcompteRendu->getCompteRenduById( (int) $params['id'] ) ;
+if(!$comptRendu)
+{
+    $router->getErrorPage();
+    exit();
+}
+
 
 $utilisateur = $_SESSION['utilisateur'];
 $allCompte = $TcompteRendu->getCompteRendusVeteriniareById($utilisateur->getId());
@@ -16,12 +23,9 @@ foreach($allCompte as $rapport)
     $lstIdRapport[] = $rapport->getId();
 }
 
-\App\Controller\services\Verificateur::checkRestrition($params['id'] , $lstIdRapport,$router);
-
+\App\Controller\services\Verificateur::checkRestrition( $comptRendu->getId(), $lstIdRapport, $router);
 
 $Tanimal = new \App\Model\repository\TableAnimal(DbZoo::connection());
-
-$comptRendu = $TcompteRendu->getCompteRenduById( (int) $params['id'] ) ;
 
 $errors = [];
 
@@ -49,7 +53,7 @@ if(isset($_POST['compte'])){
     {
         $comptRendu->setVeterinaire($utilisateur);
         $TcompteRendu->UpdateRapportVeterinaire($comptRendu ,$animalSelect );
-        header('Location:'.$router->url('modifierCompteRenduVeto',['id'=> $comptRendu->getId()]).'?CompteRenduVeto=modifier');
+        header('Location:'.$router->url('modifierCompteRenduVeto',['id'=> $comptRendu->getId()]).'?CompteRenduVeto=modifier',true , 301);
     }else{
         $errors = $validator->get_errors();
     }

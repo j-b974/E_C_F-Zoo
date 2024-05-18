@@ -90,7 +90,7 @@ class TableUtilisateur
         }
         return $utilisateur;
     }
-    public function getUtilisateurByID(int $id):Utilisateur
+    public function getUtilisateurByID(int $id): ?Utilisateur
     {
         $query="SELECT id , username , password , nom , prenom FROM utilisateur WHERE id= :id";
         $req = $this->bdd->prepare($query);
@@ -101,7 +101,7 @@ class TableUtilisateur
         if($utilisateur){
             $this->Trole->addRoleUtilisateur($utilisateur);
         }
-        return $utilisateur;
+        return $utilisateur ? $utilisateur : null ;
 
     }
     public function Validation(string $name , string $password)

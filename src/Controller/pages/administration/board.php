@@ -6,6 +6,19 @@ use App\Model\DbZoo;
 
 \App\Controller\services\Verificateur::verifieConnection($router);
 
+$utilisateur = $_SESSION['utilisateur'];
+
+if($utilisateur->getrole()->getlabel() == 'veterinaire')
+{
+    header('Location:'.$router->url('comptRenduVeto'),true, 301);
+    exit();
+}
+if($utilisateur->getrole()->getlabel() == 'employer')
+{
+    header('Location:'.$router->url('gestionAvis') , true ,301);;
+    exit();
+}
+
 $Tanimaux = new \App\Model\repository\TableAnimal(DbZoo::connection());
 $lstAnimaux = [];
 
@@ -34,5 +47,5 @@ require $pathView.'Pages'.DIRECTORY_SEPARATOR.'administration'.DIRECTORY_SEPARAT
 
 $contenu = ob_get_clean();
 $titre = "administration";
-$utilisateur = $_SESSION['utilisateur'];
+
 require $pathView.'Pages'.DIRECTORY_SEPARATOR.'administration'.DIRECTORY_SEPARATOR.'index.php';

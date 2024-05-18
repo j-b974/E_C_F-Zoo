@@ -12,6 +12,11 @@ $Thabitat = new \App\Model\repository\TableHabitat(DbZoo::connection());
 $Tanimal = new \App\Model\repository\TableAnimal(DbZoo::connection());
 
 $Habitat = $Thabitat->getHabitatById((int) $params['id']);
+if(!$Habitat)
+{
+    $router->getErrorPage();
+    exit();
+}
 $lstAnimal = $Tanimal->getAllAnimalByHabitatId($Habitat->getId());
 
 ob_start();

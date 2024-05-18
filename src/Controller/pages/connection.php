@@ -10,8 +10,7 @@ if(isset($_POST['connection']))
 {
 
     $Tutilisateur = new \App\Model\repository\TableUtilisateur(DbZoo::connection());
-    $v = new \App\Controller\services\Validateur\valideConnection($_POST , $Tutilisateur );
-
+    $v = new \App\Controller\services\Validateur\ValideConnection($_POST , $Tutilisateur );
 
     if($v->valideur())
     {

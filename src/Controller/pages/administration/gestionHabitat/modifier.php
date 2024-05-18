@@ -8,6 +8,11 @@ use App\Model\DbZoo;
 $errors = [];
 $THabitat =new \App\Model\repository\TableHabitat(DbZoo::connection());
 $habitat = $THabitat->getHabitatById((int) $params['id']);
+if(!$habitat)
+{
+    $router->getErrorPage();
+    exit();
+}
 
 if(isset($_POST['compte']))
 {

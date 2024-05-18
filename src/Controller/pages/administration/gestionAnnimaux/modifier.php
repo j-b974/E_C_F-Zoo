@@ -8,6 +8,11 @@ use App\Model\DbZoo;
 
 $Tanimaux = new \App\Model\repository\TableAnimal(DbZoo::connection());
 $animaux = $Tanimaux->getAnimalById((int) $params['id']);
+if(!$animaux)
+{
+    $router->getErrorPage();
+    exit();
+}
 
 // pour champs d'option select
 $Trace = new \App\Model\repository\TableRace(DbZoo::connection());

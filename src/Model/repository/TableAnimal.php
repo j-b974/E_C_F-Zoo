@@ -49,7 +49,7 @@ class TableAnimal
         $req->execute();
         return $req->fetchAll();
     }
-    public function getAnimalById(int $id):Animal
+    public function getAnimalById(int $id):?Animal
     {
         $query ="SELECT animal.id, animal.prenom , animal.etat , animal.image ,
                 race.id AS race_id, race.label ,
@@ -60,8 +60,11 @@ class TableAnimal
                 WHERE animal.id = $id";
         $req = $this->bdd->prepare($query);
         $req->execute();
-        return $this->dataFormatObjet($req->fetchAll(PDO::FETCH_ASSOC))[0];
-
+        $rep = $req->fetchAll(PDO::FETCH_ASSOC);
+        if($rep){
+            $rep = $this->dataFormatObjet($rep)[0];
+        }
+        return $rep ? $rep : null ;
     }
     public function addAnimal(Animal $animal):void
     {

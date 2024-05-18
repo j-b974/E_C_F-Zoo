@@ -48,14 +48,15 @@ class TableAvis
         $req->execute();
         return $req->fetchAll();
     }
-    public function getAvisById(int $id):Avis
+    public function getAvisById(int $id):?Avis
     {
         $query ="SELECT id , pseudo , commentaire , isVisible FROM avis WHERE id = :id";
         $req = $this->bdd->prepare($query);
         $req->bindValue('id',$id, PDO::PARAM_INT);
         $req->setFetchMode(PDO::FETCH_CLASS , Avis::class);
         $req->execute();
-        return $req->fetch();
+        $rep = $req->fetch();
+        return $rep ? $rep : null ;
     }
 
     public function UpdateAvis(Avis $avis)

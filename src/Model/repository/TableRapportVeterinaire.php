@@ -35,7 +35,7 @@ class TableRapportVeterinaire
         }
         return $lstRapport;
     }
-    public function getCompteRenduById(int $idRapport):RapportVeterinaire
+    public function getCompteRenduById(int $idRapport): ?RapportVeterinaire
     {
         $query ="SELECT id , date , nouriture , quantite ,etat ,detail_etat FROM rapport_veterinaire WHERE id = :id";
         $req = $this->bdd->prepare($query);
@@ -43,7 +43,11 @@ class TableRapportVeterinaire
         $req->setFetchMode(PDO::FETCH_CLASS , RapportVeterinaire::class);
         $req->execute();
         $rapport = $req->fetch();
-        return $rapport->setAnimal($this->getAnimalOfRapport($rapport));
+        if($rapport)
+        {
+            $rapport->setAnimal($this->getAnimalOfRapport($rapport));
+        }
+        return $rapport ? $rapport : null ;
     }
     public function addRapportVeterinaire(RapportVeterinaire $rapportVeto , int $anialId):void
     {
