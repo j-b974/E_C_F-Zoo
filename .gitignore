@@ -5,5 +5,3 @@ docker-compose.local.yml
 /vendor/*
 Makefile
 *.log
-README.local.md
-docker-compose.local.yml
