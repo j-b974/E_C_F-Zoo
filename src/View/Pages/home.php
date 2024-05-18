@@ -1,4 +1,4 @@
-<div class="bannier">
+<div class="bannier" style="background-image: url('<?=$_SERVER['HTTP_HOST_ZOO']?>asset/images/tigre.jpg');">
     <?php require dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'template' . DIRECTORY_SEPARATOR . 'Cards' . DIRECTORY_SEPARATOR . 'CardBanierHome.php'; ?>
 </div>
 <h3 class="text-center fontRoboto m-5 ">nous proposons plusieurs service pour nos visiteurs</h3>

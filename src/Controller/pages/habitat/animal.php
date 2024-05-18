@@ -8,9 +8,6 @@ if (session_status() != PHP_SESSION_ACTIVE) {
 session_start();
 }
 
-
-
-
 $Tanimal = new \App\Model\repository\TableAnimal(DbZoo::connection());
 $animal = $Tanimal->getAnimalById((int) $params['id']);
 if(!$animal)

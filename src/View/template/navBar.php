@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-expand-lg navbar-light bg-secondary fontRoboto mb-4">
     <div class="container-fluid">
         <a class="navbar-brand" href="<?= $router->url('home')?>">Zoo José</a>

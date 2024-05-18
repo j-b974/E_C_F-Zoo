@@ -53,7 +53,7 @@ if(isset($_POST['compte'])){
     {
         $comptRendu->setVeterinaire($utilisateur);
         $TcompteRendu->UpdateRapportVeterinaire($comptRendu ,$animalSelect );
-        header('Location:'.$router->url('modifierCompteRenduVeto',['id'=> $comptRendu->getId()]).'?CompteRenduVeto=modifier');
+        header('Location:'.$router->url('modifierCompteRenduVeto',['id'=> $comptRendu->getId()]).'?CompteRenduVeto=modifier',true , 301);
     }else{
         $errors = $validator->get_errors();
     }

@@ -46,7 +46,7 @@ class RouterZoo {
     }
     public function getErrorPage()
     {
-        require(dirname(__DIR__,3).DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."404.html");
+        require(dirname(__DIR__,3).DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."404.php");
     }
     public function url(string $nom , ?array $donne = [])
     {

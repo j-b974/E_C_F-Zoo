@@ -2,11 +2,10 @@ version: '2.3'
 services:
   web:
     build:
+      context: .
       dockerfile: Dockerfile
     image: zoojose
     container_name: ZooJose
-    volumes:
-      - .:/var/www/ZooJose
     environment:
       APACHE_DOCUMENT_ROOT: /var/www/ZooJose
       PDO_HOST: db
