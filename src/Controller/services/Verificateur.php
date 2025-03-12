@@ -38,10 +38,10 @@ class Verificateur
         $role = $_SESSION['utilisateur']->getrole()->getLabel();
 
         if(!in_array($role , $lstRole)){
-            header('Location:'.$router->url('home'), true , 301);
+            header('Location:'.$router->url('home'),
+                true , 301);
             exit();
         }
-
     }
 
     /**

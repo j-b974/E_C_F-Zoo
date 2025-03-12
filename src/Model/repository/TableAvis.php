@@ -7,14 +7,12 @@ use \PDO;
 class TableAvis
 {
     private PDO $bdd;
-
     public function __construct(PDO $bdd)
     {
         $this->bdd = $bdd;
     }
     public function addAvis(Avis $avis):void
     {
-
         $query = "INSERT INTO avis (pseudo , commentaire  ) VALUES (:pseudo , :comment)";
         $req = $this->bdd->prepare($query);
         $req->bindValue('pseudo',$avis->getPseudo() , PDO::PARAM_STR);
@@ -24,7 +22,6 @@ class TableAvis
 
         $avis->setId($this->bdd->lastInsertId());
     }
-
     /**
      * @return Avis[]
      */
@@ -36,7 +33,6 @@ class TableAvis
         $req->execute();
         return $req->fetchAll();
     }
-
     /**
      * @return Avis[]
      */
@@ -77,6 +73,4 @@ class TableAvis
         $req->bindValue('id',$avis->getId(), PDO::PARAM_INT);
         $req->execute();
     }
-
-
 }

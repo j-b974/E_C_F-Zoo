@@ -68,12 +68,9 @@ for($i=0 ; $i <= 18 ; $i++)
     if($vetto <= 0){
         $rand = rand(0,99)<=83 ? 0 : 1;
     }else{
-        $rand = 1;
-        $vetto--;
+        $rand = 1; $vetto--;
     }
-
     $role = $roles[$rand];
-
     $utilisateur = new \App\Controller\entity\Utilisateur();
     $utilisateur->setUsername($faker->email())
         ->setPrenom($faker->firstName())
@@ -111,7 +108,6 @@ for($i=0 ; $i < 5 ; $i++)
         ->setCommentaireHabitat($faker->realText(195));
     $Thabitat->addHabitat($habitat);
 }
-
 // remplire la table animal
 $lstHabit = $Thabitat->getAllHabitat();
 $lstRace = $Trace->getAllRace();

@@ -7,7 +7,6 @@ require_once (dirname(__DIR__,2).DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATO
 
 class MongodbZoo
 {
-
     /**
      * @return mongoDataBase
      */
@@ -22,5 +21,4 @@ class MongodbZoo
         // crée ou selecte la database
         return  $client->Zoodb;
     }
-
 }

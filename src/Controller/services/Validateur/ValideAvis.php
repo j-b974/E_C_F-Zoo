@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controller\services\Validateur;
-
 class ValideAvis extends Valide
 {
     public function __construct(array $data)
@@ -10,5 +9,4 @@ class ValideAvis extends Valide
         $this->validator->rule('required',['pseudo','commentaire']);
         $this->validator->rule('lengthMax',['pseudo','commentaire'],200);
     }
-
 }

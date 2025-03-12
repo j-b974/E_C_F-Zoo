@@ -84,7 +84,6 @@ CREATE TABLE IF NOT EXISTS rapport_veterinaire(
             REFERENCES utilisateur (id)
             ON DELETE CASCADE
             ON UPDATE RESTRICT
-
 )ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS rapport_veterinaire_annimaux(
@@ -101,7 +100,6 @@ CREATE TABLE IF NOT EXISTS rapport_veterinaire_annimaux(
             REFERENCES animal (id)
             ON DELETE CASCADE
             ON UPDATE RESTRICT
-
 )ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS rapport_employe(
@@ -118,7 +116,6 @@ CREATE TABLE IF NOT EXISTS rapport_employe(
                 ON DELETE CASCADE
                 ON UPDATE RESTRICT
 )ENGINE = InnoDB;
-
 CREATE TABLE IF NOT EXISTS rapport_employe_animal(
     id_rapport_employe INT UNSIGNED NOT NULL ,
     id_animaux INT UNSIGNED NOT NULL ,

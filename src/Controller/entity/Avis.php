@@ -26,7 +26,6 @@ class Avis
         $this->id = $id;
         return $this;
     }
-
     /**
      * @return string
      */
@@ -34,7 +33,6 @@ class Avis
     {
         return $this->pseudo;
     }
-
     /**
      * @param string $pseudo
      * @return Avis
@@ -44,7 +42,6 @@ class Avis
         $this->pseudo = $pseudo;
         return $this;
     }
-
     /**
      * @return string
      */

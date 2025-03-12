@@ -16,8 +16,6 @@ form.addEventListener('submit', function(event){
     xhr.open("POST", "/avis", true);
     xhr.onreadystatechange = function() {
         if(xhr.readyState == 4 && xhr.status == 200) {
-            // Afficher la réponse dans la div message
-            //xhr.responseText;
 
             let response = xhr.response;
             if(response['message']) {
@@ -28,7 +26,6 @@ form.addEventListener('submit', function(event){
         }
     };
     xhr.send(data);
-
 });
 
 function afficheMessage(data)
