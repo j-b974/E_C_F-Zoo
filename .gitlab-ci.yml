@@ -14,20 +14,25 @@ deploy:
     - ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
 
     - echo "🚀 Déploiement sur le VPS"
-    - ssh $SSH_USER_IP << 'EOF'
+    - ssh $SSH_USER@$SERVER_IP << 'EOF'
       set -e  # Stop si erreur
+
+      echo "📁 Vérification du dossier"
       cd /home/ZooJose || git clone git@gitlab.com:jb974/ZooJose.git /home/ZooJose
       cd /home/ZooJose
+
+      echo "🔄 Mise à jour du code"
       git pull origin main
-      
+
       echo "📦 Build de l'application"
       docker compose build
-      
+
       echo "🛑 Arrêt du conteneur existant"
       docker compose down || true
-      
+
       echo "🚀 Lancement du nouveau conteneur"
       docker compose up -d --force-recreate
+
       echo "✅ Déploiement terminé !"
       EOF
   only:
