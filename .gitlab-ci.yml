@@ -14,7 +14,7 @@ deploy:
     - ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
 
     - echo "🚀 Déploiement sur le VPS"
-    - ssh $SSH_USER@$SERVER_IP << 'EOF'
+    - ssh $SSH_USER@$SERVER_IP bash -c '
       set -e  # Stop si erreur
 
       echo "📁 Vérification du dossier"
@@ -34,6 +34,6 @@ deploy:
       docker compose up -d --force-recreate
 
       echo "✅ Déploiement terminé !"
-      EOF
+      '
   only:
     - main
