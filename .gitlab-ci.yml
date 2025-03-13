@@ -5,35 +5,15 @@ deploy:
   stage: deploy
   image: alpine:latest
   before_script:
-    - apk add --no-cache openssh
+    - apk add --no-cache openssh git
   script:
     - echo "🔑 Ajout de la clé SSH"
     - mkdir -p ~/.ssh
-    - echo "$SSH_KEY_BASE64" | base64 -d > ~/.ssh/id_rsa
-    - chmod 600 ~/.ssh/id_rsa
+    - echo "$SSH_KEY" > ~/.ssh/id_ed25519
+    - chmod 600 ~/.ssh/id_ed25519
     - ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
-
+    - SSH_USER=${SSH_USER_CI:6}
     - echo "🚀 Déploiement sur le VPS"
-    - ssh $SSH_USER@$SERVER_IP bash -c '
-      set -e  # Stop si erreur
-
-      echo "📁 Vérification du dossier"
-      cd /home/ZooJose || git clone git@gitlab.com:jb974/ZooJose.git /home/ZooJose
-      cd /home/ZooJose
-
-      echo "🔄 Mise à jour du code"
-      git pull origin main
-
-      echo "📦 Build de l'application"
-      docker compose build
-
-      echo "🛑 Arrêt du conteneur existant"
-      docker compose down || true
-
-      echo "🚀 Lancement du nouveau conteneur"
-      docker compose up -d --force-recreate
-
-      echo "✅ Déploiement terminé !"
-      '
+    - ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no root@$SERVER_IP "/bin/bash -s " < deploy.sh
   only:
     - main
