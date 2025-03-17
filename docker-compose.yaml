@@ -11,13 +11,22 @@ services:
       PDO_HOST: db
       PDO_USER: admin
       PDO_PASSWORD: 1234
-    ports:
-      - "8888:80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.app.rule=Host(`zoo.bertil.re`)"
+      - "traefik.http.routers.app.entrypoints=web"
+      - "traefik.http.routers.apps.tls=true"
+      - "traefik.http.routers.apps.tls.certresolver=cloudflare"
+      - "traefik.http.routers.apps.entrypoints=websecure"
+      - "traefik.http.routers.apps.rule=Host(`zoo.bertil.re`)"
+      # Indique à Traefik le port interne sur lequel le service écoute (ici 80)
+      - "traefik.http.services.app.loadbalancer.server.port=80"
+      - "traefik.docker.network=webTraefik"  # Réseau Docker utilisé par Traefik
     depends_on:
       - db
       - mongo
     networks:
-      - dev
+      - webTraefik
   db:
     image: mysql:latest
     container_name: db_zoo
@@ -33,7 +42,7 @@ services:
     ports:
       - "3306:3306"
     networks:
-      - dev
+      - webTraefik
   mongo:
     image: mongo
     restart: always
@@ -41,9 +50,10 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
     networks:
-      - dev
+      - webTraefik
 volumes:
   db-data:
 
 networks:
-  dev:
+  webTraefik:
+    external: true
